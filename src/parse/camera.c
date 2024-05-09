@@ -37,10 +37,6 @@ int	ft_init_camera(t_scene *scene)
 		scene->camera->defined = 1;
 		scene->camera->pov = malloc(sizeof(t_coordinates *));
 		scene->camera->orientation = malloc(sizeof(t_coordinates *));
-		scene->camera->orientation_position = -1;
-		scene->camera->pov_defined = 0;
-		scene->camera->orientation_defined = 0;
-		scene->camera->fov_defined = 0;
 		if (!scene->camera)
 				return (1);
 		printf("SALGO DE FT_INIT_CAMERA\n");
@@ -91,20 +87,13 @@ int	ft_data_camera(char **params, t_scene *scene)
 int	ft_get_fov(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_FOV\n");
-	int	i;
-
-	i = 1;
-	while (params[i])
+	if (ft_strchr(params[3], ',') == NULL && ft_atoi(params[3]) > 0
+		&& ft_atoi(params[3]) < 181)
 	{
-		if (ft_strchr(params[i], ',') == NULL && ft_atoi(params[i]) > 0
-			&& ft_atoi(params[i]) < 181 && scene->camera->fov_defined == 0)
-		{
-			scene->camera->fov = ft_atoi(params[i]);
-			scene->camera->fov_defined = 1;
-			printf("SALGO DE FT_GET_FOV CON FOV %d\n", scene->camera->fov);
-			return (0);
-		}
-		i++;
+		scene->camera->fov = ft_atoi(params[3]);
+		printf("SALGO DE FT_GET_FOV CON FOV %d\n", scene->camera->fov);
+		return (0);
+
 	}
 	printf("SALGO DE FT_GET_FOV SIN FOV\n");
 	return (1);
@@ -113,38 +102,27 @@ int	ft_get_fov(char **params, t_scene *scene)
 int	ft_get_orientation(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_ORIENTATION\n");
-	int	i;
 	char **co;
 
-	i = 1;
-	while (params[i] && scene->camera->orientation_defined == 0)
-	{
-		printf("params[%d]: %s\n", i, params[i]);
-	
-		if (ft_strchr(params[i], ',') != NULL)
+		co = ft_split(params[2], ',');
+		if (ft_is_coordinates(co) == 1 && ft_is_normalized(co) == 1)
 		{
-			co = ft_split(params[i], ',');
-			if (ft_is_coordinates(co) == 1 && ft_is_normalized(co) == 1)
+			printf("co[0]: %s\n", co[0]);
+			if (ft_data_orientation(co, scene) == 1)
 			{
-				printf("co[0]: %s\n", co[0]);
-				if (ft_data_orientation(co, scene) == 1)
-				{
-					printf("SALGO DE FT_GET_ORIENTATION EN 1\n");
-					ft_free_params(co);
-					return (1);
-				}
-				else
-				{
-					scene->camera->orientation_position = i;
-					printf("SALGO DE FT_GET_ORIENTATION EN 2\n");
-					ft_free_params(co);
-					return (0);
-				}
+				printf("SALGO DE FT_GET_ORIENTATION EN 1\n");
+				ft_free_params(co);
+				return (1);
 			}
-			ft_free_params(co);
+			else
+			{
+				printf("SALGO DE FT_GET_ORIENTATION EN 2\n");
+				ft_free_params(co);
+				return (0);
+			}
 		}
-		i++;
-	}
+
+	ft_free_params(co);
 	printf("SALGO DE FT_GET_ORIENTATION EN 3\n");
 	return (1);
 }
@@ -197,7 +175,6 @@ int	ft_is_normalized(char **co)
 int	ft_data_orientation(char **co, t_scene *scene)
 {
 	printf("ENTRO EN FT_DATA_ORIENTATION\n");
-	scene->camera->orientation_defined = 1;
 	scene->camera->orientation->x = ft_atof(co[0]);
 	scene->camera->orientation->y = ft_atof(co[1]);
 	scene->camera->orientation->z = ft_atof(co[2]);
@@ -208,36 +185,27 @@ int	ft_data_orientation(char **co, t_scene *scene)
 int	ft_get_pov(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_POV\n");
-	int	i;
 	char **co;
-
-	i = 1;
-	while (params[i] && scene->camera->pov_defined == 0)
-	{
-		printf("params[%d]: %s\n", i, params[i]);
 	
-		if (ft_strchr(params[i], ',') != NULL && i != scene->camera->orientation_position)
+
+		co = ft_split(params[1], ',');
+		if (ft_is_coordinates(co) == 1)
 		{
-			co = ft_split(params[i], ',');
-			if (ft_is_coordinates(co) == 1 && ft_is_normalized(co) == 0)
+			if (ft_data_pov(co, scene) == 1)
 			{
-				if (ft_data_pov(co, scene) == 1)
-				{
-					printf("SALGO DE FT_GET_POV EN 1\n");
-					ft_free_params(co);
-					return (1);
-				}
-				else
-				{
-					printf("SALGO DE FT_GET_POV EN 2\n");
-					ft_free_params(co);
-					return (0);
-				}
+				printf("SALGO DE FT_GET_POV EN 1\n");
+				ft_free_params(co);
+				return (1);
 			}
-			ft_free_params(co);
+			else
+			{
+				printf("SALGO DE FT_GET_POV EN 2\n");
+				ft_free_params(co);
+				return (0);
+			}
 		}
-		i++;
-	}
+	
+	ft_free_params(co);
 	printf("SALGO DE FT_GET_POV EN 3\n");
 	return (1);
 }
@@ -245,7 +213,6 @@ int	ft_get_pov(char **params, t_scene *scene)
 int	ft_data_pov(char **co, t_scene *scene)
 {
 	printf("ENTRO EN FT_DATA_POV\n");
-	scene->camera->pov_defined = 1;
 	scene->camera->pov->x = ft_atof(co[0]);
 	scene->camera->pov->y = ft_atof(co[1]);
 	scene->camera->pov->z = ft_atof(co[2]);

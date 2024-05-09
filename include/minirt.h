@@ -37,10 +37,6 @@ typedef struct s_color
 typedef struct s_camera
 {
 	int						defined;
-	int						pov_defined;
-	int						orientation_defined;
-	int						fov_defined;
-	int						orientation_position;
 	char					identifier;
 	struct s_coordinates	*pov;
 	struct s_coordinates	*orientation;
@@ -49,10 +45,11 @@ typedef struct s_camera
 
 typedef struct s_ambient
 {
-	int				defined;
-	char			identifier;
-	float			ratio;
-	struct s_color	color;
+	int						defined;
+	int						ratio_defined;
+	char					identifier;
+	float					ratio;
+	struct s_color			*color;
 }	t_ambient;
 
 typedef struct s_light
