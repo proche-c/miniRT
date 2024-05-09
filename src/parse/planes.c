@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   planes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,24 @@
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+int	 ft_get_planes(char **params, t_scene *scene)
 {
-	t_scene	*scene;
-
-	if (argc != 2)
+	(void)params;
+	if (scene->elements == NULL)
+		ft_init_elements(scene);
+	if (ft_init_planes(scene) == 1)
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
+		perror("error: planes: fail to asign memory\n");
 		return (1);
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
+	return (0);
+}
+
+int	ft_init_planes(t_scene *scene)
+{
+	scene->elements->planes = malloc(sizeof(t_planes *));
+	if (!scene->elements->planes)
 		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
+	printf("pointer scene->elements->planes: %p\n", scene->elements->planes); 
 	return (0);
 }

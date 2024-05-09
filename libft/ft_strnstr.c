@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:04:07 by proche-c          #+#    #+#             */
-/*   Updated: 2023/10/05 00:11:28 by proche-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 12:49:11 by proche-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
-	t_scene	*scene;
+	size_t	i;
+	size_t	lenth;
 
-	if (argc != 2)
+	if (needle[0] == '\0')
+		return ((char *)haystack);
+	lenth = ft_strlen(needle);
+	i = 0;
+	while (haystack[i] != '\0' && (i + lenth) <= len)
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
-		return (1);
+		if (haystack[i] == needle[0])
+		{
+			if (ft_strncmp(haystack + i, needle, lenth) == 0)
+				return ((char *)(haystack + i));
+		}
+		i++;
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
-		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
-	return (0);
+	return (NULL);
 }

@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:04:07 by proche-c          #+#    #+#             */
-/*   Updated: 2023/10/05 00:11:28 by proche-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 12:30:00 by proche-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strchr(const char *s, int c)
 {
-	t_scene	*scene;
+	size_t	i;
 
-	if (argc != 2)
+	i = 0;
+	while (s[i] != '\0')
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
-		return (1);
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
-		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
-	return (0);
+	if ((char)c == '\0')
+		return ((char *)&s[i]);
+	return (NULL);
 }

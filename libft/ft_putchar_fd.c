@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:04:07 by proche-c          #+#    #+#             */
-/*   Updated: 2023/10/05 00:11:28 by proche-c         ###   ########.fr       */
+/*   Updated: 2022/01/20 18:31:08 by proche-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_putchar_fd(char c, int fd)
 {
-	t_scene	*scene;
-
-	if (argc != 2)
-	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
-		return (1);
-	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
-		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
-	return (0);
+	write(fd, &c, 1);
 }

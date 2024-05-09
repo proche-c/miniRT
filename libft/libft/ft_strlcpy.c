@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:04:07 by proche-c          #+#    #+#             */
-/*   Updated: 2023/10/05 00:11:28 by proche-c         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:15:53 by proche-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	t_scene	*scene;
+	size_t	lenth;
+	size_t	i;
 
-	if (argc != 2)
+	lenth = 0;
+	i = 0;
+	if (src != NULL || dest != NULL || size)
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
-		return (1);
+		while (*(src + i) != '\0')
+		{
+			i++;
+			lenth++;
+		}
+		i = 0;
+		while ((i + 1) < size && *(src + i) != '\0')
+		{
+			*(dest + i) = *(src + i);
+			i++;
+		}
+		if (size > 0)
+			*(dest + i) = '\0';
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
-		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
-	return (0);
+	return (lenth);
 }

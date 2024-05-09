@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,30 @@
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+int	 ft_get_light(char **params, t_scene *scene)
 {
-	t_scene	*scene;
-
-	if (argc != 2)
+	(void)params;
+	if (scene->light != NULL)
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
+		perror("error: light: light already defined\n");
 		return (1);
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
+	else
+	{
+		if (ft_init_light(scene) == 1)
+		{
+			perror("error: light: fail to asign memory\n");
+			return (1);
+		}
+	}
+	return (0);
+}
+
+int	ft_init_light(t_scene *scene)
+{
+	scene->light = malloc(sizeof(t_light *));
+	if (!scene->light)
 		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
+	printf("pointer scene->light: %p\n", scene->light); 
 	return (0);
 }

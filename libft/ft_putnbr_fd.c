@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:04:07 by proche-c          #+#    #+#             */
-/*   Updated: 2023/10/05 00:11:28 by proche-c         ###   ########.fr       */
+/*   Updated: 2022/01/25 10:57:16 by proche-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_putnbr_fd(int i, int fd)
 {
-	t_scene	*scene;
+	long	nbr;
 
-	if (argc != 2)
+	nbr = i;
+	if (nbr < 0)
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
-		return (1);
+		ft_putchar_fd('-', fd);
+		nbr = -nbr;
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
-		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
-	return (0);
+	if (nbr > 9)
+	{
+		ft_putnbr_fd(nbr / 10, fd);
+		ft_putchar_fd('0' + nbr % 10, fd);
+	}
+	else
+		ft_putchar_fd('0' + nbr % 10, fd);
 }

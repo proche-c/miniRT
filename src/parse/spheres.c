@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   spheres.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,24 @@
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+int	 ft_get_spheres(char **params, t_scene *scene)
 {
-	t_scene	*scene;
-
-	if (argc != 2)
+	(void)params;
+	if (scene->elements == NULL)
+		ft_init_elements(scene);
+	if (ft_init_spheres(scene) == 1)
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
+		perror("error: spheres: fail to asign memory\n");
 		return (1);
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
+	return (0);
+}
+
+int	ft_init_spheres(t_scene *scene)
+{
+	scene->elements->spheres = malloc(sizeof(t_spheres *));
+	if (!scene->elements->spheres)
 		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
+	printf("pointer scene->elements->spheres: %p\n", scene->elements->spheres); 
 	return (0);
 }

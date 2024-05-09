@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   clean_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,20 @@
 
 #include "minirt.h"
 
-int	main(int argc, char **argv)
+void	ft_free_planes(t_scene *scene)
 {
-	t_scene	*scene;
+	free(scene->elements->planes);
+	return ;
+}
 
-	if (argc != 2)
-	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
-		return (1);
-	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
-		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
-	return (0);
+void	ft_free_spheres(t_scene *scene)
+{
+	free(scene->elements->spheres);
+	return ;
+}
+
+void	ft_free_cylinders(t_scene *scene)
+{
+	free(scene->elements->cylinders);
+	return ;
 }

@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.c                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: proche-c <proche-c@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/09 19:04:07 by proche-c          #+#    #+#             */
-/*   Updated: 2023/10/05 00:11:28 by proche-c         ###   ########.fr       */
+/*   Updated: 2022/01/19 17:06:35 by proche-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+char	*ft_strjoin(char const *s1, const char *s2)
 {
-	t_scene	*scene;
+	char	*result;
+	size_t	i;
+	size_t	j;
 
-	if (argc != 2)
+	result = malloc(sizeof(const char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
 	{
-		ft_putstr_fd("error: wrong arguments\n", 1);
-		return (1);
+		result[j] = s1[i];
+		i++;
+		j++;
 	}
-	scene = malloc(sizeof(t_scene *));
-	if (ft_check(argv[1], scene) != 0)
-		return (1);
-	if (ft_parse(scene) != 0)
-		return (1);
-	ft_execute();
-	ft_free_scene(scene);
-	return (0);
+	i = 0;
+	while (s2[i])
+	{
+		result[j] = s2[i];
+		i++;
+		j++;
+	}
+	result[j] = '\0';
+	return (result);
 }
