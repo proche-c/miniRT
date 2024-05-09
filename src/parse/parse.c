@@ -27,28 +27,29 @@ int	ft_parse(t_scene *scene)
 		{
 			perror("error: parameter definition\n");
 			ft_free_scene(scene);
+			ft_free_params(lines);
 			printf("**1  SALGO DE FT_PARSE**\n");
 			return (1);
 		}
 		i++;
 	}
-	printf("scene->camera->fov: %d\n", *(scene->camera->fov));
 	ft_free_params(lines);
+	printf("---scene->camera->fov: %d\n", scene->camera->fov);
 	printf("**2  SALGO DE FT_PARSE**\n");
 	return (0);
 }
 
 void	ft_initialize_scene(t_scene *scene)
 {
-	//printf("**ENTRO EN FT_INITIALIZE SCENE**\n");
-	scene->camera = NULL;
-	scene->ambient = NULL;
-	scene->light = NULL;
+	printf("**ENTRO EN FT_INITIALIZE SCENE**\n");
+	scene->camera = malloc(sizeof(t_camera *));
+	scene->ambient = malloc(sizeof(t_ambient *));
+	scene->light = malloc(sizeof(t_light *));
 	scene->elements = NULL;
-	// scene->camera->defined = 0;
-	// scene->ambient->defined = 0;
-	// scene->light->defined = 0;
-	//printf("**SALGO DE FT_INITIALIZE SCENE**\n");
+	scene->camera->defined = 0;
+	scene->ambient->defined = 0;
+	scene->light->defined = 0;
+	printf("**SALGO DE FT_INITIALIZE SCENE**\n");
 }
 
 int	ft_get_parameter(char *line, t_scene *scene)
@@ -64,16 +65,17 @@ int	ft_get_parameter(char *line, t_scene *scene)
 	{
 		if (ft_get_data(params, scene) == 1)
 		{
-			//ft_free_params(params);
+			ft_free_params(params);
 			return (1);
 		}
 	}
 	else
 	{
 		perror("error: unknown identifier\n");
+		ft_free_params(params);
 		return (1);
 	}
-	//ft_free_params(params);
+	ft_free_params(params);
 	return (0);
 }
 

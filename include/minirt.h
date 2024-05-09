@@ -21,9 +21,9 @@
 
 typedef struct s_coordinates
 {
-	float	*x;
-	float	*y;
-	float	*z;
+	float	x;
+	float	y;
+	float	z;
 }	t_coordinates;
 
 typedef struct s_color
@@ -40,10 +40,11 @@ typedef struct s_camera
 	int						pov_defined;
 	int						orientation_defined;
 	int						fov_defined;
+	int						orientation_position;
 	char					identifier;
 	struct s_coordinates	*pov;
 	struct s_coordinates	*orientation;
-	int						*fov;
+	int						fov;
 }	t_camera;
 
 typedef struct s_ambient
@@ -131,6 +132,8 @@ int		ft_get_orientation(char **params, t_scene *scene);
 int		ft_is_coordinates(char **co);
 int		ft_is_normalized(char **co);
 int		ft_data_orientation(char **co, t_scene *scene);
+int		ft_get_pov(char **params, t_scene *scene);
+int		ft_data_pov(char **co, t_scene *scene);
 
 	/*ambient.c*/
 int	 	ft_get_ambient(char **params, t_scene *scene);

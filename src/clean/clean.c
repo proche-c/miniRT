@@ -38,18 +38,10 @@ printf("**SALGO DE FT_FREE_SCENE**\n");
 void	ft_free_camera(t_scene *scene)
 {
 	printf("**ENTRO EN FT_FREE_CAMERA**\n");
-	if (scene->camera->fov != NULL)
-		free(scene->camera->fov);
-	// if (scene->camera->orientation != NULL)
-	// {
-	// 	free(scene->camera->orientation->x);
-	// 	free(scene->camera->orientation->y);
-	// 	free(scene->camera->orientation->z);
-	// 	free(scene->camera->orientation);
-	// }
-	// printf("pointer (scene->camera->pov: %p\n", (scene->camera->pov));
-	// if (scene->camera->pov != NULL)
-	// 	free(scene->camera->pov);
+	if (scene->camera->orientation != NULL)
+		free(scene->camera->orientation);
+	if (scene->camera->pov != NULL)
+		free(scene->camera->pov);
 	free(scene->camera);
 	printf("**SALGO DE FT_FREE_CAMERA**\n");
 	return ;

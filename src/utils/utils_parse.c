@@ -88,6 +88,7 @@ int	ft_is_positive(char *str)
 
 float	ft_atof(char *str)
 {
+	// printf("\n***************ENTRO EN FT_ATOF con str: %s*******************\n", str);
 	float	result;
 	float	num1;
 	float	num2;
@@ -98,7 +99,7 @@ float	ft_atof(char *str)
 	if (parts[1] != NULL)
 	{
 		num2 = ft_atoi(parts[1]);
-		while (num2 > 0)
+		while (num2 > 1)
 			num2 = num2 / 10;
 	}
 	else
@@ -107,6 +108,7 @@ float	ft_atof(char *str)
 		result = num1 + num2;
 	else
 		result = num1 - num2;
-	//ft_free_params(parts);
+	ft_free_params(parts);
+	// printf("********************SALGO DE FT_ATOF con str: %s\n\n", str);
 	return (result);
 }
