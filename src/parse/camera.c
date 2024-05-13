@@ -15,31 +15,18 @@
 int	 ft_get_camera(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_CAMERA\n");
-	if (ft_init_camera(scene) == 1)
-	{
-		perror("error: camera: fail to asign memory\n");
-		return (1);
-	}
-	if (ft_data_camera(params, scene) == 1)
-	{
-		perror("error: camera: wrong parameters\n");
-		return (1);
-	}
-	printf("SALGO DE FT_GET_CAMERA\n");
-	return (0);
-}
-
-int	ft_init_camera(t_scene *scene)
-{
-	printf("ENTRO EN FT_INIT_CAMERA\n");
 	if (scene->camera->defined == 0)
 	{
 		scene->camera->defined = 1;
-		scene->camera->pov = malloc(sizeof(t_coordinates *));
-		scene->camera->orientation = malloc(sizeof(t_coordinates *));
-		if (!scene->camera)
-				return (1);
-		printf("SALGO DE FT_INIT_CAMERA\n");
+		if (ft_data_camera(params, scene) == 1)
+		{
+			perror("error: camera: wrong parameters\n");
+			return (1);
+		}
+		printf("scene->camera->defined: %d\n", scene->camera->defined);
+		printf("scene->ambient->defined: %d\n", scene->ambient->defined);
+		printf("scene->light->defined: %d\n", scene->light->defined);
+		printf("SALGO DE FT_GET_CAMERA\n");
 		return (0);
 	}
 	else
@@ -49,12 +36,14 @@ int	ft_init_camera(t_scene *scene)
 	}
 }
 
+
+
 int	ft_data_camera(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_DATA_CAMERA\n");
 	if (ft_count_params(params) != 4)
 	{
-		printf("n_params in camera: %d\n", ft_count_params(params));
+		// printf("n_params in camera: %d\n", ft_count_params(params));
 		printf("SALGO DE FT_DATA_CAMERA EN 1\n");
 		return (1);
 	}
@@ -132,10 +121,10 @@ int	ft_is_coordinates(char **co)
 	printf("ENTRO EN FT_IS_COORDINATES\n");
 	int	i;
 
-	printf("en ft_is_coordinates co[0]: %s\n", co[0]);
+	// printf("en ft_is_coordinates co[0]: %s\n", co[0]);
 	if (ft_count_params(co) != 3)
 	{
-		printf("n_params in co: %d\n", ft_count_params(co));
+		// printf("n_params in co: %d\n", ft_count_params(co));
 		printf("SALGO DE FT_IS_COORDINATES, PARAMS != 3\n");
 		return (0);
 	}
@@ -175,8 +164,13 @@ int	ft_is_normalized(char **co)
 int	ft_data_orientation(char **co, t_scene *scene)
 {
 	printf("ENTRO EN FT_DATA_ORIENTATION\n");
+	printf("co[0]: %s\n", co[0]);
+	printf("co[1]: %s\n", co[1]);
+	printf("co[2]: %s\n", co[2]);
 	scene->camera->orientation->x = ft_atof(co[0]);
+	printf("llego aqui?\n");
 	scene->camera->orientation->y = ft_atof(co[1]);
+	printf("llego aqui?\n");
 	scene->camera->orientation->z = ft_atof(co[2]);
 	printf("SALGO DE FDATA_ORIENTATION\n");
 	return (0);

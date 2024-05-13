@@ -25,23 +25,23 @@ int	ft_count_params(char **params)
 
 int	ft_is_float(char *str)
 {
-	//printf("ENTRO EN FT_IS_FLOAT con str: %s\n", str);
+	// printf("ENTRO EN FT_IS_FLOAT con str: %s\n", str);
 	char	**parts;
 	//int		i;
 
 	parts = ft_split(str, '.');
-	//printf("ft_count_params(parts): %d\n", ft_count_params(parts));
+	// printf("ft_count_params(parts): %d\n", ft_count_params(parts));
 	if (ft_count_params(parts) != 2 && ft_count_params(parts) != 1)
 	{
 		ft_free_params(parts);
-		//printf("SALGO DE FT_IS_FLOAT, NO SON 1 O 2 PARTES\n");
+		// printf("SALGO DE FT_IS_FLOAT, NO SON 1 O 2 PARTES\n");
 		return (0);
 	}
 	//i = 0;
 	if (ft_is_a_num(parts[0]) == 0)
 	{
 		ft_free_params(parts);
-		//printf("SALGO DE FT_IS_FLOAT, 1ª PARTE NO ES NUMERO\n");
+		// printf("SALGO DE FT_IS_FLOAT, 1ª PARTE NO ES NUMERO\n");
 		return (0);
 	}
 	if (ft_count_params(parts) == 2)
@@ -49,12 +49,12 @@ int	ft_is_float(char *str)
 		if (ft_is_positive(parts[1]) == 0)
 		{
 			ft_free_params(parts);
-			//printf("SALGO DE FT_IS_FLOAT, 2ª PARTE NO ES NUMERO\n");
+			// printf("SALGO DE FT_IS_FLOAT, 2ª PARTE NO ES NUMERO\n");
 			return (0);
 		}
 	}
 	ft_free_params(parts);
-	//printf("SALGO DE FT_IS_FLOAT, ES UN FLOAT\n");
+	// printf("SALGO DE FT_IS_FLOAT, ES UN FLOAT\n");
 	return (1);
 }
 
@@ -88,7 +88,7 @@ int	ft_is_positive(char *str)
 
 float	ft_atof(char *str)
 {
-	// printf("\n***************ENTRO EN FT_ATOF con str: %s*******************\n", str);
+	//printf("\n***************ENTRO EN FT_ATOF con str: %s*******************\n", str);
 	float	result;
 	float	num1;
 	float	num2;
@@ -104,11 +104,11 @@ float	ft_atof(char *str)
 	}
 	else
 		num2 = 0;
-	if (num1 > 0)
+	if (num1 >= 0)
 		result = num1 + num2;
 	else
 		result = num1 - num2;
 	ft_free_params(parts);
-	// printf("********************SALGO DE FT_ATOF con str: %s\n\n", str);
+	//printf("********************SALGO DE FT_ATOF con result: %f\n\n", result);
 	return (result);
 }

@@ -14,7 +14,7 @@
 # define MINIRT_H
 
 # include <stdio.h>
-#include <fcntl.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 #define MAX_LEN	10000
@@ -46,7 +46,6 @@ typedef struct s_camera
 typedef struct s_ambient
 {
 	int						defined;
-	int						ratio_defined;
 	char					identifier;
 	float					ratio;
 	struct s_color			*color;
@@ -115,7 +114,6 @@ int		ft_check_file(int fd, t_scene *scene);
 // PARSE
 	/*parse.c*/
 int		ft_parse(t_scene *scene);
-void	ft_initialize_scene(t_scene *scene);
 int		ft_get_parameter(char *line, t_scene *scene);
 int		ft_get_data(char **params, t_scene *scene);
 int		ft_init_elements(t_scene *scene);
@@ -135,6 +133,10 @@ int		ft_data_pov(char **co, t_scene *scene);
 	/*ambient.c*/
 int	 	ft_get_ambient(char **params, t_scene *scene);
 int		ft_init_ambient(t_scene *scene);
+int		ft_data_ambient(char **params, t_scene *scene);
+int		ft_get_ratio(char **params, t_scene *scene);
+int		ft_get_color(char **params, t_scene *scene);
+int		ft_is_color(char **col);
 
 	/*light.c*/
 int	 	ft_get_light(char **params, t_scene *scene);
@@ -159,6 +161,9 @@ int		ft_is_float(char *str);
 int		ft_is_a_num(char *str);
 int		ft_is_positive(char *str);
 float	ft_atof(char *str);
+
+	/*init*/
+int		ft_initialize_scene(t_scene *scene);
 
 //EXECUTE
 int		ft_execute(void);

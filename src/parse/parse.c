@@ -18,8 +18,12 @@ int	ft_parse(t_scene *scene)
 	char	**lines;
 	int		i;
 
-	ft_initialize_scene(scene);
+	// if (ft_initialize_scene(scene) == 1)
+	// 	return (1);
 	lines = ft_split(scene->str_scene, '\n');
+	printf("scene->camera->defined: %d\n", scene->camera->defined);
+	printf("scene->ambient->defined: %d\n", scene->ambient->defined);
+	printf("scene->light->defined: %d\n", scene->light->defined);
 	i = 0;
 	while (lines[i])
 	{
@@ -34,22 +38,8 @@ int	ft_parse(t_scene *scene)
 		i++;
 	}
 	ft_free_params(lines);
-	printf("---scene->camera->fov: %d\n", scene->camera->fov);
 	printf("**2  SALGO DE FT_PARSE**\n");
 	return (0);
-}
-
-void	ft_initialize_scene(t_scene *scene)
-{
-	printf("**ENTRO EN FT_INITIALIZE SCENE**\n");
-	scene->camera = malloc(sizeof(t_camera *));
-	scene->ambient = malloc(sizeof(t_ambient *));
-	scene->light = malloc(sizeof(t_light *));
-	scene->elements = NULL;
-	scene->camera->defined = 0;
-	scene->ambient->defined = 0;
-	scene->light->defined = 0;
-	printf("**SALGO DE FT_INITIALIZE SCENE**\n");
 }
 
 int	ft_get_parameter(char *line, t_scene *scene)

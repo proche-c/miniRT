@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 	}
 	if (ft_check(argv[1], &scene) != 0)
 		return (1);
+	if (ft_initialize_scene(&scene) == 1)
+		return (1);
 	if (ft_parse(&scene) != 0)
 		return (1);
 	ft_execute();

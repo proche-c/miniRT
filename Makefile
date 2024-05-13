@@ -13,6 +13,7 @@ PARSE = ./src/parse/parse.c \
 	./src/parse/cylinders.c \
 
 UTILS =	./src/utils/utils_parse.c \
+	./src/utils/init.c \
 
 # LISTS = ./src/lists/parse.c \
 # 	./src/lists/envp.c \

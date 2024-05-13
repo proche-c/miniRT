@@ -15,30 +15,15 @@
 int	 ft_get_ambient(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_AMBIENT\n");
-	if (ft_init_ambient(scene) == 1)
-	{
-		perror("error: ambient: fail to initialize ambient\n");
-		return (1);
-	}
-	if (ft_data_ambient(params, scene) == 1)
-	{
-		perror("error: ambient: wrong parameters\n");
-		return (1);
-	}
-	printf("SALGO DE FT_GET_AMBIENT\n");
-	return (0);
-}
-
-int	ft_init_ambient(t_scene *scene)
-{
-	printf("ENTRO EN FT_INIT_AMBIENT\n");
 	if (scene->ambient->defined == 0)
 	{
 		scene->ambient->defined = 1;
-		scene->ambient->color = malloc(sizeof(t_color *));
-		if (!scene->ambient->color)
-				return (1);
-		printf("SALGO DE FT_INIT_AMBIENT\n");
+		if (ft_data_ambient(params, scene) == 1)
+		{
+			perror("error: ambient: wrong parameters\n");
+			return (1);
+		}
+		printf("SALGO DE FT_GET_AMBIENT\n");
 		return (0);
 	}
 	else
@@ -47,6 +32,8 @@ int	ft_init_ambient(t_scene *scene)
 		return (1);
 	}
 }
+
+
 
 int	ft_data_ambient(char **params, t_scene *scene)
 {
@@ -67,13 +54,60 @@ int	ft_data_ambient(char **params, t_scene *scene)
 		printf("SALGO DE FT_DATA_AMBIENT EN 3\n");
 		return (1);
 	}
-	// printf("''''''scene->ambient->fov: %d\n", scene->ambient->fov);
-	// printf("scene->ambient->orientation->x: %5.2f\n", scene->ambient->orientation->x);
-	// printf("scene->ambient->orientation->y: %5.2f\n", scene->ambient->orientation->y);
-	// printf("scene->ambient->orientation->z: %5.2f\n", scene->ambient->orientation->z);
+	printf("''''''scene->ambient->ratio: %f\n", scene->ambient->ratio);
+	printf("scene->ambient->color->r: %d\n", scene->ambient->color->r);
+	printf("scene->ambient->color->g: %d\n", scene->ambient->color->g);
+	printf("scene->ambient->color->b: %d\n", scene->ambient->color->b);
 	// printf("scene->ambient->pov->x: %5.2f\n", scene->ambient->pov->x);
 	// printf("scene->ambient->pov->y: %5.2f\n", scene->ambient->pov->y);
 	// printf("scene->ambient->pov->z: %5.2f\n", scene->ambient->pov->z);
 	printf("SALGO DE FT_DATA_AMBIENT EN 4\n");
 	return (0);
+}
+
+int	ft_get_ratio(char **params, t_scene *scene)
+{
+	printf("ENTRO EN FT_GET_RATIO\n");
+	printf("ft_atof(params[1]): %f\n", ft_atof(params[1]));
+	if (ft_is_float(params[1]) == 1 && ft_atof(params[1]) >= 0
+		&& ft_atof(params[1]) <= 1)
+	{
+		scene->ambient->ratio = ft_atof(params[1]);
+		printf("SALGO DE FT_GET_RATIO EN 1\n");
+		return (0);
+	}
+	printf("SALGO DE FT_GET_RATIO EN 2\n");
+	return (1);
+}
+
+int	ft_get_color(char **params, t_scene *scene)
+{
+	char **col;
+
+	col = ft_split(params[2], ',');
+	if (ft_is_color(col) == 1)
+	{
+		scene->ambient->color->r = ft_atoi(col[0]);
+		scene->ambient->color->g = ft_atoi(col[1]);
+		scene->ambient->color->b = ft_atoi(col[2]);
+		ft_free_params(col);
+		return (0);
+	}
+	ft_free_params(col);
+	return (1);
+}
+
+int	ft_is_color(char **col)
+{
+	int	i;
+	if (ft_count_params(col) != 3)
+		return (0);
+	i = 0;
+	while (i < 3)
+	{
+		if (ft_is_positive(col[i]) == 0 || ft_atoi(col[i]) > 255)
+			return (0);
+		i++;
+	}
+	return (1);
 }
