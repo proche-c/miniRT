@@ -16,17 +16,17 @@ int	ft_initialize_scene(t_scene *scene)
 {
 	printf("ENTRO EN FT_INITIALIZE SCENE\n");
 
-	scene->camera_defined = 0;
-	scene->ambient_defined = 0;
-	scene->light_defined = 0;
+	scene->camera.defined = 0;
+	scene->ambient.defined = 0;
+	scene->light.defined = 0;
 	// scene->ambient_color = malloc(sizeof(t_color *));
-	scene->light_color = malloc(sizeof(t_color *));
+	// scene->light_color = malloc(sizeof(t_color *));
 	scene->elements = NULL;
-	if (!scene->light_color)
-	{
-		perror("error: scene: fail to assign memory\n");
-		return (1);
-	}
+	// if (!scene->light_color)
+	// {
+	// 	perror("error: scene: fail to assign memory\n");
+	// 	return (1);
+	// }
 
 	printf("SALGO DE FT_INITIALIZE SCENE\n");
 	return (0);

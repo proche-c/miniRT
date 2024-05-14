@@ -19,35 +19,56 @@
 
 #define MAX_LEN	10000
 
-typedef struct s_coordinates
+typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
-}	t_coordinates;
+	float				x;
+	float				y;
+	float				z;
+}	t_vector;
 
 typedef struct s_color
 {
-	int	r;
-	int	g;
-	int	b;
+	int					r;
+	int					g;
+	int					b;
 }	t_color;
 
+typedef struct s_camera
+{
+	int					defined;
+	struct s_vector		pov;
+	struct s_vector		orientation;
+	int					fov;
+}	t_camera;
+
+typedef struct s_ambient
+{
+	int					defined;
+	float				ratio;
+	struct s_color		color;
+}	t_ambient;
+
+typedef struct s_light
+{
+	int					defined;
+	float				ratio;
+	struct s_vector		position;
+}	t_light;
 
 typedef struct s_spheres
 {
-	char					identifier;
-	struct s_coordinates	position;
-	float					diameter;
-	struct s_color			color;
-	struct s_spheres		*next;
+	char				identifier;
+	struct s_vector		position;
+	float				diameter;
+	struct s_color		color;
+	struct s_spheres	*next;
 }	t_spheres;
 
 typedef struct s_planes
 {
 	char					identifier;
-	struct s_coordinates	position;
-	struct s_coordinates	n_vector;
+	struct s_vector	position;
+	struct s_vector	n_vector;
 	struct s_color			color;
 	struct s_planes			*next;
 }	t_planes;
@@ -55,8 +76,8 @@ typedef struct s_planes
 typedef struct s_cylinders
 {
 	char					identifier;
-	struct s_coordinates	position;
-	struct s_coordinates	n_vector;
+	struct s_vector	position;
+	struct s_vector	n_vector;
 	float					diameter;
 	float					height;
 	struct s_color			color;
@@ -73,17 +94,9 @@ typedef struct s_element
 typedef struct s_scene
 {
 	char				*str_scene;
-	int					camera_defined;
-	float				camera_pov[3];
-	float				camera_orientation[3];
-	int					camera_fov;
-	int					ambient_defined;
-	float				ambient_ratio;
-	int					ambient_color[3];
-	int					light_defined;
-	float				light_ratio;
-	float				light_position[3];
-	struct s_color		*light_color;
+	struct s_camera		camera;
+	struct s_ambient	ambient;
+	struct s_light		light;
 	struct s_element	*elements;
 }	t_scene;
 
@@ -105,7 +118,7 @@ int	 	ft_get_camera(char **params, t_scene *scene);
 int		ft_data_camera(char **params, t_scene *scene);
 int		ft_get_fov(char **params, t_scene *scene);
 int		ft_get_orientation(char **params, t_scene *scene);
-int		ft_is_coordinates(char **co);
+int		ft_is_vector(char **co);
 int		ft_is_normalized(char **co);
 int		ft_data_orientation(char **co, t_scene *scene);
 int		ft_get_pov(char **params, t_scene *scene);

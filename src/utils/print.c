@@ -15,33 +15,33 @@
 void	ft_print_camera(t_scene *scene)
 {
 	printf("\n***CAMERA***\n");
-	printf("scene->camera->defined: %d\n", scene->camera_defined);
-	printf("scene->camera->pov[0]: %f\n", scene->camera_pov[0]);
-	printf("scene->camera->pov[1]: %f\n", scene->camera_pov[1]);
-	printf("scene->camera->pov[2]: %f\n", scene->camera_pov[2]);
-	printf("scene->camera->orientation[0]: %f\n", scene->camera_orientation[0]);
-	printf("scene->camera->orientation[1]: %f\n", scene->camera_orientation[1]);
-	printf("scene->camera->orientation[2]: %f\n", scene->camera_orientation[2]);
-	printf("scene->camera->fov: %d\n", scene->camera_fov);
+	printf("scene->camera->defined: %d\n", scene->camera.defined);
+	printf("scene->camera->pov[0]: %f\n", scene->camera.pov.x);
+	printf("scene->camera->pov[1]: %f\n", scene->camera.pov.y);
+	printf("scene->camera->pov[2]: %f\n", scene->camera.pov.z);
+	printf("scene->camera->orientation[0]: %f\n", scene->camera.orientation.x);
+	printf("scene->camera->orientation[1]: %f\n", scene->camera.orientation.y);
+	printf("scene->camera->orientation[2]: %f\n", scene->camera.orientation.z);
+	printf("scene->camera->fov: %d\n", scene->camera.fov);
 }
 
 void	ft_print_ambient(t_scene *scene)
 {
 	printf("\n***AMBIENT***\n");
-	printf("scene->ambient->defined: %d\n", scene->ambient_defined);
-	printf("scene->ambient->ratio: %f\n", scene->ambient_ratio);
-	printf("scene->ambient_color[0]: %d\n", scene->ambient_color[0]);
-	printf("scene->ambient_color[1]: %d\n", scene->ambient_color[1]);
-	printf("scene->ambient_color[2]: %d\n", scene->ambient_color[2]);
+	printf("scene->ambient->defined: %d\n", scene->ambient.defined);
+	printf("scene->ambient->ratio: %f\n", scene->ambient.ratio);
+	printf("scene->ambient_color[0]: %d\n", scene->ambient.color.r);
+	printf("scene->ambient_color[1]: %d\n", scene->ambient.color.g);
+	printf("scene->ambient_color[2]: %d\n", scene->ambient.color.b);
 }
 
 void	ft_print_light(t_scene *scene)
 {
 	printf("\n***LIGHT***\n");
-	printf("scene->light->defined: %d\n", scene->light_defined);
-	// printf("scene->camera->pov[0]: %d\n", scene->camera->pov[0]);
-	// printf("scene->camera->pov[1]: %d\n", scene->camera->pov[1]);
-	// printf("scene->camera->pov[2]: %d\n", scene->camera->pov[2]);
+	printf("scene->light->defined: %d\n", scene->light.defined);
+	printf("sscene->light.position.x: %f\n", scene->light.position.x);
+	printf("scene->light.position.y: %f\n", scene->light.position.y);
+	printf("scene->light.position.z: %f\n", scene->light.position.z);
 	// printf("scene->camera->orientation[0]: %d\n", scene->camera->orientation[0]);
 	// printf("scene->camera->orientation[1]: %d\n", scene->camera->orientation[1]);
 	// printf("scene->camera->orientation[2]: %d\n", scene->camera->orientation[2]);

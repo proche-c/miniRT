@@ -15,9 +15,9 @@
 int	 ft_get_ambient(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_AMBIENT\n");
-	if (scene->ambient_defined == 0)
+	if (scene->ambient.defined == 0)
 	{
-		scene->ambient_defined = 1;
+		scene->ambient.defined = 1;
 		if (ft_data_ambient(params, scene) == 1)
 		{
 			perror("error: ambient: wrong parameters\n");
@@ -68,7 +68,7 @@ int	ft_get_ratio(char **params, t_scene *scene)
 	if (ft_is_float(params[1]) == 1 && ft_atof(params[1]) >= 0
 		&& ft_atof(params[1]) <= 1)
 	{
-		scene->ambient_ratio = ft_atof(params[1]);
+		scene->ambient.ratio = ft_atof(params[1]);
 		printf("SALGO DE FT_GET_RATIO EN 1\n");
 		return (0);
 	}
@@ -83,9 +83,9 @@ int	ft_get_color(char **params, t_scene *scene)
 	col = ft_split(params[2], ',');
 	if (ft_is_color(col) == 1)
 	{
-		scene->ambient_color[0] = ft_atoi(col[0]);
-		scene->ambient_color[1] = ft_atoi(col[1]);
-		scene->ambient_color[2] = ft_atoi(col[2]);
+		scene->ambient.color.r = ft_atoi(col[0]);
+		scene->ambient.color.g = ft_atoi(col[1]);
+		scene->ambient.color.b = ft_atoi(col[2]);
 		ft_free_params(col);
 		return (0);
 	}

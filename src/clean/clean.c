@@ -17,7 +17,7 @@ void	ft_free_scene(t_scene *scene)
 	printf("**ENTRO EN FT_FREE_SCENE**\n");
 	free(scene->str_scene);
 	//free(scene->ambient_color);
-	free(scene->light_color);
+	free(scene);
 	printf("**SALGO DE FT_FREE_SCENE**\n");
 }
 

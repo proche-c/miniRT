@@ -15,9 +15,9 @@
 int	 ft_get_light(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_LIGHT\n");
-	if (scene->light_defined == 0)
+	if (scene->light.defined == 0)
 	{
-		scene->light_defined = 1;
+		scene->light.defined = 1;
 		if (ft_data_light(params, scene) == 1)
 		{
 			perror("error: light: wrong parameters\n");
@@ -59,7 +59,7 @@ int	ft_get_position(char **params, t_scene *scene)
 	
 
 		co = ft_split(params[1], ',');
-		if (ft_is_coordinates(co) == 1)
+		if (ft_is_vector(co) == 1)
 		{
 			if (ft_data_position(co, scene) == 1)
 			{
@@ -83,9 +83,9 @@ int	ft_get_position(char **params, t_scene *scene)
 int	ft_data_position(char **co, t_scene *scene)
 {
 	printf("ENTRO EN FT_DATA_POSITION\n");
-	scene->light_position[0] = ft_atof(co[0]);
-	scene->light_position[1] = ft_atof(co[1]);
-	scene->light_position[2] = ft_atof(co[2]);
+	scene->light.position.x = ft_atof(co[0]);
+	scene->light.position.y = ft_atof(co[1]);
+	scene->light.position.z = ft_atof(co[2]);
 	printf("SALGO DE FDATA_POSITION\n");
 	return (0);
 }
