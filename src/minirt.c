@@ -14,20 +14,22 @@
 
 int	main(int argc, char **argv)
 {
-	t_scene	scene;
+	t_scene	*scene;
+
 
 	if (argc != 2)
 	{
 		ft_putstr_fd("error: wrong arguments\n", 1);
 		return (1);
 	}
-	if (ft_check(argv[1], &scene) != 0)
+	scene = malloc(sizeof(t_scene *));
+	if (ft_initialize_scene(scene) == 1)
 		return (1);
-	if (ft_initialize_scene(&scene) == 1)
+	if (ft_check(argv[1], scene) != 0)
 		return (1);
-	if (ft_parse(&scene) != 0)
+	if (ft_parse(scene) != 0)
 		return (1);
 	ft_execute();
-	ft_free_scene(&scene);
+	ft_free_scene(scene);
 	return (0);
 }

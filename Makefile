@@ -14,6 +14,7 @@ PARSE = ./src/parse/parse.c \
 
 UTILS =	./src/utils/utils_parse.c \
 	./src/utils/init.c \
+	./src/utils/print.c \
 
 # LISTS = ./src/lists/parse.c \
 # 	./src/lists/envp.c \

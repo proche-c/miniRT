@@ -88,7 +88,7 @@ int	ft_is_positive(char *str)
 
 float	ft_atof(char *str)
 {
-	//printf("\n***************ENTRO EN FT_ATOF con str: %s*******************\n", str);
+	// printf("\n***************ENTRO EN FT_ATOF con str: %s*******************\n", str);
 	float	result;
 	float	num1;
 	float	num2;
@@ -109,6 +109,6 @@ float	ft_atof(char *str)
 	else
 		result = num1 - num2;
 	ft_free_params(parts);
-	//printf("********************SALGO DE FT_ATOF con result: %f\n\n", result);
+	// printf("********************SALGO DE FT_ATOF con result: %f\n\n", result);
 	return (result);
 }

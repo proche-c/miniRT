@@ -18,19 +18,14 @@ int	ft_parse(t_scene *scene)
 	char	**lines;
 	int		i;
 
-	// if (ft_initialize_scene(scene) == 1)
-	// 	return (1);
 	lines = ft_split(scene->str_scene, '\n');
-	printf("scene->camera->defined: %d\n", scene->camera->defined);
-	printf("scene->ambient->defined: %d\n", scene->ambient->defined);
-	printf("scene->light->defined: %d\n", scene->light->defined);
 	i = 0;
 	while (lines[i])
 	{
 		if (ft_get_parameter(lines[i], scene) == 1)
 		{
 			perror("error: parameter definition\n");
-			ft_free_scene(scene);
+			// ft_free_scene(scene);
 			ft_free_params(lines);
 			printf("**1  SALGO DE FT_PARSE**\n");
 			return (1);
@@ -46,6 +41,7 @@ int	ft_get_parameter(char *line, t_scene *scene)
 {
 	char	**params;
 
+	printf("--------line:--------- \n%s\n", line);
 	params = ft_split(line, ' ');
 	if (ft_strncmp(params[0], "C", 2) == 0 || ft_strncmp(params[0], "A", 2) == 0
 		|| ft_strncmp(params[0], "L", 2) == 0

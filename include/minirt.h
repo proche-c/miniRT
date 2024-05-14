@@ -34,32 +34,6 @@ typedef struct s_color
 }	t_color;
 
 
-typedef struct s_camera
-{
-	int						defined;
-	char					identifier;
-	struct s_coordinates	*pov;
-	struct s_coordinates	*orientation;
-	int						fov;
-}	t_camera;
-
-typedef struct s_ambient
-{
-	int						defined;
-	char					identifier;
-	float					ratio;
-	struct s_color			*color;
-}	t_ambient;
-
-typedef struct s_light
-{
-	int						defined;
-	char					identifier;
-	float					ratio;
-	struct s_color			color;
-	struct s_coordinates	position;
-}	t_light;
-
 typedef struct s_spheres
 {
 	char					identifier;
@@ -99,9 +73,17 @@ typedef struct s_element
 typedef struct s_scene
 {
 	char				*str_scene;
-	struct s_camera		*camera;
-	struct s_ambient	*ambient;
-	struct s_light		*light;
+	int					camera_defined;
+	float				camera_pov[3];
+	float				camera_orientation[3];
+	int					camera_fov;
+	int					ambient_defined;
+	float				ambient_ratio;
+	int					ambient_color[3];
+	int					light_defined;
+	float				light_ratio;
+	float				light_position[3];
+	struct s_color		*light_color;
 	struct s_element	*elements;
 }	t_scene;
 
@@ -113,14 +95,13 @@ int		ft_check_file(int fd, t_scene *scene);
 
 // PARSE
 	/*parse.c*/
-int		ft_parse(t_scene *scene);
+int	ft_parse(t_scene *scene);
 int		ft_get_parameter(char *line, t_scene *scene);
 int		ft_get_data(char **params, t_scene *scene);
 int		ft_init_elements(t_scene *scene);
 
 	/*camera.c*/
 int	 	ft_get_camera(char **params, t_scene *scene);
-int		ft_init_camera(t_scene *scene);
 int		ft_data_camera(char **params, t_scene *scene);
 int		ft_get_fov(char **params, t_scene *scene);
 int		ft_get_orientation(char **params, t_scene *scene);
@@ -132,7 +113,6 @@ int		ft_data_pov(char **co, t_scene *scene);
 
 	/*ambient.c*/
 int	 	ft_get_ambient(char **params, t_scene *scene);
-int		ft_init_ambient(t_scene *scene);
 int		ft_data_ambient(char **params, t_scene *scene);
 int		ft_get_ratio(char **params, t_scene *scene);
 int		ft_get_color(char **params, t_scene *scene);
@@ -140,7 +120,9 @@ int		ft_is_color(char **col);
 
 	/*light.c*/
 int	 	ft_get_light(char **params, t_scene *scene);
-int		ft_init_light(t_scene *scene);
+int		ft_data_light(char **params, t_scene *scene);
+int		ft_get_position(char **params, t_scene *scene);
+int		ft_data_position(char **co, t_scene *scene);
 
 	/*planes.c*/
 int	 	ft_get_planes(char **params, t_scene *scene);
@@ -164,6 +146,15 @@ float	ft_atof(char *str);
 
 	/*init*/
 int		ft_initialize_scene(t_scene *scene);
+int		ft_init_camera(t_scene *scene);
+int		ft_init_ambient(t_scene *scene);
+int		ft_init_light(t_scene *scene);
+
+	/*print*/
+void	ft_print_camera(t_scene *scene);
+void	ft_print_ambient(t_scene *scene);
+void	ft_print_light(t_scene *scene);
+void	ft_print_params(char **params);
 
 //EXECUTE
 int		ft_execute(void);

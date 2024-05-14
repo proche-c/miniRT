@@ -15,14 +15,17 @@
 int	 ft_get_ambient(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_AMBIENT\n");
-	if (scene->ambient->defined == 0)
+	if (scene->ambient_defined == 0)
 	{
-		scene->ambient->defined = 1;
+		scene->ambient_defined = 1;
 		if (ft_data_ambient(params, scene) == 1)
 		{
 			perror("error: ambient: wrong parameters\n");
 			return (1);
 		}
+		ft_print_camera(scene);
+		ft_print_ambient(scene);
+		ft_print_light(scene);
 		printf("SALGO DE FT_GET_AMBIENT\n");
 		return (0);
 	}
@@ -54,13 +57,6 @@ int	ft_data_ambient(char **params, t_scene *scene)
 		printf("SALGO DE FT_DATA_AMBIENT EN 3\n");
 		return (1);
 	}
-	printf("''''''scene->ambient->ratio: %f\n", scene->ambient->ratio);
-	printf("scene->ambient->color->r: %d\n", scene->ambient->color->r);
-	printf("scene->ambient->color->g: %d\n", scene->ambient->color->g);
-	printf("scene->ambient->color->b: %d\n", scene->ambient->color->b);
-	// printf("scene->ambient->pov->x: %5.2f\n", scene->ambient->pov->x);
-	// printf("scene->ambient->pov->y: %5.2f\n", scene->ambient->pov->y);
-	// printf("scene->ambient->pov->z: %5.2f\n", scene->ambient->pov->z);
 	printf("SALGO DE FT_DATA_AMBIENT EN 4\n");
 	return (0);
 }
@@ -68,11 +64,11 @@ int	ft_data_ambient(char **params, t_scene *scene)
 int	ft_get_ratio(char **params, t_scene *scene)
 {
 	printf("ENTRO EN FT_GET_RATIO\n");
-	printf("ft_atof(params[1]): %f\n", ft_atof(params[1]));
+	
 	if (ft_is_float(params[1]) == 1 && ft_atof(params[1]) >= 0
 		&& ft_atof(params[1]) <= 1)
 	{
-		scene->ambient->ratio = ft_atof(params[1]);
+		scene->ambient_ratio = ft_atof(params[1]);
 		printf("SALGO DE FT_GET_RATIO EN 1\n");
 		return (0);
 	}
@@ -87,9 +83,9 @@ int	ft_get_color(char **params, t_scene *scene)
 	col = ft_split(params[2], ',');
 	if (ft_is_color(col) == 1)
 	{
-		scene->ambient->color->r = ft_atoi(col[0]);
-		scene->ambient->color->g = ft_atoi(col[1]);
-		scene->ambient->color->b = ft_atoi(col[2]);
+		scene->ambient_color[0] = ft_atoi(col[0]);
+		scene->ambient_color[1] = ft_atoi(col[1]);
+		scene->ambient_color[2] = ft_atoi(col[2]);
 		ft_free_params(col);
 		return (0);
 	}
