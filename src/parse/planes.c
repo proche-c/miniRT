@@ -27,9 +27,6 @@ int	 ft_get_planes(char **params, t_scene *scene)
 
 int	ft_init_planes(t_scene *scene)
 {
-	scene->elements->planes = malloc(sizeof(t_planes *));
-	if (!scene->elements->planes)
-		return (1);
-	printf("pointer scene->elements->planes: %p\n", scene->elements->planes); 
+	(void)scene;
 	return (0);
 }

@@ -8,6 +8,7 @@ PARSE = ./src/parse/parse.c \
 	./src/parse/camera.c \
 	./src/parse/ambient.c \
 	./src/parse/light.c \
+	./src/parse/elements.c \
 	./src/parse/planes.c \
 	./src/parse/spheres.c \
 	./src/parse/cylinders.c \

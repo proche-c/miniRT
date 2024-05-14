@@ -66,29 +66,33 @@ typedef struct s_spheres
 
 typedef struct s_planes
 {
-	char					identifier;
-	struct s_vector	position;
-	struct s_vector	n_vector;
-	struct s_color			color;
-	struct s_planes			*next;
+	char				identifier;
+	struct s_vector		position;
+	struct s_vector		n_vector;
+	struct s_color		color;
+	struct s_planes		*next;
 }	t_planes;
 
 typedef struct s_cylinders
 {
-	char					identifier;
-	struct s_vector	position;
-	struct s_vector	n_vector;
-	float					diameter;
-	float					height;
-	struct s_color			color;
-	struct s_cylinders		*next;
+	char				identifier;
+	struct s_vector		position;
+	struct s_vector		n_vector;
+	float				diameter;
+	float				height;
+	struct s_color		color;
+	struct s_cylinders	*next;
 }	t_cylinders;
 
 typedef struct s_element
 {
-	struct s_spheres	*spheres;
-	struct s_planes		*planes;
-	struct s_cylinders	*cylinders;
+	char				identifier;
+	struct s_vector		position;
+	struct s_color		color;
+	float				diameter;
+	struct s_vector		n_vector;
+	float				height;
+	struct s_spheres	*next;
 }	t_element;
 
 typedef struct s_scene
@@ -136,6 +140,9 @@ int	 	ft_get_light(char **params, t_scene *scene);
 int		ft_data_light(char **params, t_scene *scene);
 int		ft_get_position(char **params, t_scene *scene);
 int		ft_data_position(char **co, t_scene *scene);
+
+	/*elements*/
+int	 	ft_get_element(char **params, t_scene *scene);
 
 	/*planes.c*/
 int	 	ft_get_planes(char **params, t_scene *scene);

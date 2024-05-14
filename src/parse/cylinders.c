@@ -27,9 +27,6 @@ int	 ft_get_cylinders(char **params, t_scene *scene)
 
 int	ft_init_cylinders(t_scene *scene)
 {
-	scene->elements->cylinders = malloc(sizeof(t_cylinders *));
-	if (!scene->elements->cylinders)
-		return (1);
-	printf("pointer scene->elements->cylinders: %p\n", scene->elements->cylinders); 
+	(void)scene;
 	return (0);
 }

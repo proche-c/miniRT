@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   spheres.c                                          :+:      :+:    :+:   */
+/*   elements.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,10 @@
 
 #include "minirt.h"
 
-int	 ft_get_spheres(char **params, t_scene *scene)
+int	 ft_get_element(char **params, t_scene *scene)
 {
+	(void)scene;
 	(void)params;
-	if (scene->elements == NULL)
-		ft_init_elements(scene);
-	if (ft_init_spheres(scene) == 1)
-	{
-		perror("error: spheres: fail to asign memory\n");
-		return (1);
-	}
 	return (0);
 }
 
-int	ft_init_spheres(t_scene *scene)
-{
-	(void)scene;
-	return (0);
-}

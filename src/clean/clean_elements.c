@@ -14,18 +14,18 @@
 
 void	ft_free_planes(t_scene *scene)
 {
-	free(scene->elements->planes);
+	(void)scene;
 	return ;
 }
 
 void	ft_free_spheres(t_scene *scene)
 {
-	free(scene->elements->spheres);
+	(void)scene;
 	return ;
 }
 
 void	ft_free_cylinders(t_scene *scene)
 {
-	free(scene->elements->cylinders);
+	(void)scene;
 	return ;
 }

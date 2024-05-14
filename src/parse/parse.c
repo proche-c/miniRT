@@ -77,11 +77,11 @@ int	ft_get_data(char **params, t_scene *scene)
 	else if (ft_strncmp(params[0], "L", 2) == 0)
 		result = ft_get_light(params, scene);
 	else if (ft_strncmp(params[0], "pl", 3) == 0)
-		result = ft_get_planes(params, scene);
+		result = ft_get_element(params, scene);
 	else if (ft_strncmp(params[0], "sp", 3) == 0)
-		result = ft_get_spheres(params, scene);
+		result = ft_get_element(params, scene);
 	else if (ft_strncmp(params[0], "cy", 3) == 0)
-		result = ft_get_cylinders(params, scene);
+		result = ft_get_element(params, scene);
 	// if (scene->camera != NULL)
 	// 	printf("3 scene->camera->fov: %d\n", *(scene->camera->fov));
 	return (result);
@@ -89,11 +89,6 @@ int	ft_get_data(char **params, t_scene *scene)
 
 int	ft_init_elements(t_scene *scene)
 {
-	scene->elements = malloc(sizeof(t_element *));
-	if (!scene->elements)
-		return (1);
-	scene->elements->planes = NULL;
-	scene->elements->spheres = NULL;
-	scene->elements->cylinders = NULL;
+	(void)scene;
 	return (0);
 }
