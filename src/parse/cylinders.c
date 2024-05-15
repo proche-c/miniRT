@@ -12,6 +12,8 @@
 
 #include "minirt.h"
 
+
+// WORK IN PROGRESS
 int	 ft_get_cylinders(char **params, t_scene *scene)
 {
 	(void)params;

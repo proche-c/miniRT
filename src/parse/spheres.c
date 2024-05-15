@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 
+// WORK IN PROGRESS
 int	 ft_get_spheres(char **params, t_scene *scene)
 {
 	(void)params;

@@ -14,23 +14,29 @@
 
 int	 ft_get_ambient(char **params, t_scene *scene)
 {
-	printf("ENTRO EN FT_GET_AMBIENT\n");
+	printf("IN FT_GET_AMBIENT\n");
+	// check if ambient is already defined
 	if (scene->ambient.defined == 0)
 	{
 		scene->ambient.defined = 1;
+		// if it's not defined, ft_data_ambient stores data in struc scene
 		if (ft_data_ambient(params, scene) == 1)
 		{
 			perror("error: ambient: wrong parameters\n");
+			printf("OUT FT_GET_AMBIENT IN 1\n");
 			return (1);
 		}
+		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
 		ft_print_camera(scene);
 		ft_print_ambient(scene);
 		ft_print_light(scene);
-		printf("SALGO DE FT_GET_AMBIENT\n");
+		printf("OUT FT_GET_AMBIENT IN 2\n");
 		return (0);
 	}
 	else
 	{
+
+		// if ambient is already defined, error
 		perror("error: ambient: ambient already defined\n");
 		return (1);
 	}
@@ -40,39 +46,40 @@ int	 ft_get_ambient(char **params, t_scene *scene)
 
 int	ft_data_ambient(char **params, t_scene *scene)
 {
-	printf("ENTRO EN FT_DATA_AMBIENT\n");
+	printf("IN FT_DATA_AMBIENT\n");
+	// params in ambient must be 3: identifier, ratio and color
 	if (ft_count_params(params) != 3)
 	{
-		printf("n_params in ambient: %d\n", ft_count_params(params));
-		printf("SALGO DE FT_DATA_AMBIENT EN 1\n");
+		printf("OUT FT_DATA_AMBIENT IN 1\n");
 		return (1);
 	}
 	if (ft_get_ratio(params, scene) == 1)
 	{
-		printf("SALGO DE FT_DATA_AMBIENT EN 2\n");
+		printf("OUT FT_DATA_AMBIENT IN 2\n");
 		return (1);
 	}
 	if (ft_get_color(params, scene) == 1)
 	{
-		printf("SALGO DE FT_DATA_AMBIENT EN 3\n");
+		printf("OUT FT_DATA_AMBIENT IN 3\n");
 		return (1);
 	}
-	printf("SALGO DE FT_DATA_AMBIENT EN 4\n");
+	printf("OUT FT_DATA_AMBIENT IN 4\n");
 	return (0);
 }
 
 int	ft_get_ratio(char **params, t_scene *scene)
 {
-	printf("ENTRO EN FT_GET_RATIO\n");
+	printf("IN FT_GET_RATIO\n");
+	// ratio is a float in the range 0-1
 	
 	if (ft_is_float(params[1]) == 1 && ft_atof(params[1]) >= 0
 		&& ft_atof(params[1]) <= 1)
 	{
 		scene->ambient.ratio = ft_atof(params[1]);
-		printf("SALGO DE FT_GET_RATIO EN 1\n");
+		printf("OUT FT_GET_RATIO, RATIO %f\n", scene->ambient.ratio);
 		return (0);
 	}
-	printf("SALGO DE FT_GET_RATIO EN 2\n");
+	printf("OUT FT_GET_RATIO WITHOUT RATIO\n");
 	return (1);
 }
 
@@ -81,6 +88,7 @@ int	ft_get_color(char **params, t_scene *scene)
 	char **col;
 
 	col = ft_split(params[2], ',');
+	// col must be a color
 	if (ft_is_color(col) == 1)
 	{
 		scene->ambient.color.r = ft_atoi(col[0]);
@@ -101,6 +109,7 @@ int	ft_is_color(char **col)
 	i = 0;
 	while (i < 3)
 	{
+		// each member of col is a positive int in range 0-255
 		if (ft_is_positive(col[i]) == 0 || ft_atoi(col[i]) > 255)
 			return (0);
 		i++;

@@ -98,6 +98,7 @@ typedef struct s_element
 typedef struct s_scene
 {
 	char				*str_scene;
+	int					flag;
 	struct s_camera		camera;
 	struct s_ambient	ambient;
 	struct s_light		light;
@@ -124,9 +125,7 @@ int		ft_get_fov(char **params, t_scene *scene);
 int		ft_get_orientation(char **params, t_scene *scene);
 int		ft_is_vector(char **co);
 int		ft_is_normalized(char **co);
-int		ft_data_orientation(char **co, t_scene *scene);
 int		ft_get_pov(char **params, t_scene *scene);
-int		ft_data_pov(char **co, t_scene *scene);
 
 	/*ambient.c*/
 int	 	ft_get_ambient(char **params, t_scene *scene);
@@ -139,10 +138,10 @@ int		ft_is_color(char **col);
 int	 	ft_get_light(char **params, t_scene *scene);
 int		ft_data_light(char **params, t_scene *scene);
 int		ft_get_position(char **params, t_scene *scene);
-int		ft_data_position(char **co, t_scene *scene);
 
 	/*elements*/
 int	 	ft_get_element(char **params, t_scene *scene);
+void	ft_create_element(t_element *new_element);
 
 	/*planes.c*/
 int	 	ft_get_planes(char **params, t_scene *scene);
@@ -165,7 +164,7 @@ int		ft_is_positive(char *str);
 float	ft_atof(char *str);
 
 	/*init*/
-int		ft_initialize_scene(t_scene *scene);
+void		ft_initialize_scene(t_scene *scene);
 int		ft_init_camera(t_scene *scene);
 int		ft_init_ambient(t_scene *scene);
 int		ft_init_light(t_scene *scene);

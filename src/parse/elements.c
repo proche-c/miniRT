@@ -12,10 +12,21 @@
 
 #include "minirt.h"
 
+// WORK IN PROGRESS
 int	 ft_get_element(char **params, t_scene *scene)
 {
-	(void)scene;
 	(void)params;
+	t_element *new_element = NULL;
+
+	if (scene->flag == 0)
+	{
+		ft_create_element(new_element);
+	}
 	return (0);
 }
 
+void	ft_create_element(t_element *new_element)
+{
+	(void)new_element;
+	return ;
+}

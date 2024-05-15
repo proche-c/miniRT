@@ -12,6 +12,7 @@
 
 #include "minirt.h"
 
+// TO DO ONCE PARSING IS DONE
 int	ft_execute(void)
 {
 	return (0);

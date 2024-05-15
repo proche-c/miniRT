@@ -14,24 +14,29 @@
 
 int	 ft_get_camera(char **params, t_scene *scene)
 {
-	printf("ENTRO EN FT_GET_CAMERA\n");
+	printf("IN FT_GET_CAMERA\n");
 	ft_print_params(params);
+	// check if camera is already defined
 	if (scene->camera.defined == 0)
 	{
 		scene->camera.defined = 1;
+		// if it's not defined, ft_data_camera stores data in struc scene
 		if (ft_data_camera(params, scene) == 1)
 		{
 			perror("error: camera: wrong parameters\n");
+			printf("OUT FT_GET_CAMERA IN 1\n");
 			return (1);
 		}
+		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
 		ft_print_camera(scene);
 		ft_print_ambient(scene);
 		ft_print_light(scene);
-		printf("SALGO DE FT_GET_CAMERA\n");
+		printf("OUT FT_GET_CAMERA IN 2\n");
 		return (0);
 	}
 	else
 	{
+		// if camera is already defined, error
 		perror("error: camera: camera already defined\n");
 		return (1);
 	}
@@ -41,127 +46,117 @@ int	 ft_get_camera(char **params, t_scene *scene)
 
 int	ft_data_camera(char **params, t_scene *scene)
 {
-	printf("ENTRO EN FT_DATA_CAMERA\n");
+	printf("IN FT_DATA_CAMERA\n");
+	// params in camera must be 4: identifier, pov, orientation and fov
 	if (ft_count_params(params) != 4)
 	{
-		printf("SALGO DE FT_DATA_CAMERA EN 1\n");
+		printf("OUT FT_DATA_CAMERA IN 1\n");
 		return (1);
 	}
 	if (ft_get_fov(params, scene) == 1)
 	{
-		printf("SALGO DE FT_DATA_CAMERA EN 2\n");
+		printf("OUT FT_DATA_CAMERA IN 2\n");
 		return (1);
 	}
 	if (ft_get_orientation(params, scene) == 1)
 	{
-		printf("SALGO DE FT_DATA_CAMERA EN 3\n");
+		printf("OUT FT_DATA_CAMERA IN 3\n");
 		return (1);
 	}
 	if (ft_get_pov(params, scene) == 1)
 	{
-		printf("SALGO DE FT_DATA_CAMERA EN 4\n");
+		printf("OUT FT_DATA_CAMERA IN 4\n");
 		return (1);
 	}
-	printf("SALGO DE FT_DATA_CAMERA EN 5\n");
+	printf("OUT FT_DATA_CAMERA IN 5\n");
 	return (0);
 }
 
 int	ft_get_fov(char **params, t_scene *scene)
 {
-	printf("ENTRO EN FT_GET_FOV\n");
-	if (ft_strchr(params[3], ',') == NULL && ft_atoi(params[3]) > 0
+	printf("IN FT_GET_FOV\n");
+	// fov is a positive int in the range 0-180 (0 not included, I think)
+	if (ft_is_positive(params[3]) == 1 && ft_atoi(params[3]) > 0
 		&& ft_atoi(params[3]) < 181)
 	{
 		scene->camera.fov = ft_atoi(params[3]);
-		printf("SALGO DE FT_GET_FOV CON FOV %d\n", scene->camera.fov);
+		printf("OUTE FT_GET_FOV, FOV %d\n", scene->camera.fov);
 		return (0);
 
 	}
-	printf("SALGO DE FT_GET_FOV SIN FOV\n");
+	printf("OUT FT_GET_FOV WITHOUT FOV\n");
 	return (1);
 }
 
 int	ft_get_orientation(char **params, t_scene *scene)
 {
-	printf("ENTRO EN FT_GET_ORIENTATION con params[2]: %s  \n", params[2]);
+	printf("IN FT_GET_ORIENTATION, params[2]: %s  \n", params[2]);
 	char **co;
 
-		co = ft_split(params[2], ',');
-		if (ft_is_vector(co) == 1 && ft_is_normalized(co) == 1)
-		{
-			// printf("co[0]: %s\n", co[0]);
-			if (ft_data_orientation(co, scene) == 1)
-			{
-				printf("SALGO DE FT_GET_ORIENTATION EN 1\n");
-				ft_free_params(co);
-				return (1);
-			}
-			else
-			{
-				printf("SALGO DE FT_GET_ORIENTATION EN 2\n");
-				ft_free_params(co);
-				return (0);
-			}
-		}
-
+	co = ft_split(params[2], ',');
+	// orientation must be a normalized vector
+	if (ft_is_vector(co) == 1 && ft_is_normalized(co) == 1)
+	{
+		// stores orientation in struct scene
+		scene->camera.orientation.x = ft_atof(co[0]);
+		scene->camera.orientation.y = ft_atof(co[1]);
+		scene->camera.orientation.z = ft_atof(co[2]);
+		printf("OUT FT_GET_ORIENTATION IN 1\n");
+		ft_free_params(co);
+		return (0);
+	}
+	// if co is not a normalized vector, error
 	ft_free_params(co);
-	printf("SALGO DE FT_GET_ORIENTATION EN 3\n");
+	printf("OUT FT_GET_ORIENTATION IN 2\n");
 	return (1);
 }
 
 int	ft_is_vector(char **co)
 {
-	printf("ENTRO EN FT_IS_COORDINATES\n");
+	// check if co is a vector
+	printf("IN FT_IS_VECTOR\n");
 	int	i;
 
-	// printf("en ft_is_coordinates co[0]: %s\n", co[0]);
+	// co must have 3 parameters
 	if (ft_count_params(co) != 3)
 	{
-		// printf("n_params in co: %d\n", ft_count_params(co));
-		printf("SALGO DE FT_IS_COORDINATES, PARAMS != 3\n");
+		printf("OUT FT_IS_VECTOR, PARAMS != 3\n");
 		return (0);
 	}
 	i = 0;
 	while (co[i])
 	{
+		// each parameter must be a float
 		if (ft_is_float(co[i]) == 0)
 		{
-			printf("SALGO DE FT_IS_COORDINATES, NO FLOATS\n");
+			printf("OUT FT_IS_VECTOR, NO FLOATS\n");
 			return (0);
 		}
 		i++;
 	}
-	printf("SALGO DE FT_IS_COORDINATES, THEY ARE FLOATS\n");
+	printf("OUT FT_IS_VECTOR, THEY ARE FLOATS\n");
 	return (1);
 }
 
 int	ft_is_normalized(char **co)
 {
-	printf("ENTRO EN FT_IS_NORMALIZED\n");
+	// check if co is normalized
+	printf("IN FT_IS_NORMALIZED\n");
 	int	i;
 
 	i = 0;
 	while (co[i])
 	{
+		// each parameter must be 1 or 0
 		if (ft_atof(co[i]) != 1 && ft_atof(co[i]) != 0)
 		{
-			printf("SALGO DE FT_IS_NORMALIZED, NO NORMALIZED\n");
+			printf("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
 			return (0);
 		}
 		i++;
 	}
-	printf("SALGO DE FT_IS_NORMALIZED, SON NORMALIZED\n");
+	printf("OUT FT_IS_NORMALIZED, THEY ARE NORMALIZED\n");
 	return (1);
-}
-
-int	ft_data_orientation(char **co, t_scene *scene)
-{
-	printf("ENTRO EN FT_DATA_ORIENTATION\n");
-	scene->camera.orientation.x = ft_atof(co[0]);
-	scene->camera.orientation.y = ft_atof(co[1]);
-	scene->camera.orientation.z = ft_atof(co[2]);
-	printf("SALGO DE FDATA_ORIENTATION\n");
-	return (0);
 }
 
 int	ft_get_pov(char **params, t_scene *scene)
@@ -169,35 +164,19 @@ int	ft_get_pov(char **params, t_scene *scene)
 	printf("ENTRO EN FT_GET_POV\n");
 	char **co;
 	
-
-		co = ft_split(params[1], ',');
-		if (ft_is_vector(co) == 1)
-		{
-			if (ft_data_pov(co, scene) == 1)
-			{
-				printf("SALGO DE FT_GET_POV EN 1\n");
-				ft_free_params(co);
-				return (1);
-			}
-			else
-			{
-				printf("SALGO DE FT_GET_POV EN 2\n");
-				ft_free_params(co);
-				return (0);
-			}
-		}
-	
+	co = ft_split(params[1], ',');
+	// pov must be a vector
+	if (ft_is_vector(co) == 1)
+	{
+		scene->camera.pov.x = ft_atof(co[0]);
+		scene->camera.pov.y = ft_atof(co[1]);
+		scene->camera.pov.z = ft_atof(co[2]);
+		printf("OUT FT_GET_POV IN 1\n");
+		ft_free_params(co);
+		return (0);
+	}
+	// if pov is not a vector, error:
 	ft_free_params(co);
-	printf("SALGO DE FT_GET_POV EN 3\n");
+	printf("OUT FT_GET_POV EN 2\n");
 	return (1);
-}
-
-int	ft_data_pov(char **co, t_scene *scene)
-{
-	printf("ENTRO EN FT_DATA_POV\n");
-	scene->camera.pov.x = ft_atof(co[0]);
-	scene->camera.pov.y = ft_atof(co[1]);
-	scene->camera.pov.z = ft_atof(co[2]);
-	printf("SALGO DE FDATA_POV\n");
-	return (0);
 }
