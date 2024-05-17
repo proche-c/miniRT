@@ -27,9 +27,9 @@ int	 ft_get_ambient(char **params, t_scene *scene)
 			return (1);
 		}
 		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
-		ft_print_camera(scene);
-		ft_print_ambient(scene);
-		ft_print_light(scene);
+		// ft_print_camera(scene);
+		// ft_print_ambient(scene);
+		// ft_print_light(scene);
 		printf("OUT FT_GET_AMBIENT IN 2\n");
 		return (0);
 	}
@@ -53,7 +53,7 @@ int	ft_data_ambient(char **params, t_scene *scene)
 		printf("OUT FT_DATA_AMBIENT IN 1\n");
 		return (1);
 	}
-	if (ft_get_ratio(params, scene) == 1)
+	if (ft_get_ambient_ratio(params, scene) == 1)
 	{
 		printf("OUT FT_DATA_AMBIENT IN 2\n");
 		return (1);
@@ -67,19 +67,19 @@ int	ft_data_ambient(char **params, t_scene *scene)
 	return (0);
 }
 
-int	ft_get_ratio(char **params, t_scene *scene)
+int	ft_get_ambient_ratio(char **params, t_scene *scene)
 {
-	printf("IN FT_GET_RATIO\n");
+	printf("IN FT_GET_AMBIENT_RATIO\n");
 	// ratio is a float in the range 0-1
 	
 	if (ft_is_float(params[1]) == 1 && ft_atof(params[1]) >= 0
 		&& ft_atof(params[1]) <= 1)
 	{
 		scene->ambient.ratio = ft_atof(params[1]);
-		printf("OUT FT_GET_RATIO, RATIO %f\n", scene->ambient.ratio);
+		printf("OUT FT_GET_AMBIENT_RATIO, RATIO %f\n", scene->ambient.ratio);
 		return (0);
 	}
-	printf("OUT FT_GET_RATIO WITHOUT RATIO\n");
+	printf("OUT FT_GET_AMBIENT_RATIO WITHOUT RATIO\n");
 	return (1);
 }
 

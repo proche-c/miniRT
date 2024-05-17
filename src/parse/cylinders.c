@@ -14,16 +14,10 @@
 
 
 // WORK IN PROGRESS
-int	 ft_get_cylinders(char **params, t_scene *scene)
+int	 ft_get_cylinder(t_element *new_element, char **params)
 {
 	(void)params;
-	if (scene->elements == NULL)
-		ft_init_elements(scene);
-	if (ft_init_cylinders(scene) == 1)
-	{
-		perror("error: cylinders: fail to asign memory\n");
-		return (1);
-	}
+	(void)new_element;
 	return (0);
 }
 

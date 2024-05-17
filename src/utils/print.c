@@ -42,10 +42,7 @@ void	ft_print_light(t_scene *scene)
 	printf("sscene->light.position.x: %f\n", scene->light.position.x);
 	printf("scene->light.position.y: %f\n", scene->light.position.y);
 	printf("scene->light.position.z: %f\n", scene->light.position.z);
-	// printf("scene->camera->orientation[0]: %d\n", scene->camera->orientation[0]);
-	// printf("scene->camera->orientation[1]: %d\n", scene->camera->orientation[1]);
-	// printf("scene->camera->orientation[2]: %d\n", scene->camera->orientation[2]);
-	// printf("scene->camera->fov: %d\n", scene->camera->fov);
+	printf("scene->light->ratio: %f\n", scene->light.ratio);
 }
 
 void	ft_print_params(char **params)
@@ -58,4 +55,49 @@ void	ft_print_params(char **params)
 		printf("params[%d]: %s\n", i, params[i]);
 		i++;
 	 }
+}
+
+void	ft_print_elements(t_scene *scene)
+{
+	printf("IN FT_PRINT_ELEMENTS\n");
+	t_element	*element;
+
+	element = scene->elements;
+	while (element)
+	{
+		if (ft_strncmp(element->identifier, "sp", 3) == 0)
+		{
+			printf("\n***SPHERE***\n");
+			printf("scene->flag: %d\n", scene->flag);
+			printf("pointer scene->elements: %p\n", scene->elements);
+			printf("pointer: %p\n", element);
+			printf("element->identifier: %s\n", element->identifier);
+			printf("element->position.x: %f\n", element->position.x);
+			printf("element->position.y: %f\n", element->position.y);
+			printf("element->position.z: %f\n", element->position.z);
+			printf("element->diameter: %f\n", element->diameter);
+			printf("element->color.r: %d\n", element->color.r);
+			printf("element->color.g: %d\n", element->color.g);
+			printf("element->color.b: %d\n", element->color.b);
+		}
+		else if (ft_strncmp(element->identifier, "pl", 3) == 0)
+		{
+			printf("\n***PLANE***\n");
+			printf("pointer: %p\n", element);
+			printf("scene->flag: %d\n", scene->flag);
+			printf("pointer scene->elements: %p\n", scene->elements);
+			printf("element->identifier: %s\n", element->identifier);
+			printf("element->position.x: %f\n", element->position.x);
+			printf("element->position.y: %f\n", element->position.y);
+			printf("element->position.z: %f\n", element->position.z);
+			printf("element->n_vector.x: %f\n", element->n_vector.x);
+			printf("element->n_vector.y: %f\n", element->n_vector.y);
+			printf("element->n_vector.z: %f\n", element->n_vector.z);
+			printf("element->color.r: %d\n", element->color.r);
+			printf("element->color.g: %d\n", element->color.g);
+			printf("element->color.b: %d\n", element->color.b);	
+		}
+		element = element->next;
+	}
+	printf("OUT FT_PRINT_ELEMENTS\n");
 }

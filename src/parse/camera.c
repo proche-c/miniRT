@@ -15,7 +15,6 @@
 int	 ft_get_camera(char **params, t_scene *scene)
 {
 	printf("IN FT_GET_CAMERA\n");
-	ft_print_params(params);
 	// check if camera is already defined
 	if (scene->camera.defined == 0)
 	{
@@ -28,9 +27,9 @@ int	 ft_get_camera(char **params, t_scene *scene)
 			return (1);
 		}
 		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
-		ft_print_camera(scene);
-		ft_print_ambient(scene);
-		ft_print_light(scene);
+		// ft_print_camera(scene);
+		// ft_print_ambient(scene);
+		// ft_print_light(scene);
 		printf("OUT FT_GET_CAMERA IN 2\n");
 		return (0);
 	}

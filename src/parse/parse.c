@@ -79,11 +79,17 @@ int	ft_get_data(char **params, t_scene *scene)
 	else if (ft_strncmp(params[0], "L", 2) == 0)
 		result = ft_get_light(params, scene);
 	else if (ft_strncmp(params[0], "pl", 3) == 0)
+	{
+		// result = 0;
 		result = ft_get_element(params, scene);
+	}
 	else if (ft_strncmp(params[0], "sp", 3) == 0)
 		result = ft_get_element(params, scene);
 	else if (ft_strncmp(params[0], "cy", 3) == 0)
-		result = ft_get_element(params, scene);
+	{
+		result = 0;
+		// result = ft_get_element(params, scene);
+	}
 	return (result);
 }
 
