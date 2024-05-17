@@ -87,8 +87,8 @@ int	ft_get_data(char **params, t_scene *scene)
 		result = ft_get_element(params, scene);
 	else if (ft_strncmp(params[0], "cy", 3) == 0)
 	{
-		result = 0;
-		// result = ft_get_element(params, scene);
+		// result = 0;
+		result = ft_get_element(params, scene);
 	}
 	return (result);
 }

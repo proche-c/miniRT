@@ -97,6 +97,25 @@ void	ft_print_elements(t_scene *scene)
 			printf("element->color.g: %d\n", element->color.g);
 			printf("element->color.b: %d\n", element->color.b);	
 		}
+		else if (ft_strncmp(element->identifier, "cy", 3) == 0)
+		{
+			printf("\n***CYLINDER***\n");
+			printf("pointer: %p\n", element);
+			printf("scene->flag: %d\n", scene->flag);
+			printf("pointer scene->elements: %p\n", scene->elements);
+			printf("element->identifier: %s\n", element->identifier);
+			printf("element->position.x: %f\n", element->position.x);
+			printf("element->position.y: %f\n", element->position.y);
+			printf("element->position.z: %f\n", element->position.z);
+			printf("element->n_vector.x: %f\n", element->n_vector.x);
+			printf("element->n_vector.y: %f\n", element->n_vector.y);
+			printf("element->n_vector.z: %f\n", element->n_vector.z);
+			printf("element->diameter: %f\n", element->diameter);
+			printf("element->height: %f\n", element->height);
+			printf("element->color.r: %d\n", element->color.r);
+			printf("element->color.g: %d\n", element->color.g);
+			printf("element->color.b: %d\n", element->color.b);	
+		}
 		element = element->next;
 	}
 	printf("OUT FT_PRINT_ELEMENTS\n");

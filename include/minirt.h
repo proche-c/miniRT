@@ -160,7 +160,7 @@ int		ft_get_e_diameter(t_element *new_element, char *param);
 
 	/*cylinders.c*/
 int	 	ft_get_cylinder(t_element *new_element, char **params);
-int		ft_init_cylinders(t_scene *scene);
+int	ft_get_e_height(t_element *new_element, char *param);
 
 //UTILS
 	/*utils_parse*/
