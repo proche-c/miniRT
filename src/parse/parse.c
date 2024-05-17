@@ -33,7 +33,14 @@ int	ft_parse(t_scene *scene)
 		i++;
 	}
 	ft_free_params(lines);
-	printf("OUT FT_PARSE IN 2\n");
+	if (scene->camera.defined == 0 || scene->ambient.defined == 0
+		|| scene->light.defined == 0 || scene->elements == NULL)
+	{
+		printf("error: scene definition: missing mandatory parameters\n");
+		printf("OUT FT_PARSE IN 2\n");
+		return (1);
+	}
+	printf("OUT FT_PARSE IN 3\n");
 	return (0);
 }
 
