@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "mlx.h"
 
 #define MAX_LEN	10000
 
@@ -103,6 +104,8 @@ typedef struct s_scene
 	struct s_ambient	ambient;
 	struct s_light		light;
 	struct s_element	*elements;
+	void				*mlx_ptr;
+	void				*window_ptr;
 }	t_scene;
 
 // CHECKERS
@@ -184,7 +187,7 @@ void	ft_print_params(char **params);
 void	ft_print_elements(t_scene *scene);
 
 //EXECUTE
-int		ft_execute(void);
+int		ft_execute(t_scene *scene);
 
 // CLEAN
 

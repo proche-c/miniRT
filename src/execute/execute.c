@@ -13,7 +13,12 @@
 #include "minirt.h"
 
 // TO DO ONCE PARSING IS DONE
-int	ft_execute(void)
+int	ft_execute(t_scene *scene)
 {
+	printf("IN FT_EXECUTE\n");
+	scene->mlx_ptr = mlx_init();
+	scene->window_ptr = mlx_new_window(scene->mlx_ptr, 300, 200, "miniRT");
+	mlx_loop(scene->mlx_ptr);
+	printf("OUT FT_EXECUTE\n");
 	return (0);
 }

@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 		free(scene);
 		return (1);
 	}
-	ft_execute();
+	ft_execute(scene);
 	ft_free_scene(scene);
 	return (0);
 }

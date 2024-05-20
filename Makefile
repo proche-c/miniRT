@@ -38,9 +38,6 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g $(INC)
 
-# LFLAGS      = -lft
-# LDIR        = ./libft
-# LIBFT_INC        = ./libft/includes
 
 ifeq ($(shell uname), Linux)
 	MDIR   = ./minilibx/linux
