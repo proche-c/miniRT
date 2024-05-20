@@ -38,6 +38,20 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -g $(INC)
 
+# LFLAGS      = -lft
+# LDIR        = ./libft
+# LIBFT_INC        = ./libft/includes
+
+ifeq ($(shell uname), Linux)
+	MDIR   = ./minilibx/linux
+	MINC   = ./minilibx/linux
+	MFLAGS = -lmlx -lXext -lX11 -lm -lz
+else
+	MDIR   = ./minilibx/macos
+	MINC   = ./minilibx/macos
+	MFLAGS = -lmlx -framework openGL -framework AppKit
+endif
+
 
 INCS        = -I ./include/
 
@@ -46,11 +60,12 @@ RM = rm -f
 all: $(NAME) library
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
+	$(CC) $(CFLAGS) -I $(MINC) -c $< -o $@ $(INCS)
 	@echo "files .o generated"
 
 $(NAME): $(OBJS) $(HEADER) library
-	$(CC) $(CFLAGS) $(OBJS)  -L./libft -lft -o $(NAME)
+	$(MAKE) -C $(MDIR)
+	$(CC) $(CFLAGS) $(OBJS) $(MFLAGS) -L $(MDIR)  -L./libft -lft -o $(NAME)
 	@echo "file .out generated"
 
 library:
@@ -60,6 +75,7 @@ library:
 clean:
 	@$(RM) $(OBJS)
 	@$(MAKE) -s -C libft clean
+	$(MAKE) -C $(MDIR) clean
 	@echo "files .o removed"
 
 fclean: clean
