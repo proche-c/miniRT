@@ -193,3 +193,5 @@ void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
 #endif
+
+//test
