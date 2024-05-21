@@ -16,8 +16,11 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "mlx.h"
 
 #define MAX_LEN	10000
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 
 typedef struct s_vector
 {
@@ -104,6 +107,29 @@ typedef struct s_scene
 	struct s_light		light;
 	struct s_element	*elements;
 }	t_scene;
+
+//rt
+
+typedef struct s_img
+{
+	void	*img;
+    char	*addr;
+    int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+
+}	t_img;
+
+typedef struct s_rt
+{
+    float			width;
+	float			height;
+    void			*mlx;
+    void			*mlx_win;
+    t_img			img;
+    int				pnum; //number of coordinate value
+
+}    t_rt;
 
 // CHECKERS
 
@@ -192,6 +218,7 @@ void	ft_free_planes(t_scene *scene);
 void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
-#endif
+/*rt*/
+void	rt_init(t_rt *rt);
 
-//test
+#endif

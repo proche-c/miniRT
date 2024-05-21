@@ -10,11 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../include/minirt.h"
 
 int	main(int argc, char **argv)
 {
+	#include "minirt.h"
+
 	t_scene	*scene;
+
 
 	if (argc != 2)
 	{
@@ -38,7 +41,9 @@ int	main(int argc, char **argv)
 		free(scene);
 		return (1);
 	}
-	ft_execute();
+	t_rt *rt = NULL;
+	rt_init(rt);
+	//ft_execute();
 	ft_free_scene(scene);
 	return (0);
 }
