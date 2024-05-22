@@ -16,9 +16,13 @@
 int	ft_execute(t_scene *scene)
 {
 	printf("IN FT_EXECUTE\n");
+	// (void)scene;
+	// void	*mlx_ptr;
+	//void	*window_ptr;
+	// mlx_ptr = malloc(sizeof(void *));
 	scene->mlx_ptr = mlx_init();
-	scene->window_ptr = mlx_new_window(scene->mlx_ptr, 300, 200, "miniRT");
-	mlx_loop(scene->mlx_ptr);
+	scene->window_ptr = mlx_new_window(scene->mlx_ptr, 1000, 700, "miniRT");
+	//mlx_loop(scene->mlx_ptr);
 	printf("OUT FT_EXECUTE\n");
 	return (0);
 }

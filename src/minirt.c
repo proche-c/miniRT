@@ -39,6 +39,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_execute(scene);
+	mlx_loop(scene->mlx_ptr);
 	ft_free_scene(scene);
 	return (0);
 }
