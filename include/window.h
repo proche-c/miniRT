@@ -58,7 +58,7 @@
 #  define KV_LEFTCLICK 1
 #  define KV_RIGHTCLICK 3
 
-# define MAX_KEY 65535
+
 
 
 
@@ -72,21 +72,7 @@ enum {
     ON_DESTROY = 17
 };
 
-typedef struct s_event
-{
-    int		x;
-    int		y;
-    int		lastx;
-    int		lasty;
-    int		key[MAX_KEY];
-    int		mouse;
 
-}	t_event;
 
-int	    handle_keydown(int key, t_scene *scene);
-int	    handle_keyup(int key, t_scene *scene);
-void	hook_init(t_scene *scene);
-int	    exit_win(t_scene *scene);
-static int	handle_no_event(t_scene *scene);
 
 # endif

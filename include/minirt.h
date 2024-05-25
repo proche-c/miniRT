@@ -23,6 +23,41 @@
 #define MAX_LEN	10000
 # define MAX_KEY 65535
 
+enum {
+    ON_KEYDOWN = 2,
+    ON_KEYUP = 3,
+    ON_MOUSEDOWN = 4,
+    ON_MOUSEUP = 5,
+    ON_MOUSEMOVE = 6,
+    ON_EXPOSE = 12,
+    ON_DESTROY = 17
+};
+/*
+# ifdef __APPLE__
+#  define IS_LINUX 0
+#  define ESC_KEY 53
+#  define A_KEY 0
+#  define S_KEY 1
+#  define D_KEY 2
+#  define C_KEY 5
+#  define I_KEY 34
+#  define P_KEY 35
+#  define L_KEY 37
+#  define LEFT_CLICK 1
+#  define RIGHT_CLICK 2
+# elif defined __unix__*/
+#  define IS_LINUX 1
+#  define ESC_KEY 65307
+#  define A_KEY 97
+#  define S_KEY 115
+#  define P_KEY 112
+#  define L_KEY 108
+#  define C_KEY 99
+#  define D_KEY 100
+#  define I_KEY 105
+
+//# endif
+
 typedef struct s_vector
 {
 	float				x;
@@ -219,11 +254,14 @@ void	ft_free_planes(t_scene *scene);
 void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
+
 //EVENT
 int	    handle_keydown(int key, t_scene *scene);
 int	    handle_keyup(int key, t_scene *scene);
 void	hook_init(t_scene *scene);
 int	    exit_win(t_scene *scene);
-static int	handle_no_event(t_scene *scene);
+int		handle_no_event(t_scene *scene);
+
+
 
 #endif

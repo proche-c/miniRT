@@ -5,7 +5,7 @@ EXECUTE = $(wildcard ./src/execute/*.c)
 PARSE = $(wildcard ./src/parse/*.c)
 UTILS =	$(wildcard ./src/utils/*.c)
 CLEAN = $(wildcard ./src/clean/*.c)
-EVENT = $(wildcard ./src/rt/*.c)
+EVENT = $(wildcard ./src/events/*.c)
 
 # LISTS = ./src/lists/parse.c \
 # 	./src/lists/envp.c \

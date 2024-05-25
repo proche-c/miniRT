@@ -1,6 +1,6 @@
 
 # include "../include/minirt.h"
-# include "../include/window.h"
+
 
 int	exit_win(t_scene *scene)
 {
