@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minirt.h""
+#include "../../include/minirt.h"
 
 int	ft_parse(t_scene *scene)
 {
