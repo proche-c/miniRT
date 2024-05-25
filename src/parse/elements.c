@@ -9,8 +9,7 @@
 /*   Updated: 2023/10/05 00:11:28 by proche-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "minirt.h"
+#include "../../include/minirt.h"
 
 // WORK IN PROGRESS
 int	 ft_get_element(char **params, t_scene *scene)

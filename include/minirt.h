@@ -18,7 +18,10 @@
 # include "../libft/libft.h"
 # include "mlx.h"
 
+#include <minirt.h>
+
 #define MAX_LEN	10000
+# define MAX_KEY 65535
 
 typedef struct s_vector
 {
@@ -96,6 +99,17 @@ typedef struct s_element
 	struct s_element	*next;
 }	t_element;
 
+typedef struct s_event
+{
+    int		x;
+    int		y;
+    int		lastx;
+    int		lasty;
+    int		key[MAX_KEY];
+    int		mouse;
+
+}	t_event;
+
 typedef struct s_scene
 {
 	char				*str_scene;
@@ -106,6 +120,7 @@ typedef struct s_scene
 	struct s_element	*elements;
 	void				*mlx_ptr;
 	void				*window_ptr;
+	t_event				event;
 }	t_scene;
 
 // CHECKERS
@@ -203,5 +218,12 @@ void	ft_free_params(char **params);
 void	ft_free_planes(t_scene *scene);
 void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
+
+//EVENT
+int	    handle_keydown(int key, t_scene *scene);
+int	    handle_keyup(int key, t_scene *scene);
+void	hook_init(t_scene *scene);
+int	    exit_win(t_scene *scene);
+static int	handle_no_event(t_scene *scene);
 
 #endif

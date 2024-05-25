@@ -40,6 +40,7 @@ int	main(int argc, char **argv)
 	}*/
 	ft_execute(scene);
 	mlx_loop(scene->mlx_ptr);
+	hook_init(scene);
 	ft_free_scene(scene);
 	return (0);
 }

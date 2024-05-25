@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../include/minirt.h"
 
 // WORK IN PROGRESS
 int	 ft_get_sphere(t_element *new_element, char **params)
