@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../include/minirt.h"
 
 void	ft_free_scene(t_scene *scene)
 {

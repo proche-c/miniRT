@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../include/minirt.h"
 
 // TO DO ONCE PARSING IS DONE
 int	ft_execute(t_scene *scene)

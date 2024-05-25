@@ -42,7 +42,7 @@ char	*ft_strtrim(char const *s1, const char *set)
 	while (s1[i] != '\0' && ft_find_char(set, s1[i]) == 1)
 		i++;
 	lenth = ft_strlen(s1);
-	while (lenth - 1 >= i && lenth - 1 >= 0
+	while (lenth - 1 >= i
 		&& ft_find_char(set, s1[lenth - 1]) == 1)
 		lenth--;
 	result = malloc(lenth - i + 1);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
+#include "../../include/minirt.h"
 
 int	ft_check(char *file_name, t_scene *scene)
 {
