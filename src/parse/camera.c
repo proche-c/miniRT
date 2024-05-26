@@ -26,10 +26,8 @@ int	 ft_get_camera(char **params, t_scene *scene)
 			printf("OUT FT_GET_CAMERA IN 1\n");
 			return (1);
 		}
-		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
-		// ft_print_camera(scene);
-		// ft_print_ambient(scene);
-		// ft_print_light(scene);
+		// ft_print_camera, _ambient, ft_print_light are debug functions
+
 		printf("OUT FT_GET_CAMERA IN 2\n");
 		return (0);
 	}
