@@ -27,9 +27,9 @@ int	 ft_get_light(char **params, t_scene *scene)
 			return (1);
 		}
 		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
-		ft_print_camera(scene);
-		ft_print_ambient(scene);
-		ft_print_light(scene);
+		// ft_print_camera(scene);
+		// ft_print_ambient(scene);
+		// ft_print_light(scene);
 		printf("OUT FT_GET_LIGHT IN 2\n");
 		return (0);
 	}
@@ -56,6 +56,11 @@ int	ft_data_light(char **params, t_scene *scene)
 		printf("OUT FT_DATA_LIGHT EN 2\n");
 		return (1);
 	}
+	if (ft_get_light_ratio(params, scene) == 1)
+	{
+		printf("OUT FT_DATA_LIGHT EN 2\n");
+		return (1);
+	}
 	return (0);
 }
 
@@ -77,5 +82,21 @@ int	ft_get_position(char **params, t_scene *scene)
 	
 	ft_free_params(co);
 	printf("OUT FT_GET_POSITION EN 3\n");
+	return (1);
+}
+
+int	ft_get_light_ratio(char **params, t_scene *scene)
+{
+	printf("IN FT_GET_LIGHT_RATIO\n");
+	// ratio is a float in the range 0-1
+	
+	if (ft_is_float(params[2]) == 1 && ft_atof(params[2]) >= 0
+		&& ft_atof(params[2]) <= 1)
+	{
+		scene->light.ratio = ft_atof(params[2]);
+		printf("OUT FT_GET_LIGHT_RATIO, RATIO %f\n", scene->ambient.ratio);
+		return (0);
+	}
+	printf("OUT FT_GET_LIGHT_RATIO WITHOUT RATIO\n");
 	return (1);
 }

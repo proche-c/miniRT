@@ -33,7 +33,18 @@ int	ft_parse(t_scene *scene)
 		i++;
 	}
 	ft_free_params(lines);
-	printf("OUT FT_PARSE IN 2\n");
+	ft_print_camera(scene);
+	ft_print_ambient(scene);
+	ft_print_light(scene);
+	ft_print_elements(scene);
+	if (scene->camera.defined == 0 || scene->ambient.defined == 0
+		|| scene->light.defined == 0 || scene->elements == NULL)
+	{
+		printf("error: scene definition: missing mandatory parameters\n");
+		printf("OUT FT_PARSE IN 2\n");
+		return (1);
+	}
+	printf("OUT FT_PARSE IN 3\n");
 	return (0);
 }
 
@@ -79,11 +90,17 @@ int	ft_get_data(char **params, t_scene *scene)
 	else if (ft_strncmp(params[0], "L", 2) == 0)
 		result = ft_get_light(params, scene);
 	else if (ft_strncmp(params[0], "pl", 3) == 0)
+	{
+		// result = 0;
 		result = ft_get_element(params, scene);
+	}
 	else if (ft_strncmp(params[0], "sp", 3) == 0)
 		result = ft_get_element(params, scene);
 	else if (ft_strncmp(params[0], "cy", 3) == 0)
+	{
+		// result = 0;
 		result = ft_get_element(params, scene);
+	}
 	return (result);
 }
 

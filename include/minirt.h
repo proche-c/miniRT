@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "mlx.h"
 
 #define MAX_LEN	10000
 
@@ -86,13 +87,13 @@ typedef struct s_cylinders
 
 typedef struct s_element
 {
-	char				identifier;
+	char				*identifier;
 	struct s_vector		position;
 	struct s_color		color;
 	float				diameter;
 	struct s_vector		n_vector;
 	float				height;
-	struct s_spheres	*next;
+	struct s_element	*next;
 }	t_element;
 
 typedef struct s_scene
@@ -103,6 +104,8 @@ typedef struct s_scene
 	struct s_ambient	ambient;
 	struct s_light		light;
 	struct s_element	*elements;
+	void				*mlx_ptr;
+	void				*window_ptr;
 }	t_scene;
 
 // CHECKERS
@@ -130,7 +133,7 @@ int		ft_get_pov(char **params, t_scene *scene);
 	/*ambient.c*/
 int	 	ft_get_ambient(char **params, t_scene *scene);
 int		ft_data_ambient(char **params, t_scene *scene);
-int		ft_get_ratio(char **params, t_scene *scene);
+int		ft_get_ambient_ratio(char **params, t_scene *scene);
 int		ft_get_color(char **params, t_scene *scene);
 int		ft_is_color(char **col);
 
@@ -138,22 +141,29 @@ int		ft_is_color(char **col);
 int	 	ft_get_light(char **params, t_scene *scene);
 int		ft_data_light(char **params, t_scene *scene);
 int		ft_get_position(char **params, t_scene *scene);
+int		ft_get_light_ratio(char **params, t_scene *scene);
 
 	/*elements*/
 int	 	ft_get_element(char **params, t_scene *scene);
-void	ft_create_element(t_element *new_element);
+int	ft_data_first_element(char **params, t_scene *scene);
+int	ft_data_add_element(char **params, t_scene *scene);
+int		ft_data_element(t_element *new_element, char **params);
+int		ft_get_e_position(t_element *new_element, char *param);
+int		ft_get_e_color(t_element *new_element, char *param);
+void	ft_add_element(t_element **lst, t_element *new);
+t_element	*ft_elelast(t_element *lst);
 
 	/*planes.c*/
-int	 	ft_get_planes(char **params, t_scene *scene);
-int		ft_init_planes(t_scene *scene);
+int	 	ft_get_plane(t_element *new_element, char **params);
+int		ft_get_e_n_vector(t_element *new_element, char *param);
 
 	/*spheres.c*/
-int	 	ft_get_spheres(char **params, t_scene *scene);
-int		ft_init_spheres(t_scene *scene);
+int 	ft_get_sphere(t_element *new_element, char **params);
+int		ft_get_e_diameter(t_element *new_element, char *param);
 
 	/*cylinders.c*/
-int	 	ft_get_cylinders(char **params, t_scene *scene);
-int		ft_init_cylinders(t_scene *scene);
+int	 	ft_get_cylinder(t_element *new_element, char **params);
+int	ft_get_e_height(t_element *new_element, char *param);
 
 //UTILS
 	/*utils_parse*/
@@ -174,14 +184,16 @@ void	ft_print_camera(t_scene *scene);
 void	ft_print_ambient(t_scene *scene);
 void	ft_print_light(t_scene *scene);
 void	ft_print_params(char **params);
+void	ft_print_elements(t_scene *scene);
 
 //EXECUTE
-int		ft_execute(void);
+int		ft_execute(t_scene *scene);
 
 // CLEAN
 
 /*clean.c*/
 void	ft_free_scene(t_scene *scene);
+void	ft_free_all_elements(t_scene *scene);
 void	ft_free_camera(t_scene *scene);
 void	ft_free_ambient(t_scene *scene);
 void	ft_free_light(t_scene *scene);

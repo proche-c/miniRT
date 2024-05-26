@@ -63,6 +63,7 @@ int	ft_check_file(int fd, t_scene *scene)
 		printf("file_size: %lu\n", file_size);
 		printf("len scene: %lu\n", ft_strlen(scene->str_scene));
 		result = 0;
+		//free(buff);
 	}
 	close(fd);
 	return (result);
