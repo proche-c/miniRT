@@ -3,8 +3,9 @@
 
 int	handle_keydown(int key, t_scene *scene)
 {
-	if (key == A_KEY)
+	if (key == ESC_KEY)
     {
+
         printf("ESC KEY PRESSED\n"); //
     	exit_win(scene);
     }

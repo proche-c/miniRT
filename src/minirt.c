@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("error: wrong arguments\n", 1);
 		return (1);
 	}
-	scene = malloc(sizeof(t_scene *));
+	scene = malloc(sizeof(t_scene));
 	if (!scene)
 		return (1);
 	// init params in scene
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	
 	ft_execute(scene);
 	hook_init(scene);
-	//mlx_loop(scene->mlx_ptr);
+	mlx_loop(scene->mlx_ptr);
 	ft_free_scene(scene);
 	return (0);
 }

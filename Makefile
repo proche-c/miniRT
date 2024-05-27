@@ -13,8 +13,6 @@ EVENT = $(wildcard ./src/events/*.c)
 # 	./src/lists/files.c \
 # 	./src/lists/args.c \
 
-CLEAN = ./src/clean/clean.c \
-	./src/clean/clean_elements.c \
 
 MAIN = ./src/minirt.c \
 

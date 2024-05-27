@@ -18,7 +18,7 @@
 # include "../libft/libft.h"
 # include "mlx.h"
 
-#include <minirt.h>
+
 
 #define MAX_LEN	10000
 # define MAX_KEY 65535
@@ -47,7 +47,8 @@ enum {
 #  define RIGHT_CLICK 2
 # elif defined __unix__*/
 #  define IS_LINUX 1
-#  define ESC_KEY 65307
+# define ESC_KEY 65307
+
 #  define A_KEY 97
 #  define S_KEY 115
 #  define P_KEY 112
