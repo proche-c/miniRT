@@ -16,6 +16,32 @@
 int	ft_execute(t_scene *scene)
 {
 
+		/*
+	int	i = 0;
+	int	j = 0;
+	t_ray	ray;
+	t_intersection	intersection;
+	
+	ft_get_viewport(scene);   PAULA
+	while (j < image_height)
+	{
+		while (i < image_width)
+		{
+			ray = ft_get_ray(scene, j, i);	PAULA
+			if (ft_hit_something(ray, scene) == 1)	PAULA
+			{
+				intersection = ft_get_intersection(ray, scene, j, i); PAULA
+				write_pixel_object(scene, intersection, j, i); ALEX
+			}
+			else
+				write_pixel_no_object(scene, j, i); ALEX
+
+			i++;
+		}
+		j++;
+	}
+	*/
+
 	scene->mlx_ptr = mlx_init();
 	scene->window_ptr = mlx_new_window(scene->mlx_ptr, 800, 400, "miniRT");
 

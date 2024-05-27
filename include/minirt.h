@@ -104,6 +104,12 @@ typedef struct s_element
 	struct s_element	*next;
 }	t_element;
 
+typedef struct s_intersection
+{
+	struct s_vector		position;
+	struct s_element	*element;
+}	t_intersection;
+
 typedef struct s_scene
 {
 	char				*str_scene;
