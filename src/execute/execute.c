@@ -24,7 +24,7 @@ int	ft_execute(t_scene *scene)
 
 	scene->window_ptr = mlx_new_window(scene->mlx_ptr, 1000, 700, "miniRT");
 
-	mlx_loop(scene->mlx_ptr);
+	
 	printf("OUT FT_EXECUTE\n");
 	return (0);
 }

@@ -18,10 +18,8 @@
 # include "../libft/libft.h"
 # include "mlx.h"
 
-
-
 #define MAX_LEN	10000
-# define MAX_KEY 65535
+//# define MAX_KEY 65535
 
 enum {
     ON_KEYDOWN = 2,
@@ -32,7 +30,7 @@ enum {
     ON_EXPOSE = 12,
     ON_DESTROY = 17
 };
-/*
+
 # ifdef __APPLE__
 #  define IS_LINUX 0
 #  define ESC_KEY 53
@@ -45,10 +43,11 @@ enum {
 #  define L_KEY 37
 #  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2
-# elif defined __unix__*/
+# elif defined __unix__
 #  define IS_LINUX 1
-# define ESC_KEY 65307
-
+#  define ESC_KEY 65307
+#endif
+/*
 #  define A_KEY 97
 #  define S_KEY 115
 #  define P_KEY 112
@@ -56,8 +55,8 @@ enum {
 #  define C_KEY 99
 #  define D_KEY 100
 #  define I_KEY 105
+*/
 
-//# endif
 
 typedef struct s_vector
 {
@@ -98,11 +97,8 @@ typedef struct s_light
 typedef struct s_spheres
 {
 	char				identifier;
-	struct s_vector		position;
-	float				diameter;
-	struct s_color		color;
-	struct s_spheres	*next;
 }	t_spheres;
+
 
 typedef struct s_planes
 {
@@ -141,7 +137,6 @@ typedef struct s_event
     int		y;
     int		lastx;
     int		lasty;
-    int		key[MAX_KEY];
     int		mouse;
 
 }	t_event;

@@ -33,11 +33,11 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	// it store the struc if the params are right
-	/*if*/ ft_parse(scene);
-	/*{
+	if (ft_parse(scene))
+	{
 		free(scene);
-		return (1);
-	}*/
+		return (1); 
+	}
 	
 	ft_execute(scene);
 	hook_init(scene);
