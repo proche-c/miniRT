@@ -3,6 +3,8 @@ SRCS = ${CHECKERS} ${EXECUTE} ${PARSE} ${UTILS} ${CLEAN} ${MAIN}
 CHECKERS = ./src/checkers/check.c \
 
 EXECUTE = ./src/execute/execute.c \
+	./src/execute/vectors_1.c \
+	./src/execute/vectors_2.c \
 
 PARSE = ./src/parse/parse.c \
 	./src/parse/camera.c \

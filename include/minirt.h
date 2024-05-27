@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include <fcntl.h>
+# include <math.h>
 # include "../libft/libft.h"
 # include "mlx.h"
 
@@ -25,6 +26,8 @@ typedef struct s_vector
 	float				x;
 	float				y;
 	float				z;
+	float				length_squared;
+	float				length;
 }	t_vector;
 
 typedef struct s_color
@@ -56,34 +59,39 @@ typedef struct s_light
 	struct s_vector		position;
 }	t_light;
 
-typedef struct s_spheres
+typedef struct s_ray
 {
-	char				identifier;
-	struct s_vector		position;
-	float				diameter;
-	struct s_color		color;
-	struct s_spheres	*next;
-}	t_spheres;
+	struct s_vector		origin;
+	struct s_vector		direction;
+}	t_ray;
+// typedef struct s_spheres
+// {
+// 	char				identifier;
+// 	struct s_vector		position;
+// 	float				diameter;
+// 	struct s_color		color;
+// 	struct s_spheres	*next;
+// }	t_spheres;
 
-typedef struct s_planes
-{
-	char				identifier;
-	struct s_vector		position;
-	struct s_vector		n_vector;
-	struct s_color		color;
-	struct s_planes		*next;
-}	t_planes;
+// typedef struct s_planes
+// {
+// 	char				identifier;
+// 	struct s_vector		position;
+// 	struct s_vector		n_vector;
+// 	struct s_color		color;
+// 	struct s_planes		*next;
+// }	t_planes;
 
-typedef struct s_cylinders
-{
-	char				identifier;
-	struct s_vector		position;
-	struct s_vector		n_vector;
-	float				diameter;
-	float				height;
-	struct s_color		color;
-	struct s_cylinders	*next;
-}	t_cylinders;
+// typedef struct s_cylinders
+// {
+// 	char				identifier;
+// 	struct s_vector		position;
+// 	struct s_vector		n_vector;
+// 	float				diameter;
+// 	float				height;
+// 	struct s_color		color;
+// 	struct s_cylinders	*next;
+// }	t_cylinders;
 
 typedef struct s_element
 {
@@ -187,7 +195,20 @@ void	ft_print_params(char **params);
 void	ft_print_elements(t_scene *scene);
 
 //EXECUTE
+	/*execute*/
 int		ft_execute(t_scene *scene);
+
+	/*vectors_1*/
+t_vector ft_add_vectors(t_vector v1, t_vector v2);
+t_vector ft_subtract_vectors(t_vector v1, t_vector v2);
+t_vector ft_multiply_vectors(t_vector v1, t_vector v2);
+t_vector ft_multiply_vector_and_float(t_vector v, float f);
+t_vector ft_division_vector_by_float(t_vector v, float f);
+
+	/*vectors_2*/
+float	ft_get_length_squared(t_vector v);
+float	ft_get_vector_length(t_vector v);
+float	ft_dot(t_vector v1, t_vector v2);
 
 // CLEAN
 
