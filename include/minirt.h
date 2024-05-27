@@ -154,6 +154,15 @@ typedef struct s_scene
 	t_event				event;
 }	t_scene;
 
+
+typedef struct s_img
+{
+	void	*ptr;
+	char	*str;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}			t_img;
 // CHECKERS
 
 int		ft_check(char *file_name, t_scene *scene);
@@ -252,11 +261,11 @@ void	ft_free_cylinders(t_scene *scene);
 
 
 //EVENT
-int	    handle_keydown(int key, t_scene *scene);
-int	    handle_keyup(int key, t_scene *scene);
+int		handle_input(int keycode, t_scene *scene);
 void	hook_init(t_scene *scene);
-int	    exit_win(t_scene *scene);
 int		handle_no_event(t_scene *scene);
+int 	pixel_print(t_scene *scene);
+
 
 
 

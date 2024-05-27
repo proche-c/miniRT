@@ -1,6 +1,12 @@
 
 # include "../include/minirt.h"
 
+int handle_no_event(t_scene *scene)
+{
+	(void)scene;
+	return (0);
+}
+
 
 
 int handle_input(int keycode, t_scene *scene)
@@ -19,7 +25,7 @@ int handle_input(int keycode, t_scene *scene)
 
 void	hook_init(t_scene *scene)
 {
-
 	mlx_key_hook(scene->window_ptr, handle_input, scene);
+	mlx_loop_hook(scene->mlx_ptr, handle_no_event, scene);
 
 }

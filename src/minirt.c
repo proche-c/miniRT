@@ -42,6 +42,7 @@ int	main(int argc, char **argv)
 	ft_execute(scene);
 	hook_init(scene);
 	mlx_loop(scene->mlx_ptr);
+	pixel_print(scene);
 	ft_free_scene(scene);
 	return (0);
 }
