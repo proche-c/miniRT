@@ -18,7 +18,21 @@ int handle_input(int keycode, t_scene *scene)
 		mlx_destroy_display(scene->mlx_ptr);
 		ft_free_scene(scene);
 		exit(0);
-		
+	}
+	else if (keycode == R_KEY)
+	{
+		printf("R key pressed\n"); //
+		color_screen(scene, 0xff0000);
+	}
+	else if (keycode == G_KEY)
+	{
+		printf("G key pressed\n"); //
+		color_screen(scene, 0xff00);
+	}
+	else if (keycode == B_KEY)
+	{
+		printf("B key pressed\n"); //
+		color_screen(scene, 0xff);
 	}
 	return (0);
 }
