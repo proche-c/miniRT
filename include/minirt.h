@@ -141,6 +141,15 @@ typedef struct s_event
 
 }	t_event;
 
+typedef struct s_img
+{
+	void	*ptr;
+	char	*str;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}			t_img;
+
 typedef struct s_scene
 {
 	char				*str_scene;
@@ -152,17 +161,11 @@ typedef struct s_scene
 	void				*mlx_ptr;
 	void				*window_ptr;
 	t_event				event;
+	struct s_img		img;
 }	t_scene;
 
 
-typedef struct s_img
-{
-	void	*ptr;
-	char	*str;
-	int		bpp;
-	int		size_line;
-	int		endian;
-}			t_img;
+
 // CHECKERS
 
 int		ft_check(char *file_name, t_scene *scene);
