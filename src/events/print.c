@@ -1,5 +1,23 @@
 # include "../include/minirt.h"
 
+
+int mlx_initiator(t_scene *scene)
+{
+	scene->mlx_ptr = mlx_init(); 
+    if (!scene->mlx_ptr)
+    {
+        printf("Error initializing MLX.\n");
+        return (-1);
+    }
+	scene->window_ptr = mlx_new_window(scene->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "miniRT");
+    if (!scene->window_ptr)
+    {
+        printf("Error creating window.\n");
+        return (-1);
+    }
+    return (0);
+}
+
 void	ft_pixel_put(t_img *img, int x, int y, int color)
 {
 	int	offset;
@@ -11,10 +29,6 @@ void	ft_pixel_put(t_img *img, int x, int y, int color)
     }
 
 	//calc the offset in octets for the pixel at position (x, y) in the img
-    //printf("color: %d\n", color);
-    //printf("bpp: %d\n", img->bpp);
-    //printf("size_line: %d\n", img->size_line);
-    //printf("endian: %d\n", img->endian);
 	offset = (img->size_line * y) + (x * (img->bpp / 8));	
     printf("size_line: %d, bpp: %d, x: %d, y: %d, offset: %d\n", img->size_line, img->bpp, x, y, offset);
     //printf("Offset: %d (x: %d, y: %d)\n", offset, x, y);
@@ -25,9 +39,7 @@ void	ft_pixel_put(t_img *img, int x, int y, int color)
     {
         printf("Error: Invalid offset %d for pixel (%d, %d)\n", offset, x, y);
         return;
-    }
-    
-    
+    } 
     *((unsigned int *)( img->img_pixel_str + offset)) = color;
     printf("color_screen done\n");
     //converts the address of the pixel to a pointer
@@ -52,26 +64,14 @@ void	color_screen(t_scene *scene, int color)
         }
         y++;
     }
+
+    int start_x = (WIN_WIDTH - IMG_WIDTH) / 2;
+    int start_y = (WIN_HEIGHT - IMG_HEIGHT) / 2;
     
-    mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr, scene->img.img_ptr, 0, 0);
+    mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr, scene->img.img_ptr, start_x, start_y);
 }
 
-int mlx_initiator(t_scene *scene)
-{
-	scene->mlx_ptr = mlx_init(); 
-    if (!scene->mlx_ptr)
-    {
-        printf("Error initializing MLX.\n");
-        return (-1);
-    }
-	scene->window_ptr = mlx_new_window(scene->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "miniRT");
-    if (!scene->window_ptr)
-    {
-        printf("Error creating window.\n");
-        return (-1);
-    }
-    return (0);
-}
+
 
 int pixel_print(t_scene *scene)
 {

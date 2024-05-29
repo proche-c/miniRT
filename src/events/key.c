@@ -7,8 +7,6 @@ int handle_no_event(t_scene *scene)
 	return (0);
 }
 
-
-
 int handle_input(int keycode, t_scene *scene)
 {
 	if (keycode == ESC_KEY)
