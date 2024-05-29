@@ -16,6 +16,7 @@ void	ft_pixel_put(t_img *img, int x, int y, int color)
     //printf("size_line: %d\n", img->size_line);
     //printf("endian: %d\n", img->endian);
 	offset = (img->size_line * y) + (x * (img->bpp / 8));	
+    printf("size_line: %d, bpp: %d, x: %d, y: %d, offset: %d\n", img->size_line, img->bpp, x, y, offset);
     //printf("Offset: %d (x: %d, y: %d)\n", offset, x, y);
     //(img->size_line * y) = calc how many oct are necessary to reach the line y
     //(x * (img->bpp / 8)) = calc how many oct are necessary to reach the x position in the line y (converts bpp in octets pp )
@@ -27,7 +28,7 @@ void	ft_pixel_put(t_img *img, int x, int y, int color)
     }
     
     
-    *((unsigned int *)( img->img_pixel_str)) = color;
+    *((unsigned int *)( img->img_pixel_str + offset)) = color;
     printf("color_screen done\n");
     //converts the address of the pixel to a pointer
 }

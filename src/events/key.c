@@ -15,7 +15,7 @@ int handle_input(int keycode, t_scene *scene)
 	{
 		printf("ESC key pressed\n"); //
 		mlx_destroy_window(scene->mlx_ptr, scene->window_ptr);
-		mlx_destroy_display(scene->mlx_ptr);
+		//mlx_destroy_display(scene->mlx_ptr);
 		ft_free_scene(scene);
 		exit(0);
 	}
