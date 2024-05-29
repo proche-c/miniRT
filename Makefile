@@ -5,6 +5,7 @@ CHECKERS = ./src/checkers/check.c \
 EXECUTE = ./src/execute/execute.c \
 	./src/execute/vectors_1.c \
 	./src/execute/vectors_2.c \
+	./src/execute/viewport.c \
 
 PARSE = ./src/parse/parse.c \
 	./src/parse/camera.c \

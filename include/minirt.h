@@ -20,6 +20,9 @@
 # include "mlx.h"
 
 #define MAX_LEN	10000
+#define pi 3.1415926535897932385
+#define ASPECT_RATIO 1
+#define DISTANCE_VIEWPORT 1
 
 typedef struct s_vector
 {
@@ -113,6 +116,15 @@ typedef struct s_intersection
 typedef struct s_scene
 {
 	char				*str_scene;
+	float				aspect_ratio; // image_width / image_height
+	int					image_width; // width in pixels
+	int					image_height; // height in pixels
+	float				focal_length; // distance between viewport and camera
+	float				h; // tan camera fov
+	float				viewport_height;
+	float				viewport_width;
+	t_vector			u;
+	t_vector			v;
 	int					flag;
 	struct s_camera		camera;
 	struct s_ambient	ambient;
@@ -187,6 +199,9 @@ int		ft_is_a_num(char *str);
 int		ft_is_positive(char *str);
 float	ft_atof(char *str);
 
+	/*utils_execute*/
+int	ft_degrees_to_radians(float degrees)
+
 	/*init*/
 void		ft_initialize_scene(t_scene *scene);
 int		ft_init_camera(t_scene *scene);
@@ -202,7 +217,7 @@ void	ft_print_elements(t_scene *scene);
 
 //EXECUTE
 	/*execute*/
-int		ft_execute(t_scene *scene);
+float		ft_execute(t_scene *scene);
 
 	/*vectors_1*/
 t_vector ft_add_vectors(t_vector v1, t_vector v2);
