@@ -20,8 +20,8 @@
 
 #define MAX_LEN	10000
 #define WIN_HEIGHT 600
-#define WIN_WIDTH 600
-#define IMG_HEIGHT 600
+#define WIN_WIDTH 800
+#define IMG_HEIGHT 400
 #define IMG_WIDTH 600
 
 enum {
@@ -40,6 +40,7 @@ enum {
 #  define R_KEY 15
 #  define G_KEY 5
 #  define B_KEY 11
+#  define LEFT_CLICK 1
 /*
 #  define A_KEY 0
 #  define S_KEY 1
@@ -48,7 +49,6 @@ enum {
 #  define I_KEY 34
 #  define P_KEY 35
 #  define L_KEY 37
-#  define LEFT_CLICK 1
 #  define RIGHT_CLICK 2*/
 # elif defined __unix__
 #  define IS_LINUX 1
@@ -56,6 +56,8 @@ enum {
 # define R_KEY 114
 # define G_KEY 103
 # define B_KEY 98
+# define LEFT_CLICK 1
+
 #endif
 /*
 #  define A_KEY 97
