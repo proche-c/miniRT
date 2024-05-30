@@ -12,40 +12,58 @@
 
 #include "minirt.h"
 
-void	ft_create_viewport(t_scene *scene)
+void	ft_get_viewport(t_scene *scene)
 {
-	float	temp;
-	t_vector	upper_left;
-	t_vector	increaser;
+	t_vector	vup;
+	t_vector	w;
 
-	scene->aspect_ratio = ASPECT_RATIO;
-	scene->image_width = 800;
-	scene->image_height = (int)(scene->image_width / scene->aspect_ratio);
+
+	scene->image_side = IMAGE_SIDE;
 	scene->focal_length = DISTANCE_VIEWPORT;
 	scene->h = tanf(ft_degrees_to_radians(scene->camera.fov));
-	scene->viewport_height = 2 * scene->h * scene->focal_length;
-	scene->viewport_width = scene->viewport_height * (scene->aspect_ratio);
-	scene->vup.x = 0;
-	scene->vup.y = 1;
-	scene->vup.z = 0;
-	scene->w = ft_multiply_vector_and_float(scene->camera.orientation, -1);
-	if (ft_get_vector_length(ft_cross(scene->w, scene->vup)) == 0)
-	{
-		scene->vup.x = 0;
-		scene->vup.y = 0;
-		scene->vup.z = 1;
-	}
-	scene->u = ft_unit_vector(ft_cross(scene->vup, scene->w));
-	scene->v = ft_cross(scene->w, scene->u);
-	scene->viewport_u = ft_multiply_vector_and_float(scene->u, scene->viewport_width);
-	temp = scene->viewport_height * -1;
-	scene->viewport_v = ft_multiply_vector_and_float(scene->v, temp);
-	scene->pixel_delta_u = ft_division_vector_by_float(scene->viewport_u, scene->image_width);
-	scene->pixel_delta_v = ft_division_vector_by_float(scene->viewport_v, scene->image_height);
-	upper_left = ft_subtract_vectors(scene->camera.pov, ft_multiply_vector_and_float(scene->w, scene->focal_length));
-	upper_left = ft_subtract_vectors(upper_left, ft_division_vector_by_float(scene->viewport_u, 2));
-	upper_left = ft_subtract_vectors(upper_left, ft_division_vector_by_float(scene->viewport_v, 2));
-	increaser = ft_multiply_vector_and_float(ft_add_vectors(scene->pixel_delta_u, scene->pixel_delta_v), 0.5);
-	scene->pixel00 = ft_add_vectors(upper_left, increaser);
+	scene->viewport_side = 2 * scene->h * scene->focal_length;
+	w = ft_mult_vector_float(scene->camera.orientation, -1);
+	vup = ft_get_vup(w);
+	ft_get_pixel00(scene, w, vup);
 	return ;
+}
+
+t_vector	ft_get_vup(t_vector w)
+{
+	t_vector	vup;
+
+	vup.x = 0;
+	vup.y = 1;
+	vup.z = 0;
+	if (ft_get_vector_length(ft_cross(w, vup)) == 0)
+	{
+		vup.x = 0;
+		vup.y = 0;
+		vup.z = 1;
+	}
+	return (vup);
+}
+
+void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
+{
+	t_vector	upper_left;
+	t_vector	i;
+	t_vector	u;
+	t_vector	v;
+	t_vector	view_u;
+	t_vector	view_v;
+
+	u = ft_unit_vector(ft_cross(vup, w));
+	v = ft_cross(w, u);
+	view_u = ft_mult_vector_float(u, scene->viewport_side);
+	view_v = ft_mult_vector_float(v, scene->viewport_side * -1);
+	scene->delta_u = ft_div_vector_float(view_u, scene->image_side);
+	scene->delta_v = ft_div_vector_float(view_v, scene->image_side);
+	w = ft_mult_vector_float(w, scene->focal_length);
+	upper_left = ft_sub_vectors(scene->camera.pov, w);
+	upper_left = ft_sub_vectors(upper_left, ft_div_vector_float(view_u, 2));
+	upper_left = ft_sub_vectors(upper_left, ft_div_vector_float(view_v, 2));
+	i = ft_mult_vector_float(scene->delta_u, 0.5);
+	i = ft_add_vectors(ft_mult_vector_float(scene->delta_v, 0.5), i);
+	scene->pixel00 = ft_add_vectors(upper_left, i);	
 }

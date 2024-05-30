@@ -22,7 +22,7 @@ t_vector ft_add_vectors(t_vector v1, t_vector v2)
 	return (result);
 }
 
-t_vector ft_subtract_vectors(t_vector v1, t_vector v2)
+t_vector ft_sub_vectors(t_vector v1, t_vector v2)
 {
 	t_vector	result;
 
@@ -42,7 +42,7 @@ t_vector ft_multiply_vectors(t_vector v1, t_vector v2)
 	return (result);
 }
 
-t_vector ft_multiply_vector_and_float(t_vector v, float f)
+t_vector ft_mult_vector_float(t_vector v, float f)
 {
 	t_vector	result;
 
@@ -52,7 +52,7 @@ t_vector ft_multiply_vector_and_float(t_vector v, float f)
 	return (result);
 }
 
-t_vector ft_division_vector_by_float(t_vector v, float f)
+t_vector ft_div_vector_float(t_vector v, float f)
 {
 	t_vector	result;
 

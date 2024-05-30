@@ -120,3 +120,21 @@ void	ft_print_elements(t_scene *scene)
 	}
 	printf("OUT FT_PRINT_ELEMENTS\n");
 }
+
+void	ft_print_viewport(t_scene *scene)
+{
+	printf("\n***VIEWPORT***\n");
+	printf("scene->image_side: %d\n", scene->image_side);
+	printf("scene->focal_length: %f\n", scene->focal_length);
+	printf("scene->h: %f\n", scene->h);
+	printf("scene->viewport_side: %f\n", scene->viewport_side);
+	printf("scene->delta_u.x: %f\n", scene->delta_u.x);
+	printf("scene->delta_u.y: %f\n", scene->delta_u.y);
+	printf("scene->delta_u.z: %f\n", scene->delta_u.z);
+	printf("scene->delta_v.x: %f\n", scene->delta_v.x);
+	printf("scene->delta_v.y: %f\n", scene->delta_v.y);
+	printf("scene->delta_v.z: %f\n", scene->delta_v.z);
+	printf("scene->pixel00.x: %f\n", scene->pixel00.x);
+	printf("scene->pixel00.y: %f\n", scene->pixel00.y);
+	printf("scene->pixel00.z: %f\n", scene->pixel00.z);
+}
