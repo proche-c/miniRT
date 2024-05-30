@@ -123,8 +123,15 @@ typedef struct s_scene
 	float				h; // tan camera fov
 	float				viewport_height;
 	float				viewport_width;
+	t_vector			vup;
+	t_vector			w;
 	t_vector			u;
 	t_vector			v;
+	t_vector			viewport_u;
+	t_vector			viewport_v;
+	t_vector			pixel_delta_u;
+	t_vector			pixel_delta_v;
+	t_vector			pixel00;
 	int					flag;
 	struct s_camera		camera;
 	struct s_ambient	ambient;
@@ -200,7 +207,7 @@ int		ft_is_positive(char *str);
 float	ft_atof(char *str);
 
 	/*utils_execute*/
-int	ft_degrees_to_radians(float degrees)
+int	ft_degrees_to_radians(float degrees);
 
 	/*init*/
 void		ft_initialize_scene(t_scene *scene);
@@ -230,6 +237,8 @@ t_vector ft_division_vector_by_float(t_vector v, float f);
 float	ft_get_length_squared(t_vector v);
 float	ft_get_vector_length(t_vector v);
 float	ft_dot(t_vector v1, t_vector v2);
+t_vector	ft_cross(t_vector v1, t_vector v2);
+t_vector	ft_unit_vector(t_vector v);
 
 // CLEAN
 
