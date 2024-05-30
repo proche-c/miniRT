@@ -15,7 +15,6 @@
 // WORK IN PROGRESS
 int	 ft_get_sphere(t_element *new_element, char **params)
 {
-	printf("hola\n");
 	new_element->next = NULL;
 	if (ft_count_params(params) != 4)
 	{
@@ -34,14 +33,6 @@ int	 ft_get_sphere(t_element *new_element, char **params)
 	{
 		return (1);
 	}
-	//essai
-	printf("hola\n");
-	t_color light = {255, 255, 255}; // Exemple de lumière blanche
-    float intensity = 0.5; // Exemple d'intensité
-    add_light(new_element->color, light, intensity);
-	printf("red + light = %d\n", new_element->color.r);
-	//
-
 	return (0);
 }
 

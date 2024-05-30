@@ -174,6 +174,7 @@ typedef struct s_scene
 	void				*window_ptr;
 	struct s_event		event;
 	struct s_img		img;
+	struct s_color		color;
 }	t_scene;
 
 
