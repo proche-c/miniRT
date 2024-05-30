@@ -177,6 +177,13 @@ typedef struct s_scene
 }	t_scene;
 
 
+typedef struct s_intersection
+{
+	struct s_vector		position;
+	struct s_element	*element;
+}	t_intersection;
+
+
 
 // CHECKERS
 
@@ -283,6 +290,7 @@ int 	pixel_print(t_scene *scene);
 int 	mlx_initiator(t_scene *scene);
 void	ft_pixel_put(t_img *img, int x, int y, int color);
 void	color_screen(t_scene *scene, int color);
+t_color	add_light(t_color color, t_color light, float p2);
 
 
 
