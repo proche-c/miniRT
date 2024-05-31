@@ -71,7 +71,7 @@ int	ft_data_add_element(char **params, t_scene *scene)
 	}
 	if (ft_data_element(new_element, params) == 1)
 	{
-		printf("OUT FT_DATA_ADD_ELEMENT, DATA_ELEMENT FAILED\n");
+		print_in_out("OUT FT_DATA_ADD_ELEMENT, DATA_ELEMENT FAILED\n");
 		return (1);
 	}
 	ft_add_element(&(scene->elements), new_element);
@@ -134,6 +134,7 @@ int	ft_get_e_color(t_element *new_element, char *param)
 
 void	ft_add_element(t_element **lst, t_element *new)
 {
+	print_in_out("IN FT_ADD_ELEMENT\n");
 	t_element	*last;
 
 	if (lst && new)
@@ -146,10 +147,12 @@ void	ft_add_element(t_element **lst, t_element *new)
 		else
 			*lst = new;
 	}
+	print_in_out("OUT FT_ADD_ELEMENT\n");
 }
 
 t_element	*ft_elelast(t_element *lst)
 {
+	print_in_out("IN FT_ELELAST\n");
 	t_element	*temp;
 
 	temp = lst;
@@ -157,7 +160,9 @@ t_element	*ft_elelast(t_element *lst)
 	{
 		while (temp->next)
 			temp = temp->next;
+		print_in_out("IN FT_ELELAST IN 1\n");
 		return (temp);
 	}
+	print_in_out("IN FT_ELELAST IN 2\n");
 	return (NULL);
 }
