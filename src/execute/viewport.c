@@ -53,8 +53,17 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 	t_vector	view_u;
 	t_vector	view_v;
 
+	printf("w.x %f\n", w.x);
+	printf("w.y %f\n", w.y);
+	printf("w.z %f\n", w.z);
 	u = ft_unit_vector(ft_cross(vup, w));
+	printf("u.x %f\n", u.x);
+	printf("u.y %f\n", u.y);
+	printf("u.z %f\n", u.z);
 	v = ft_cross(w, u);
+	printf("v.x %f\n", v.x);
+	printf("v.y %f\n", v.y);
+	printf("v.z %f\n", v.z);
 	view_u = ft_mult_vector_float(u, scene->viewport_side);
 	view_v = ft_mult_vector_float(v, scene->viewport_side * -1);
 	scene->delta_u = ft_div_vector_float(view_u, scene->image_side);

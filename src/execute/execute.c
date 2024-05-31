@@ -27,10 +27,11 @@ int	ft_execute(t_scene *scene)
 	{
 		while (i < scene->image_side)
 		{
+			intersection->state = 0;
 			ray = ft_get_ray(scene, j, i);	//PAULA
 			ft_hit_something(ray, scene, intersection);
-			if (intersection->state == 1)
-				printf("hit something\n");
+			// if (intersection->state == 1)
+			// 	printf("hit something\n");
 			// else
 			// 	printf("nothing\n");
 			if (intersection->state == 1)	//PAULA
@@ -40,9 +41,9 @@ int	ft_execute(t_scene *scene)
 			else
 				write_pixel_no_object(scene, j, i); //ALEX
 
-			i++;
+			i = i + 10;
 		}
-		j++;
+		j = j + 10;
 	}
 	free(intersection);
 	printf("OUT FT_EXECUTE\n");

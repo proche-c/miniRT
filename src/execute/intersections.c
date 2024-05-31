@@ -24,6 +24,12 @@ t_ray	ft_get_ray(t_scene *scene, int j, int i)
 	inc = ft_add_vectors(inc, ft_mult_vector_float(scene->delta_v, j));
 	ray.pixel_center = ft_add_vectors(scene->pixel00, inc);
 	ray.direction = ft_sub_vectors(ray.pixel_center, scene->camera.pov);
+	// if (i == 0 && j == 0)
+	// {
+	// 	printf("ray.direction.x: %f\n", ray.direction.x);
+	// 	printf("ray.direction.y: %f\n", ray.direction.y);
+	// 	printf("ray.direction.z: %f\n", ray.direction.z);
+	// }
 	return (ray);
 }
 
@@ -31,7 +37,8 @@ void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter)
 {
 	t_element	*c_element;
 
-	inter->state = 0;
+
+	//inter->state = 0;
 	ft_get_inter_ray(ray, inter);
 	c_element = scene->elements;
 	while (c_element)
@@ -44,6 +51,19 @@ void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter)
 			ft_inter_cy(scene, inter, c_element);
 		c_element = c_element->next;
 	}
+	// if (ray.pixel_center.x == scene->pixel00.x && ray.pixel_center.y == scene->pixel00.y
+	// 	&& ray.pixel_center.z == scene->pixel00.z)
+	// {
+	// 	printf("inter->ray.pixel_center.x: %f\n", inter->ray.pixel_center.x);
+	// 	printf("inter->ray.pixel_center.y: %f\n", inter->ray.pixel_center.y);
+	// 	printf("inter->ray.pixel_center.z: %f\n", inter->ray.pixel_center.z);
+	// 	printf("inter->ray.direction.x: %f\n", inter->ray.direction.x);
+	// 	printf("inter->ray.direction.y: %f\n", inter->ray.direction.y);
+	// 	printf("inter->ray.direction.z: %f\n", inter->ray.direction.z);
+	// 	printf("inter->ray.origin.x: %f\n", inter->ray.origin.x);
+	// 	printf("inter->ray.origin.y: %f\n", inter->ray.origin.y);
+	// 	printf("inter->ray.origin.z: %f\n", inter->ray.origin.z);
+	// }
 	// printf("inter->position.x: %f\n", inter->position.x);
 	// printf("inter->position.x: %f\n", inter->position.x);
 	// printf("inter->position.x: %f\n", inter->position.x);

@@ -23,10 +23,20 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 
 	// printf("entro en inter_sp.....\n");
 	oc = ft_sub_vectors(c_element->position, inter->ray.origin);
+	// printf("oc.x: %f\n", oc.x);
+	// printf("oc.y: %f\n", oc.y);
+	// printf("oc.z: %f\n", oc.z);
 	a = ft_get_length_squared(inter->ray.direction);
+	// printf("inter->ray.direction.x: %f\n", inter->ray.direction.x);
+	// printf("inter->ray.direction.y: %f\n", inter->ray.direction.y);
+	// printf("inter->ray.direction.z: %f\n", inter->ray.direction.z);
+	// printf("a: %f\n", a);
 	h = ft_dot(inter->ray.direction, oc);
+	// printf("h: %f\n", h);
 	c = ft_get_length_squared(oc) - (c_element->diameter * c_element->diameter);
+	// printf("c: %f\n", c);
 	disc = h * h - a * c;
+	// printf("disc: %f\n", disc);
 	if (disc >= 0)
 		ft_get_inter_sp(inter, disc, h, a);
 }
