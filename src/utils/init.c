@@ -14,11 +14,11 @@
 
 void	ft_initialize_scene(t_scene *scene)
 {
-	printf("ENTRO EN FT_INITIALIZE SCENE\n");
+	print_in_out("ENTRO EN FT_INITIALIZE SCENE\n");
 	scene->camera.defined = 0;
 	scene->ambient.defined = 0;
 	scene->light.defined = 0;
 	scene->flag = 0;
 	scene->elements = NULL;
-	printf("SALGO DE FT_INITIALIZE SCENE\n");
+	print_in_out("SALGO DE FT_INITIALIZE SCENE\n");
 }

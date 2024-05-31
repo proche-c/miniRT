@@ -19,6 +19,7 @@
 # include "../libft/libft.h"
 # include "mlx.h"
 
+#define DEBUG 0
 #define MAX_LEN	10000
 #define pi 3.1415926535897932385
 #define ASPECT_RATIO 1
@@ -212,6 +213,7 @@ int		ft_init_ambient(t_scene *scene);
 int		ft_init_light(t_scene *scene);
 
 	/*print*/
+void	print_in_out(char *str);
 void	ft_print_camera(t_scene *scene);
 void	ft_print_ambient(t_scene *scene);
 void	ft_print_light(t_scene *scene);

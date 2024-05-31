@@ -14,7 +14,7 @@
 
 int	ft_parse(t_scene *scene)
 {
-	printf("IN FT_PARSE\n");
+	print_in_out("IN FT_PARSE\n");
 	char	**lines;
 	int		i;
 
@@ -27,7 +27,7 @@ int	ft_parse(t_scene *scene)
 		{
 			perror("error: parameter definition\n");
 			ft_free_params(lines);
-			printf("OUT FT_PARSE IN 1\n");
+			print_in_out("OUT FT_PARSE IN 1\n");
 			return (1);
 		}
 		i++;
@@ -44,7 +44,7 @@ int	ft_parse(t_scene *scene)
 		printf("OUT FT_PARSE IN 2\n");
 		return (1);
 	}
-	printf("OUT FT_PARSE IN 3\n");
+	print_in_out("OUT FT_PARSE IN 3\n");
 	return (0);
 }
 
