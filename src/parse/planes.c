@@ -38,7 +38,7 @@ int	 ft_get_plane(t_element *new_element, char **params)
 
 int	ft_get_e_n_vector(t_element *new_element, char *param)
 {
-	printf("IN FT_GET_E_N_VECTOR, params[2]: %s  \n", param);
+	print_in_out("IN FT_GET_E_N_VECTOR\n");
 	char **co;
 
 	co = ft_split(param, ',');
@@ -49,12 +49,12 @@ int	ft_get_e_n_vector(t_element *new_element, char *param)
 		new_element->n_vector.x = ft_atof(co[0]);
 		new_element->n_vector.y = ft_atof(co[1]);
 		new_element->n_vector.z = ft_atof(co[2]);
-		printf("OUT FT_GET_E_N_VECTOR IN 1\n");
+		print_in_out("OUT FT_GET_E_N_VECTOR IN 1\n");
 		ft_free_params(co);
 		return (0);
 	}
 	// if co is not a normalized vector, error
 	ft_free_params(co);
-	printf("OUT FT_GET_E_N_VECTOR IN 2\n");
+	print_in_out("OUT FT_GET_E_N_VECTOR IN 2\n");
 	return (1);
 }

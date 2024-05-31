@@ -7,6 +7,9 @@ EXECUTE = ./src/execute/execute.c \
 	./src/execute/vectors_2.c \
 	./src/execute/viewport.c \
 	./src/execute/intersections.c \
+	./src/execute/inter_sphere.c \
+	./src/execute/inter_plane.c \
+	./src/execute/inter_cylinder.c \
 
 PARSE = ./src/parse/parse.c \
 	./src/parse/camera.c \

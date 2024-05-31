@@ -14,7 +14,7 @@
 
 int	 ft_get_ambient(char **params, t_scene *scene)
 {
-	printf("IN FT_GET_AMBIENT\n");
+	print_in_out("IN FT_GET_AMBIENT\n");
 	// check if ambient is already defined
 	if (scene->ambient.defined == 0)
 	{
@@ -23,10 +23,10 @@ int	 ft_get_ambient(char **params, t_scene *scene)
 		if (ft_data_ambient(params, scene) == 1)
 		{
 			perror("error: ambient: wrong parameters\n");
-			printf("OUT FT_GET_AMBIENT IN 1\n");
+			print_in_out("OUT FT_GET_AMBIENT IN 1\n");
 			return (1);
 		}
-		printf("OUT FT_GET_AMBIENT IN 2\n");
+		print_in_out("OUT FT_GET_AMBIENT IN 2\n");
 		return (0);
 	}
 	else
@@ -42,40 +42,40 @@ int	 ft_get_ambient(char **params, t_scene *scene)
 
 int	ft_data_ambient(char **params, t_scene *scene)
 {
-	printf("IN FT_DATA_AMBIENT\n");
+	print_in_out("IN FT_DATA_AMBIENT\n");
 	// params in ambient must be 3: identifier, ratio and color
 	if (ft_count_params(params) != 3)
 	{
-		printf("OUT FT_DATA_AMBIENT IN 1\n");
+		print_in_out("OUT FT_DATA_AMBIENT IN 1\n");
 		return (1);
 	}
 	if (ft_get_ambient_ratio(params, scene) == 1)
 	{
-		printf("OUT FT_DATA_AMBIENT IN 2\n");
+		print_in_out("OUT FT_DATA_AMBIENT IN 2\n");
 		return (1);
 	}
 	if (ft_get_color(params, scene) == 1)
 	{
-		printf("OUT FT_DATA_AMBIENT IN 3\n");
+		print_in_out("OUT FT_DATA_AMBIENT IN 3\n");
 		return (1);
 	}
-	printf("OUT FT_DATA_AMBIENT IN 4\n");
+	print_in_out("OUT FT_DATA_AMBIENT IN 4\n");
 	return (0);
 }
 
 int	ft_get_ambient_ratio(char **params, t_scene *scene)
 {
-	printf("IN FT_GET_AMBIENT_RATIO\n");
+	print_in_out("IN FT_GET_AMBIENT_RATIO\n");
 	// ratio is a float in the range 0-1
 	
 	if (ft_is_float(params[1]) == 1 && ft_atof(params[1]) >= 0
 		&& ft_atof(params[1]) <= 1)
 	{
 		scene->ambient.ratio = ft_atof(params[1]);
-		printf("OUT FT_GET_AMBIENT_RATIO, RATIO %f\n", scene->ambient.ratio);
+		print_in_out("OUT FT_GET_AMBIENT_RATIO WITH RATIO \n");
 		return (0);
 	}
-	printf("OUT FT_GET_AMBIENT_RATIO WITHOUT RATIO\n");
+	print_in_out("OUT FT_GET_AMBIENT_RATIO WITHOUT RATIO\n");
 	return (1);
 }
 

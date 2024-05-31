@@ -15,13 +15,13 @@
 // WORK IN PROGRESS
 int	 ft_get_element(char **params, t_scene *scene)
 {
-	printf("IN FT_GET_ELEMENT\n");
+	print_in_out("IN FT_GET_ELEMENT\n");
 	if (scene->flag == 0)
 	{
 		scene->flag = 1;
 		if (ft_data_first_element(params, scene) == 1)
 		{
-			printf("OUT FT_GET_ELEMENT, DATA FIRST ELEMENT FAILED\n");
+			print_in_out("OUT FT_GET_ELEMENT, DATA FIRST ELEMENT FAILED\n");
 			return (1);
 		}
 	}
@@ -29,29 +29,29 @@ int	 ft_get_element(char **params, t_scene *scene)
 	{
 		if (ft_data_add_element(params, scene) == 1)
 		{
-			printf("OUT FT_GET_ELEMENT, DATA ADD ELEMENT FAILED\n");
+			print_in_out("OUT FT_GET_ELEMENT, DATA ADD ELEMENT FAILED\n");
 			return (1);
 		}
 	}
-	ft_print_elements(scene);
-	printf("OUT FT_GET_ELEMENT, OK\n");
+	//ft_print_elements(scene);
+	print_in_out("OUT FT_GET_ELEMENT, OK\n");
 	return (0);
 }
 
 int	ft_data_first_element(char **params, t_scene *scene)
 {
-	printf("IN FT_DATA_FIRST_ELEMENT\n");
+	print_in_out("IN FT_DATA_FIRST_ELEMENT\n");
 	t_element	*new_element;
 
 	new_element = malloc(sizeof(t_element));
 	if (!new_element)
 	{
-		printf("error: element: failed to assign memory\n");
+		perror("error: element: failed to assign memory\n");
 		return (1);
 	}
 	if (ft_data_element(new_element, params) == 1)
 	{
-		printf("OUT FT_DATA_FIRST_ELEMENT, DATA_ELEMENT FAILED\n");
+		print_in_out("OUT FT_DATA_FIRST_ELEMENT, DATA_ELEMENT FAILED\n");
 		return (1);
 	}
 	scene->elements = new_element;
@@ -60,13 +60,13 @@ int	ft_data_first_element(char **params, t_scene *scene)
 
 int	ft_data_add_element(char **params, t_scene *scene)
 {
-	printf("IN FT_DATA_ADD_ELEMENT\n");
+	print_in_out("IN FT_DATA_ADD_ELEMENT\n");
 	t_element	*new_element;
 
 	new_element = malloc(sizeof(t_element));
 	if (!new_element)
 	{
-		printf("error: element: failed to assign memory\n");
+		perror("error: element: failed to assign memory\n");
 		return (1);
 	}
 	if (ft_data_element(new_element, params) == 1)
@@ -94,7 +94,7 @@ int	ft_data_element(t_element *new_element, char **params)
 
 int	ft_get_e_position(t_element *new_element, char *param)
 {
-	// printf("ENTRO EN FT_GET_E_POSITION\n");
+	print_in_out("ENTRO EN FT_GET_E_POSITION\n");
 	char **co;
 	
 	co = ft_split(param, ',');
@@ -104,13 +104,13 @@ int	ft_get_e_position(t_element *new_element, char *param)
 		new_element->position.x = ft_atof(co[0]);
 		new_element->position.y = ft_atof(co[1]);
 		new_element->position.z = ft_atof(co[2]);
-		// printf("OUT FT_GET_E_POSITION IN 1\n");
+		print_in_out("OUT FT_GET_E_POSITION IN 1\n");
 		ft_free_params(co);
 		return (0);
 	}
 	// if position is not a vector, error:
 	ft_free_params(co);
-	// printf("OUT FT_GET_E_POSITION EN 2\n");
+	print_in_out("OUT FT_GET_E_POSITION EN 2\n");
 	return (1);
 }
 

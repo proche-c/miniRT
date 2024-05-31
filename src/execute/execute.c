@@ -29,6 +29,10 @@ int	ft_execute(t_scene *scene)
 		{
 			ray = ft_get_ray(scene, j, i);	//PAULA
 			ft_hit_something(ray, scene, intersection);
+			if (intersection->state == 1)
+				printf("hit something\n");
+			// else
+			// 	printf("nothing\n");
 			if (intersection->state == 1)	//PAULA
 			{
 				write_pixel_object(scene, intersection, j, i); //ALEX

@@ -19,6 +19,7 @@
 # include "../libft/libft.h"
 # include "mlx.h"
 
+#define DEBUG 0
 #define MAX_LEN	10000
 #define pi 3.1415926535897932385
 #define ASPECT_RATIO 1
@@ -67,6 +68,7 @@ typedef struct s_ray
 {
 	struct s_vector		origin;
 	struct s_vector		direction;
+	struct s_vector		pixel_center;
 }	t_ray;
 // typedef struct s_spheres
 // {
@@ -112,6 +114,7 @@ typedef struct s_intersection
 {
 	int					state;
 	struct s_vector		position;
+	struct s_ray		ray;
 	struct s_element	*element;
 }	t_intersection;
 
@@ -210,6 +213,7 @@ int		ft_init_ambient(t_scene *scene);
 int		ft_init_light(t_scene *scene);
 
 	/*print*/
+void	print_in_out(char *str);
 void	ft_print_camera(t_scene *scene);
 void	ft_print_ambient(t_scene *scene);
 void	ft_print_light(t_scene *scene);
@@ -245,6 +249,18 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup);
 	/*intersections*/
 t_ray	ft_get_ray(t_scene *scene, int j, int i);
 void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter);
+void	ft_get_inter_ray(t_ray ray, t_intersection *inter);
+
+	/*inter_sphere*/
+void	ft_inter_sp(t_intersection *inter, t_element *c_element);
+void	ft_get_inter_sp(t_intersection *inter, float disc, float h, float a);
+void	ft_get_closest_point(t_intersection *inter, t_vector inter_point);
+
+	/*inter_plane*/
+void	ft_inter_pl(t_scene *scene, t_intersection *inter, t_element *c_element);
+
+	/*inter_cylinder*/
+void	ft_inter_cy(t_scene *scene, t_intersection *inter, t_element *c_element);
 
 // CLEAN
 

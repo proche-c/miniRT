@@ -38,15 +38,15 @@ int	 ft_get_sphere(t_element *new_element, char **params)
 
 int	ft_get_e_diameter(t_element *new_element, char *param)
 {
-	printf("IN FT_GET_E_DIAMETER\n");
+	print_in_out("IN FT_GET_E_DIAMETER\n");
 	// fov is a positive int in the range 0-180 (0 not included, I think)
 	if ( ft_atof(param) > 0)
 	{
 		new_element->diameter = ft_atof(param);
-		printf("OUT FT_GET_E_DIAMETER, DIAMETER %f\n", new_element->diameter);
+		print_in_out("OUT FT_GET_E_DIAMETER WITH DIAMETER \n");
 		return (0);
 
 	}
-	printf("OUT FT_GET_E_DIAMETER WITHOUT DIAMETER\n");
+	print_in_out("OUT FT_GET_E_DIAMETER WITHOUT DIAMETER\n");
 	return (1);
 }

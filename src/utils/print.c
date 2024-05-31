@@ -12,6 +12,12 @@
 
 #include "minirt.h"
 
+void	print_in_out(char *str)
+{
+	if (DEBUG == 1)
+		printf("%s", str);
+}
+
 void	ft_print_camera(t_scene *scene)
 {
 	printf("\n***CAMERA***\n");
@@ -59,7 +65,7 @@ void	ft_print_params(char **params)
 
 void	ft_print_elements(t_scene *scene)
 {
-	printf("IN FT_PRINT_ELEMENTS\n");
+	printf("\n\nIN FT_PRINT_ELEMENTS\n");
 	t_element	*element;
 
 	element = scene->elements;
@@ -118,7 +124,7 @@ void	ft_print_elements(t_scene *scene)
 		}
 		element = element->next;
 	}
-	printf("OUT FT_PRINT_ELEMENTS\n");
+	printf("OUT FT_PRINT_ELEMENTS\n\n");
 }
 
 void	ft_print_viewport(t_scene *scene)

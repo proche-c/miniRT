@@ -47,15 +47,15 @@ int	 ft_get_cylinder(t_element *new_element, char **params)
 
 int	ft_get_e_height(t_element *new_element, char *param)
 {
-	printf("IN FT_GET_E_HEIGHT\n");
+	print_in_out("IN FT_GET_E_HEIGHT\n");
 	// height is a positive float
 	if ( ft_atof(param) > 0)
 	{
 		new_element->height = ft_atof(param);
-		printf("OUT FT_GET_E_HEIGHT, HEIGHT %f\n", new_element->diameter);
+		print_in_out("OUT FT_GET_E_HEIGHT WITH HEIGHT \n");
 		return (0);
 
 	}
-	printf("OUT FT_GET_E_HEIGHT WITHOUT HEIGHT\n");
+	print_in_out("OUT FT_GET_E_HEIGHT WITHOUT HEIGHT\n");
 	return (1);
 }
