@@ -5,6 +5,8 @@ CHECKERS = ./src/checkers/check.c \
 EXECUTE = ./src/execute/execute.c \
 	./src/execute/vectors_1.c \
 	./src/execute/vectors_2.c \
+	./src/execute/viewport.c \
+	./src/execute/intersections.c \
 
 PARSE = ./src/parse/parse.c \
 	./src/parse/camera.c \
@@ -18,6 +20,7 @@ PARSE = ./src/parse/parse.c \
 UTILS =	./src/utils/utils_parse.c \
 	./src/utils/init.c \
 	./src/utils/print.c \
+	./src/utils/utils_execute.c \
 
 # LISTS = ./src/lists/parse.c \
 # 	./src/lists/envp.c \

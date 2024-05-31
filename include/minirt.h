@@ -20,6 +20,10 @@
 # include "mlx.h"
 
 #define MAX_LEN	10000
+#define pi 3.1415926535897932385
+#define ASPECT_RATIO 1
+#define DISTANCE_VIEWPORT 1
+#define IMAGE_SIDE 1000
 
 typedef struct s_vector
 {
@@ -106,6 +110,7 @@ typedef struct s_element
 
 typedef struct s_intersection
 {
+	int					state;
 	struct s_vector		position;
 	struct s_element	*element;
 }	t_intersection;
@@ -113,6 +118,14 @@ typedef struct s_intersection
 typedef struct s_scene
 {
 	char				*str_scene;
+	int					image_side; // width and height in pixel (it's square)
+	float				focal_length; // distance between viewport and camera
+	float				h; // tan camera fov
+	float				viewport_side;
+	// float				viewport_width;
+	t_vector			delta_u;
+	t_vector			delta_v;
+	t_vector			pixel00;
 	int					flag;
 	struct s_camera		camera;
 	struct s_ambient	ambient;
@@ -187,8 +200,11 @@ int		ft_is_a_num(char *str);
 int		ft_is_positive(char *str);
 float	ft_atof(char *str);
 
+	/*utils_execute*/
+float	ft_degrees_to_radians(float degrees);
+
 	/*init*/
-void		ft_initialize_scene(t_scene *scene);
+void	ft_initialize_scene(t_scene *scene);
 int		ft_init_camera(t_scene *scene);
 int		ft_init_ambient(t_scene *scene);
 int		ft_init_light(t_scene *scene);
@@ -199,22 +215,36 @@ void	ft_print_ambient(t_scene *scene);
 void	ft_print_light(t_scene *scene);
 void	ft_print_params(char **params);
 void	ft_print_elements(t_scene *scene);
+void	ft_print_viewport(t_scene *scene);
 
 //EXECUTE
 	/*execute*/
 int		ft_execute(t_scene *scene);
+void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i);
+void	write_pixel_no_object(t_scene *scene, int j, int i);
 
 	/*vectors_1*/
 t_vector ft_add_vectors(t_vector v1, t_vector v2);
-t_vector ft_subtract_vectors(t_vector v1, t_vector v2);
+t_vector ft_sub_vectors(t_vector v1, t_vector v2);
 t_vector ft_multiply_vectors(t_vector v1, t_vector v2);
-t_vector ft_multiply_vector_and_float(t_vector v, float f);
-t_vector ft_division_vector_by_float(t_vector v, float f);
+t_vector ft_mult_vector_float(t_vector v, float f);
+t_vector ft_div_vector_float(t_vector v, float f);
 
 	/*vectors_2*/
 float	ft_get_length_squared(t_vector v);
 float	ft_get_vector_length(t_vector v);
 float	ft_dot(t_vector v1, t_vector v2);
+t_vector	ft_cross(t_vector v1, t_vector v2);
+t_vector	ft_unit_vector(t_vector v);
+
+	/*viewport*/
+void	ft_get_viewport(t_scene *scene);
+t_vector	ft_get_vup(t_vector w);
+void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup);
+
+	/*intersections*/
+t_ray	ft_get_ray(t_scene *scene, int j, int i);
+void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter);
 
 // CLEAN
 

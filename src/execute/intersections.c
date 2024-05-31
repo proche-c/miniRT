@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors_2.c                                        :+:      :+:    :+:   */
+/*   intersections.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,34 +12,22 @@
 
 #include "minirt.h"
 
-float	ft_get_length_squared(t_vector v)
+t_ray	ft_get_ray(t_scene *scene, int j, int i)
 {
-	return (v.x * v.x + v.y * v.y + v.z * v.z);
+	t_ray	ray;
+
+	(void)i;
+	(void)j;
+	ray.origin.x = scene->camera.pov.x;
+
+	return (ray);
 }
 
-float	ft_get_vector_length(t_vector v)
+void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter)
 {
-	return (sqrtf(ft_get_length_squared(v)));
-}
+	(void)ray;
+	(void)scene;
 
-float	ft_dot(t_vector v1, t_vector v2)
-{
-	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
-}
-
-t_vector	ft_cross(t_vector v1, t_vector v2)
-{
-	t_vector	result;
-
-	result.x = v1.y * v2.z - v1.z * v2.y;
-	result.y = v1.z * v2.x - v1.x * v2.z;
-	result.z = v1.x * v2.y - v1.y * v2.x;
-	return (result);
+	inter->state = 0;
 
 }
-
-t_vector	ft_unit_vector(t_vector v)
-{
-	return (ft_div_vector_float(v, ft_get_vector_length(v)));
-}
-

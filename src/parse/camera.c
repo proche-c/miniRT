@@ -140,17 +140,25 @@ int	ft_is_normalized(char **co)
 	// check if co is normalized
 	printf("IN FT_IS_NORMALIZED\n");
 	int	i;
+	float	length;
 
 	i = 0;
+	length = 0;
 	while (co[i])
 	{
 		// each parameter must be 1 or 0
-		if (ft_atof(co[i]) != 1 && ft_atof(co[i]) != 0)
+		if (ft_atof(co[i]) > 1 || ft_atof(co[i]) < - 1)
 		{
 			printf("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
 			return (0);
 		}
+		length = length + ft_atof(co[i]) * ft_atof(co[i]);
 		i++;
+	}
+	if (length != 1)
+	{
+		printf("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
+		return (0);
 	}
 	printf("OUT FT_IS_NORMALIZED, THEY ARE NORMALIZED\n");
 	return (1);

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vectors_2.c                                        :+:      :+:    :+:   */
+/*   utils_execute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,34 +12,7 @@
 
 #include "minirt.h"
 
-float	ft_get_length_squared(t_vector v)
+float	ft_degrees_to_radians(float degrees)
 {
-	return (v.x * v.x + v.y * v.y + v.z * v.z);
+	return (degrees * pi / 180);
 }
-
-float	ft_get_vector_length(t_vector v)
-{
-	return (sqrtf(ft_get_length_squared(v)));
-}
-
-float	ft_dot(t_vector v1, t_vector v2)
-{
-	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
-}
-
-t_vector	ft_cross(t_vector v1, t_vector v2)
-{
-	t_vector	result;
-
-	result.x = v1.y * v2.z - v1.z * v2.y;
-	result.y = v1.z * v2.x - v1.x * v2.z;
-	result.z = v1.x * v2.y - v1.y * v2.x;
-	return (result);
-
-}
-
-t_vector	ft_unit_vector(t_vector v)
-{
-	return (ft_div_vector_float(v, ft_get_vector_length(v)));
-}
-
