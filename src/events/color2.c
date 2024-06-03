@@ -4,28 +4,28 @@
 //add light to color   (color = obj color, light = light color, p2 = light ratio)
 t_color	add_light(t_color color, t_color light, float p2)
 {
-	t_color	c;
+    t_color c;
 
-	if (p2 > 1)
-		p2 = 1;
-	if (p2 < 0)
-		p2 = 0;
-	c.r = color.r + light.r * p2;
-	c.g = color.g + light.g * p2;
-	c.b = color.b + light.b * p2;
-	if (c.r > 1)
-		c.r = 1;
-	if (c.g > 1)
-		c.g = 1;
-	if (c.b > 1)
-		c.b = 1;
-	if (c.r < 0)
-		c.r = 0;
-	if (c.g < 0)
-		c.g = 0;
-	if (c.b < 0)
-		c.b = 0;
-	return (c);
+    if (p2 > 1)
+        p2 = 1;
+    if (p2 < 0)
+        p2 = 0;
+    c.r = color.r + light.r * p2;
+    c.g = color.g + light.g * p2;
+    c.b = color.b + light.b * p2;
+    if (c.r > 255)
+        c.r = 255;
+    if (c.g > 255)
+        c.g = 255;
+    if (c.b > 255)
+        c.b = 255;
+    if (c.r < 0)
+        c.r = 0;
+    if (c.g < 0)
+        c.g = 0;
+    if (c.b < 0)
+        c.b = 0;
+    return c;
 }
 
 //mix two colors (c1 = first color, p1 = ratio of first color, c2 = second color, p2 = ratio of second color)

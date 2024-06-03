@@ -38,22 +38,8 @@ int	main(int argc, char **argv)
 		free(scene);
 		return (1); 
 	}
-		//essai
-	printf("hola\n");
-	t_color light = {20, 255, 255}; // Exemple de lumière blanche
-    float intensity = 0.5; // Exemple d'intensité
-    printf("red = %d\n", scene->elements->color.r);
-	printf("light = %d\n", light.r);
-	add_light(scene->elements->color, light, intensity);
-	printf("red + light = %d\n", scene->elements->color.r);
-	//
-
 	ft_execute(scene);
-	mlx_initiator(scene);
-	hook_init(scene);
-	pixel_print(scene);
-	mlx_loop(scene->mlx_ptr);
-	
+	calc_and_print(scene);	
 	ft_free_scene(scene);
 	return (0);
 }

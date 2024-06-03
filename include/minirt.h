@@ -17,57 +17,10 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "mlx.h"
+# include "pixel.h" 
 
 #define MAX_LEN	10000
-#define WIN_HEIGHT 600
-#define WIN_WIDTH 800
-#define IMG_HEIGHT 400
-#define IMG_WIDTH 600
 
-enum {
-    ON_KEYDOWN = 2,
-    ON_KEYUP = 3,
-    ON_MOUSEDOWN = 4,
-    ON_MOUSEUP = 5,
-    ON_MOUSEMOVE = 6,
-    ON_EXPOSE = 12,
-    ON_DESTROY = 17
-};
-
-# ifdef __APPLE__
-#  define IS_LINUX 0
-#  define ESC_KEY 53
-#  define R_KEY 15
-#  define G_KEY 5
-#  define B_KEY 11
-#  define LEFT_CLICK 1
-/*
-#  define A_KEY 0
-#  define S_KEY 1
-#  define D_KEY 2
-#  define C_KEY 5
-#  define I_KEY 34
-#  define P_KEY 35
-#  define L_KEY 37
-#  define RIGHT_CLICK 2*/
-# elif defined __unix__
-#  define IS_LINUX 1
-#  define ESC_KEY 65307
-# define R_KEY 114
-# define G_KEY 103
-# define B_KEY 98
-# define LEFT_CLICK 1
-
-#endif
-/*
-#  define A_KEY 97
-#  define S_KEY 115
-#  define P_KEY 112
-#  define L_KEY 108
-#  define C_KEY 99
-#  define D_KEY 100
-#  define I_KEY 105
-*/
 
 
 typedef struct s_vector
@@ -142,25 +95,6 @@ typedef struct s_element
 	float				height;
 	struct s_element	*next;
 }	t_element;
-
-typedef struct s_event
-{
-    int		x;
-    int		y;
-    int		lastx;
-    int		lasty;
-    int		mouse;
-
-}	t_event;
-
-typedef struct s_img
-{
-	void	*img_ptr;
-	char	*img_pixel_str;
-	int		bpp;
-	int		size_line; //octets per line
-	int		endian;
-}			t_img;
 
 typedef struct s_scene
 {
@@ -282,8 +216,7 @@ void	ft_free_planes(t_scene *scene);
 void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
-
-//EVENT
+//ALEX
 int		handle_input(int keycode, t_scene *scene);
 void	hook_init(t_scene *scene);
 int		handle_no_event(t_scene *scene);
@@ -292,7 +225,6 @@ int 	mlx_initiator(t_scene *scene);
 void	ft_pixel_put(t_img *img, int x, int y, int color);
 void	color_screen(t_scene *scene, int color);
 t_color	add_light(t_color color, t_color light, float p2);
-
-
+int 	calc_and_print(t_scene *scene);
 
 #endif

@@ -92,3 +92,29 @@ int pixel_print(t_scene *scene)
 	printf("Data address obtained: bpp = %d, size_line = %d, endian = %d\n", scene->img.bpp, scene->img.size_line, scene->img.endian);
 	return (0);
 }
+
+int calc_and_print(t_scene *scene)
+{
+    printf("change color test\n");
+
+    t_color light = {20, 255, 255}; // Exemple de lumière blanche
+    float intensity = 0.8; // Exemple d'intensité
+
+    t_color scene_color = {100, 100, 100}; // Couleur initiale de la scène
+
+    printf("red = %d\n", scene_color.r);
+    printf("light = %d\n", light.r);
+
+    // Ajout de la lumière à la couleur de la scène
+    scene_color = add_light(scene_color, light, intensity);
+
+    printf("red + light = %d\n", scene_color.r);
+	//
+
+	
+	mlx_initiator(scene);
+	hook_init(scene);
+	pixel_print(scene);
+    mlx_loop(scene->mlx_ptr);
+    return (0);
+}
