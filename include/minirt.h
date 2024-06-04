@@ -26,6 +26,7 @@
 #define ASPECT_RATIO 1
 #define DISTANCE_VIEWPORT 1
 #define IMAGE_SIDE 1000
+#define E 0.000001
 
 typedef struct s_vector
 {
