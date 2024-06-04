@@ -1,29 +1,11 @@
-SRCS = ${CHECKERS} ${EXECUTE} ${PARSE} ${UTILS} ${CLEAN} ${MAIN}
+SRCS = ${CHECKERS} ${EXECUTE} ${PARSE} ${UTILS} ${CLEAN} ${EVENT} ${MAIN}
 
-CHECKERS = ./src/checkers/check.c \
-
-EXECUTE = ./src/execute/execute.c \
-	./src/execute/vectors_1.c \
-	./src/execute/vectors_2.c \
-	./src/execute/viewport.c \
-	./src/execute/intersections.c \
-	./src/execute/inter_sphere.c \
-	./src/execute/inter_plane.c \
-	./src/execute/inter_cylinder.c \
-
-PARSE = ./src/parse/parse.c \
-	./src/parse/camera.c \
-	./src/parse/ambient.c \
-	./src/parse/light.c \
-	./src/parse/elements.c \
-	./src/parse/planes.c \
-	./src/parse/spheres.c \
-	./src/parse/cylinders.c \
-
-UTILS =	./src/utils/utils_parse.c \
-	./src/utils/init.c \
-	./src/utils/print.c \
-	./src/utils/utils_execute.c \
+CHECKERS = $(wildcard ./src/checkers/*.c)
+EXECUTE = $(wildcard ./src/execute/*.c)
+PARSE = $(wildcard ./src/parse/*.c)
+UTILS =	$(wildcard ./src/utils/*.c)
+CLEAN = $(wildcard ./src/clean/*.c)
+EVENT = $(wildcard ./src/events/*.c)
 
 # LISTS = ./src/lists/parse.c \
 # 	./src/lists/envp.c \
@@ -31,8 +13,6 @@ UTILS =	./src/utils/utils_parse.c \
 # 	./src/lists/files.c \
 # 	./src/lists/args.c \
 
-CLEAN = ./src/clean/clean.c \
-	./src/clean/clean_elements.c \
 
 MAIN = ./src/minirt.c \
 
