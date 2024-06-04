@@ -1,4 +1,4 @@
-#include "../include/pixel.h"
+# include "../include/minirt.h"
 
 typedef struct s_vec3 {
     double x;
@@ -6,17 +6,17 @@ typedef struct s_vec3 {
     double z;
 } t_vec3;
 
-
+/*
 typedef struct s_light {
     t_vec3 position;
     double intensity;
-} t_light;
-
+} t_light;*/
+/*
 typedef struct s_color {
     int r;
     int g;
     int b;
-} t_color;
+} t_color;*/
 
 typedef struct s_surface {
     t_vec3 position;
@@ -46,9 +46,9 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
     if (cos_theta < 0) cos_theta = 0; // Clamp to 0 if negative
 
     t_color result;
-    result.r = (int)(surface.color.r * light.intensity * cos_theta);
-    result.g = (int)(surface.color.g * light.intensity * cos_theta);
-    result.b = (int)(surface.color.b * light.intensity * cos_theta);
+    result.r = (int)(surface.color.r * light.ratio * cos_theta);
+    result.g = (int)(surface.color.g * light.ratio * cos_theta);
+    result.b = (int)(surface.color.b * light.ratio * cos_theta);
 
     // Clamp values to 0-255
     if (result.r > 255) result.r = 255;
@@ -59,21 +59,21 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
 }
 
 // Example usage
-int main() {
+int reflect_tester() 
+{
+    
     t_surface surface = {{0, 0, 0}, {0, 0, 1}, {255, 0, 0}}; // Red surface
-    t_light light = {{10, 10, 10}, 1.0}; // Light source
+    t_light light = {1, 1.0, {10, 10, 10}}; // Light source
     
     t_color reflected_color = lambertian_reflection(surface, light);
 
     printf("Reflected Color: R=%d, G=%d, B=%d\n", reflected_color.r, reflected_color.g, reflected_color.b);
     
     // Initialize MiniLibX and create a window
-    void *mlx = mlx_init();
-    void *win = mlx_new_window(mlx, 800, 600, "Lambertian Reflection");
+    //void *mlx = mlx_init();
+    //void *win = mlx_new_window(mlx, 800, 600, "Lambertian Reflection");
 
     // Here you can use the reflected_color to set the pixel color in your MiniLibX window
-
-    mlx_loop(mlx);
 
     return 0;
 }

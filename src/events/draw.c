@@ -1,5 +1,25 @@
 # include "../include/minirt.h"
 
+int    add_light_test()
+{
+   printf("change color test\n");
+
+    t_color light = {20, 255, 255}; // Exemple de lumière blanche
+    float intensity = 0.8; // Exemple d'intensité
+
+    t_color scene_color = {100, 100, 100}; // Couleur initiale de la scène
+
+    printf("red = %d\n", scene_color.r);
+    printf("light = %d\n", light.r);
+
+    // Ajout de la lumière à la couleur de la scène
+    scene_color = add_light(scene_color, light, intensity);
+
+    printf("red + light = %d\n", scene_color.r);
+    return (0);
+}
+
+
 
 int mlx_initiator(t_scene *scene)
 {
@@ -94,22 +114,12 @@ int pixel_print(t_scene *scene)
 }
 
 int calc_and_print(t_scene *scene)
+
 {
-    printf("change color test\n");
-
-    t_color light = {20, 255, 255}; // Exemple de lumière blanche
-    float intensity = 0.8; // Exemple d'intensité
-
-    t_color scene_color = {100, 100, 100}; // Couleur initiale de la scène
-
-    printf("red = %d\n", scene_color.r);
-    printf("light = %d\n", light.r);
-
-    // Ajout de la lumière à la couleur de la scène
-    scene_color = add_light(scene_color, light, intensity);
-
-    printf("red + light = %d\n", scene_color.r);
-	//
+    //add_light_test();
+    reflect_tester();
+    
+	
 
 	
 	mlx_initiator(scene);
