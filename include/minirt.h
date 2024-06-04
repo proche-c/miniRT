@@ -17,11 +17,10 @@
 # include <fcntl.h>
 # include "../libft/libft.h"
 # include "mlx.h"
-# include "pixel.h" 
+# include "./pixel.h"
+# include <math.h>
 
 #define MAX_LEN	10000
-
-
 
 typedef struct s_vector
 {
@@ -55,7 +54,7 @@ typedef struct s_ambient
 typedef struct s_light
 {
 	int					defined;
-	float				ratio;
+	double				ratio;
 	struct s_vector		position;
 }	t_light;
 
@@ -226,5 +225,7 @@ void	ft_pixel_put(t_img *img, int x, int y, int color);
 void	color_screen(t_scene *scene, int color);
 t_color	add_light(t_color color, t_color light, float p2);
 int 	calc_and_print(t_scene *scene);
+int		add_light_test();
+int		reflect_tester();
 
 #endif
