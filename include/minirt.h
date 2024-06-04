@@ -135,6 +135,7 @@ typedef struct s_scene
 	struct s_ambient	ambient;
 	struct s_light		light;
 	struct s_element	*elements;
+	struct s_img		img;
 	void				*mlx_ptr;
 	void				*window_ptr;
 }	t_scene;
