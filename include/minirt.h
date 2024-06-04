@@ -223,9 +223,9 @@ int 	pixel_print(t_scene *scene);
 int 	mlx_initiator(t_scene *scene);
 void	ft_pixel_put(t_img *img, int x, int y, int color);
 void	color_screen(t_scene *scene, int color);
-t_color	add_light(t_color color, t_color light, float p2);
+t_color	add_light(t_color color, float p2);
 int 	calc_and_print(t_scene *scene);
-int		add_light_test();
-int		reflect_tester();
+int		add_light_test(t_scene *scene);
+int		reflect_tester(t_scene *scene);
 
 #endif
