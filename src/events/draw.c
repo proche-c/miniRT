@@ -116,8 +116,8 @@ int pixel_print(t_scene *scene)
 int calc_and_print(t_scene *scene)
 
 {
-    //add_light_test();
-    reflect_tester();
+    //add_light_test(scene);
+    reflect_tester(scene);
     
 	
 
