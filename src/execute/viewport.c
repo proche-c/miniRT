@@ -65,9 +65,16 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 	printf("v.y %f\n", v.y);
 	printf("v.z %f\n", v.z);
 	view_u = ft_mult_vector_float(u, scene->viewport_side);
-	view_v = ft_mult_vector_float(v, scene->viewport_side * -1);
+	v = ft_mult_vector_float(v, -1);
+	view_v = ft_mult_vector_float(v, scene->viewport_side);
+	printf("view_u.x: %f\n", view_u.x);
+	printf("view_u.y: %f\n", view_u.y);
+	printf("view_u.z: %f\n", view_u.z);
 	scene->delta_u = ft_div_vector_float(view_u, scene->image_side);
 	scene->delta_v = ft_div_vector_float(view_v, scene->image_side);
+	printf("scene->delta_u.x: %f\n", scene->delta_u.x);
+	printf("scene->delta_u.y: %f\n", scene->delta_u.y);
+	printf("scene->delta_u.z: %f\n", scene->delta_u.z);
 	w = ft_mult_vector_float(w, scene->focal_length);
 	upper_left = ft_sub_vectors(scene->camera.pov, w);
 	upper_left = ft_sub_vectors(upper_left, ft_div_vector_float(view_u, 2));
