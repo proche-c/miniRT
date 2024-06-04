@@ -277,4 +277,17 @@ void	ft_free_planes(t_scene *scene);
 void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
+//ALEX
+int		handle_input(int keycode, t_scene *scene);
+void	hook_init(t_scene *scene);
+int		handle_no_event(t_scene *scene);
+int 	pixel_print(t_scene *scene);
+int 	mlx_initiator(t_scene *scene);
+void	ft_pixel_put(t_img *img, int x, int y, int color);
+void	color_screen(t_scene *scene, int color);
+t_color	add_light(t_color color, float p2);
+int 	calc_and_print(t_scene *scene);
+int		add_light_test(t_scene *scene);
+int		reflect_tester(t_scene *scene);
+
 #endif
