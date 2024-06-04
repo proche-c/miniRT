@@ -18,6 +18,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include "mlx.h"
+# include "./pixel.h"
 
 #define DEBUG 1
 #define MAX_LEN	10000
