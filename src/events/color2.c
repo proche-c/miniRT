@@ -2,7 +2,7 @@
 #include "minirt.h"
 
 //add light to color   (color = obj color, light = light color, p2 = light ratio)
-t_color	add_light(t_color color, t_color light, float p2)
+t_color	add_light(t_color color,  float p2)
 {
     t_color c;
 
@@ -10,9 +10,9 @@ t_color	add_light(t_color color, t_color light, float p2)
         p2 = 1;
     if (p2 < 0)
         p2 = 0;
-    c.r = color.r + light.r * p2;
-    c.g = color.g + light.g * p2;
-    c.b = color.b + light.b * p2;
+    c.r = color.r * p2;
+    c.g = color.g * p2;
+    c.b = color.b * p2;
     if (c.r > 255)
         c.r = 255;
     if (c.g > 255)

@@ -58,22 +58,34 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
     return result;
 }
 
-// Example usage
-int reflect_tester() 
+
+int reflect_tester(t_scene *scene) 
 {
-    
+    t_light light = scene->light;
     t_surface surface = {{0, 0, 0}, {0, 0, 1}, {255, 0, 0}}; // Red surface
-    t_light light = {1, 1.0, {10, 10, 10}}; // Light source
     
+    printf("base color: R=%d, G=%d, B=%d\n", surface.color.r, surface.color.g, surface.color.b);
     t_color reflected_color = lambertian_reflection(surface, light);
 
     printf("Reflected Color: R=%d, G=%d, B=%d\n", reflected_color.r, reflected_color.g, reflected_color.b);
     
-    // Initialize MiniLibX and create a window
-    //void *mlx = mlx_init();
-    //void *win = mlx_new_window(mlx, 800, 600, "Lambertian Reflection");
-
-    // Here you can use the reflected_color to set the pixel color in your MiniLibX window
 
     return 0;
+}
+
+int    add_light_test(t_scene *scene)
+{
+	t_color scene_color;
+ 
+	printf("change color test\n");
+	printf("base color = %d\n", scene->elements->color.r);
+	printf("ratio = %f\n", scene->light.ratio);
+	float intensity = scene->light.ratio;
+
+
+    // Ajout de la lumière à la couleur de la scène
+    scene_color = add_light(scene->elements->color, intensity);
+
+    printf("red + light = %d\n", scene_color.r);
+    return (0);
 }
