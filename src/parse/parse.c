@@ -33,9 +33,9 @@ int	ft_parse(t_scene *scene)
 		i++;
 	}
 	ft_free_params(lines);
-	ft_print_camera(scene);
-	ft_print_ambient(scene);
-	ft_print_light(scene);
+	// ft_print_camera(scene);
+	// ft_print_ambient(scene);
+	// ft_print_light(scene);
 	ft_print_elements(scene);
 	if (scene->camera.defined == 0 || scene->ambient.defined == 0
 		|| scene->light.defined == 0 || scene->elements == NULL)

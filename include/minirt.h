@@ -20,13 +20,14 @@
 # include "mlx.h"
 # include "./pixel.h"
 
-#define DEBUG 1
+#define DEBUG 0
+#define DEBUGEXEC 1
 #define MAX_LEN	10000
 #define pi 3.1415926535897932385
 #define ASPECT_RATIO 1
 #define DISTANCE_VIEWPORT 1
 #define IMAGE_SIDE 1000
-#define E 0.000001
+#define E 0.00001
 
 typedef struct s_vector
 {
@@ -72,34 +73,6 @@ typedef struct s_ray
 	struct s_vector		direction;
 	struct s_vector		pixel_center;
 }	t_ray;
-// typedef struct s_spheres
-// {
-// 	char				identifier;
-// 	struct s_vector		position;
-// 	float				diameter;
-// 	struct s_color		color;
-// 	struct s_spheres	*next;
-// }	t_spheres;
-
-// typedef struct s_planes
-// {
-// 	char				identifier;
-// 	struct s_vector		position;
-// 	struct s_vector		n_vector;
-// 	struct s_color		color;
-// 	struct s_planes		*next;
-// }	t_planes;
-
-// typedef struct s_cylinders
-// {
-// 	char				identifier;
-// 	struct s_vector		position;
-// 	struct s_vector		n_vector;
-// 	float				diameter;
-// 	float				height;
-// 	struct s_color		color;
-// 	struct s_cylinders	*next;
-// }	t_cylinders;
 
 typedef struct s_element
 {
@@ -127,7 +100,8 @@ typedef struct s_scene
 	float				focal_length; // distance between viewport and camera
 	float				h; // tan camera fov
 	float				viewport_side;
-	// float				viewport_width;
+	t_vector			view_u;
+	t_vector			view_v;
 	t_vector			delta_u;
 	t_vector			delta_v;
 	t_vector			pixel00;
@@ -247,11 +221,11 @@ t_vector	ft_unit_vector(t_vector v);
 	/*viewport*/
 void	ft_get_viewport(t_scene *scene);
 t_vector	ft_get_vup(t_vector w);
-void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup);
+void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w);
 
 	/*intersections*/
-t_ray	ft_get_ray(t_scene *scene, int j, int i);
-void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter);
+void	ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i);
+void	ft_hit_something(t_scene *scene, t_intersection *inter);
 void	ft_get_inter_ray(t_ray ray, t_intersection *inter);
 
 	/*inter_sphere*/
@@ -280,17 +254,6 @@ void	ft_free_planes(t_scene *scene);
 void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
-//ALEX
-int		handle_input(int keycode, t_scene *scene);
-void	hook_init(t_scene *scene);
-int		handle_no_event(t_scene *scene);
-int 	pixel_print(t_scene *scene);
-int 	mlx_initiator(t_scene *scene);
-void	ft_pixel_put(t_img *img, int x, int y, int color);
-void	color_screen(t_scene *scene, int color);
-t_color	add_light(t_color color, float p2);
-int 	calc_and_print(t_scene *scene);
-int		add_light_test(t_scene *scene);
-int		reflect_tester(t_scene *scene);
+t_vector ft_mult_vector_float_1(t_vector v, float f);
 
 #endif
