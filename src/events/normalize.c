@@ -41,7 +41,7 @@ t_vector    calculate_sphere_normal(t_element *element, t_intersection *inter, t
     return (normal);
 }
 
-t_vector    calculate_plane_normal(t_element *element, t_intersection *inter, t_vector normal)
+t_vector    calculate_plane_normal(t_element *element, t_vector normal)
 {
     normal.x = element->position.x;
     normal.y = element->position.y;

@@ -19,13 +19,13 @@ typedef struct s_color {
 } t_color;*/
 
 typedef struct s_surface {
-    t_vec3 position;
-    t_vec3 normal;
+    t_vector position;
+    t_vector normal;
     t_color color;
 } t_surface;
 
 // Function to calculate dot product of two vectors
-double dot_product(t_vec3 a, t_vec3 b) {
+double dot_product(t_vector a, t_vector b) {
     return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
