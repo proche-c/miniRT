@@ -55,6 +55,7 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
 
 int reflect_tester(t_scene *scene) 
 {
+    printf("---Reflect tester---\n");
     t_light light = scene->light;
     t_surface surface = {{0, 0, 0}, {0, 0, 1}, {255, 0, 0}}; // Red surface
     
@@ -71,7 +72,7 @@ int    add_light_test(t_scene *scene)
 {
 	t_color scene_color;
  
-	printf("change color test\n");
+	printf("---change color test---\n");
 	printf("base color = %d\n", scene->elements->color.r);
 	printf("ratio = %f\n", scene->light.ratio);
 	float intensity = scene->light.ratio;
