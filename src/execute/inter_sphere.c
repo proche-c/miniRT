@@ -20,33 +20,29 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	float		h;
 	float		c;
 	float		disc;
+	float	t;
 
-	printf("entro en inter_sp.....\n");
+	// printf("entro en inter_sp.....\n");
 	oc = ft_sub_vectors(c_element->position, inter->ray.origin);
-	// printf("oc.x: %f\n", oc.x);
-	// printf("oc.y: %f\n", oc.y);
-	// printf("oc.z: %f\n", oc.z);
 	a = ft_get_length_squared(inter->ray.direction);
-	// printf("inter->ray.direction.x: %f\n", inter->ray.direction.x);
-	// printf("inter->ray.direction.y: %f\n", inter->ray.direction.y);
-	// printf("inter->ray.direction.z: %f\n", inter->ray.direction.z);
-	// printf("a: %f\n", a);
+
 	h = ft_dot(inter->ray.direction, oc);
 	// printf("h: %f\n", h);
 	c = ft_get_length_squared(oc) - (c_element->diameter * c_element->diameter);
 	// printf("c: %f\n", c);
 	disc = h * h - a * c;
-	printf("disc: %f\n", disc);
+	// printf("disc: %f\n", disc);
 	if (disc >= 0)
-		ft_get_inter_sp(inter, disc, h, a);
+	{
+		t = (h - sqrtf(disc)) / a;
+		ft_get_inter_sp(inter, c_element, t);
+	}
 }
 
-void	ft_get_inter_sp(t_intersection *inter, float disc, float h, float a)
+void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 {
 	t_vector	inter_point;
-	float		t;
 
-	t = (h - sqrtf(disc)) / a;
 	inter_point = ft_mult_vector_float(inter->ray.direction, t);
 	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
 	if (inter->state == 0)
@@ -54,13 +50,15 @@ void	ft_get_inter_sp(t_intersection *inter, float disc, float h, float a)
 		inter->position.x = inter_point.x;
 		inter->position.y = inter_point.y;
 		inter->position.z = inter_point.z;
+		inter->element = c_element;
 		inter->state = 1;
 	}
 	else
-		ft_get_closest_point(inter, inter_point);
+		ft_get_closest_point(inter, inter_point, c_element);
 }
 
-void	ft_get_closest_point(t_intersection *inter, t_vector inter_point)
+
+void	ft_get_closest_point(t_intersection *inter, t_vector inter_point, t_element *c_element)
 {
 	float		length1;
 	float		length2;
@@ -75,6 +73,7 @@ void	ft_get_closest_point(t_intersection *inter, t_vector inter_point)
 	{
 		inter->position.x = inter_point.x;
 		inter->position.y = inter_point.y;
-		inter->position.z = inter_point.z;		
+		inter->position.z = inter_point.z;
+		inter->element = c_element;	
 	}
 }

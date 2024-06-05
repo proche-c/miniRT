@@ -26,12 +26,12 @@ void	ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i)
 	inter->ray.direction.x = inter->ray.pixel_center.x - scene->camera.pov.x;
 	inter->ray.direction.y = inter->ray.pixel_center.y - scene->camera.pov.y;
 	inter->ray.direction.z = inter->ray.pixel_center.z - scene->camera.pov.z;
-	if ((i == 0 || i == 1 || i == 2) && j == 0)
-	{
-		printf("ray.direction.x: %f\n", inter->ray.direction.x);
-		printf("ray.direction.y: %f\n", inter->ray.direction.y);
-		printf("ray.direction.z: %f\n", inter->ray.direction.z);
-	}
+	// if ((i == 0 || i == 1 || i == 2) && j == 0)
+	// {
+	// 	printf("ray.direction.x: %f\n", inter->ray.direction.x);
+	// 	printf("ray.direction.y: %f\n", inter->ray.direction.y);
+	// 	printf("ray.direction.z: %f\n", inter->ray.direction.z);
+	// }
 	return ;
 }
 
@@ -46,11 +46,11 @@ void	ft_hit_something(t_scene *scene, t_intersection *inter)
 	// printf("c_element->identifier: %s\n", c_element->identifier);
 	while (c_element)
 	{
-		printf("c_element->identifier: %s\n", c_element->identifier);
+		// printf("c_element->identifier: %s\n", c_element->identifier);
 		if (ft_strncmp(c_element->identifier, "sp", 3) == 0)
 			ft_inter_sp(inter, c_element);
 		else if (ft_strncmp(c_element->identifier, "pl", 3) == 0)
-			ft_inter_pl(scene, inter, c_element);
+			ft_inter_pl(inter, c_element);
 		else if (ft_strncmp(c_element->identifier, "cy", 3) == 0)
 			ft_inter_cy(scene, inter, c_element);
 		c_element = c_element->next;

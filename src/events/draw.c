@@ -8,7 +8,7 @@ int mlx_initiator(t_scene *scene)
         printf("Error initializing MLX.\n");
         return (-1);
     }
-	scene->window_ptr = mlx_new_window(scene->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "miniRT");
+	scene->window_ptr = mlx_new_window(scene->mlx_ptr, scene->image_side, scene->image_side, "miniRT");
     if (!scene->window_ptr)
     {
         printf("Error creating window.\n");
@@ -64,8 +64,8 @@ void	color_screen(t_scene *scene, int color)
         y++;
     }
 
-    int start_x = (WIN_WIDTH - IMG_WIDTH) / 2;
-    int start_y = (WIN_HEIGHT - IMG_HEIGHT) / 2;
+    int start_x = (WIN_WIDTH - scene->image_side) / 2;
+    int start_y = (WIN_HEIGHT - scene->image_side) / 2;
     
     mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr, scene->img.img_ptr, start_x, start_y);
 }
@@ -74,7 +74,7 @@ void	color_screen(t_scene *scene, int color)
 
 int pixel_print(t_scene *scene)
 {
-	scene->img.img_ptr = mlx_new_image(scene->mlx_ptr, IMG_WIDTH, IMG_HEIGHT);
+	scene->img.img_ptr = mlx_new_image(scene->mlx_ptr, scene->image_side, scene->image_side);
 	if (!scene->img.img_ptr)
 	{
 		printf("Error creating image.\n");
@@ -96,7 +96,7 @@ int calc_and_print(t_scene *scene)
 
 {
     //add_light_test(scene);
-    reflect_tester(scene);
+    //reflect_tester(scene);
     
 	
 

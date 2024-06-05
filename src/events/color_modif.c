@@ -59,19 +59,19 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
 }
 
 
-int reflect_tester(t_scene *scene) 
-{
-    t_light light = scene->light;
-    t_surface surface = {{0, 0, 0}, {0, 0, 1}, {255, 0, 0}}; // Red surface
+// int reflect_tester(t_scene *scene) 
+// {
+//     t_light light = scene->light;
+//     t_surface surface = {{0, 0, 0}, {0, 0, 1}, {255, 0, 0}}; // Red surface
     
-    printf("base color: R=%d, G=%d, B=%d\n", surface.color.r, surface.color.g, surface.color.b);
-    t_color reflected_color = lambertian_reflection(surface, light);
+//     printf("base color: R=%d, G=%d, B=%d\n", surface.color.r, surface.color.g, surface.color.b);
+//     t_color reflected_color = lambertian_reflection(surface, light);
 
-    printf("Reflected Color: R=%d, G=%d, B=%d\n", reflected_color.r, reflected_color.g, reflected_color.b);
+//     printf("Reflected Color: R=%d, G=%d, B=%d\n", reflected_color.r, reflected_color.g, reflected_color.b);
     
 
-    return 0;
-}
+//     return 0;
+// }
 
 int    add_light_test(t_scene *scene)
 {

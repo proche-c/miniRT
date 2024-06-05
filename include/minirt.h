@@ -230,11 +230,12 @@ void	ft_get_inter_ray(t_ray ray, t_intersection *inter);
 
 	/*inter_sphere*/
 void	ft_inter_sp(t_intersection *inter, t_element *c_element);
-void	ft_get_inter_sp(t_intersection *inter, float disc, float h, float a);
-void	ft_get_closest_point(t_intersection *inter, t_vector inter_point);
+void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t);
+void	ft_get_closest_point(t_intersection *inter, t_vector inter_point, t_element *c_element);
 
 	/*inter_plane*/
-void	ft_inter_pl(t_scene *scene, t_intersection *inter, t_element *c_element);
+void	ft_inter_pl(t_intersection *inter, t_element *c_element);
+void	ft_get_inter_pl(t_intersection *inter, t_element *c_element, float t);
 
 	/*inter_cylinder*/
 void	ft_inter_cy(t_scene *scene, t_intersection *inter, t_element *c_element);
@@ -255,5 +256,11 @@ void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
 t_vector ft_mult_vector_float_1(t_vector v, float f);
+t_color	add_light(t_color color,  float p2);
+void	hook_init(t_scene *scene);
+void	color_screen(t_scene *scene, int color);
+int calc_and_print(t_scene *scene);
+int mlx_initiator(t_scene *scene);
+int pixel_print(t_scene *scene);
 
 #endif
