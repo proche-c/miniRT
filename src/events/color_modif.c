@@ -29,16 +29,10 @@ double dot_product(t_vec3 a, t_vec3 b) {
     return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
 
-// Function to normalize a vector
-t_vec3 normalize(t_vec3 v) {
-    double length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-    t_vec3 norm = {v.x / length, v.y / length, v.z / length};
-    return norm;
-}
 
 // Function to calculate the Lambertian reflection
 t_color lambertian_reflection(t_surface surface, t_light light) {
-    t_vec3 light_dir = {light.position.x - surface.position.x, 
+    t_vector light_dir = {light.position.x - surface.position.x, 
                         light.position.y - surface.position.y, 
                         light.position.z - surface.position.z};
     light_dir = normalize(light_dir);

@@ -90,7 +90,7 @@ typedef struct s_element
 	struct s_vector		position;
 	struct s_color		color;
 	float				diameter;
-	struct s_vector		n_vector;
+	struct s_vector		n_vector; 
 	float				height;
 	struct s_element	*next;
 }	t_element;
