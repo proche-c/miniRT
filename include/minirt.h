@@ -26,7 +26,7 @@
 #define ASPECT_RATIO 1
 #define DISTANCE_VIEWPORT 1
 #define IMAGE_SIDE 1000
-#define E 0.0000001
+#define E 0.00001
 
 typedef struct s_vector
 {
@@ -127,7 +127,8 @@ typedef struct s_scene
 	float				focal_length; // distance between viewport and camera
 	float				h; // tan camera fov
 	float				viewport_side;
-	// float				viewport_width;
+	t_vector			view_u;
+	t_vector			view_v;
 	t_vector			delta_u;
 	t_vector			delta_v;
 	t_vector			pixel00;
@@ -278,5 +279,7 @@ void	ft_free_params(char **params);
 void	ft_free_planes(t_scene *scene);
 void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
+
+t_vector ft_mult_vector_float_1(t_vector v, float f);
 
 #endif
