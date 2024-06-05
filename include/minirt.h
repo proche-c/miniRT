@@ -228,5 +228,6 @@ int 	calc_and_print(t_scene *scene);
 int		add_light_test(t_scene *scene);
 int		reflect_tester(t_scene *scene);
 t_vector normalize(t_vector v);
+double  dot_product(t_vector a, t_vector b);
 
 #endif

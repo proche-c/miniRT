@@ -4,6 +4,19 @@
 //diffuse light (lambertian reflection) how the light source interacts with the surface
 //specular light (phong reflection) how the light source interacts with the viewer
 
+
+
+// Function to calculate the reflection vector
+t_vector reflect_vector(t_vector light_dir, t_vector normal) {
+    double dot = dot_product(normal, light_dir);
+    t_vector reflection = {
+        2 * dot * normal.x - light_dir.x,
+        2 * dot * normal.y - light_dir.y,
+        2 * dot * normal.z - light_dir.z
+    };
+    return reflection;
+}
+
 // Calculate lighting at an intersection point
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir) {
     t_color color = {0, 0, 0};
