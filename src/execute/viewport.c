@@ -47,9 +47,10 @@ t_vector	ft_get_vup(t_vector w)
 void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 {
 	t_vector	upper_left;
-	t_vector	i;
 	t_vector	u;
 	t_vector	v;
+	t_vector	view_u;
+	t_vector	view_v;
 	float		temp;
 
 	printf("w.x %f\n", w.x);
@@ -63,15 +64,19 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 	printf("v.x %f\n", v.x);
 	printf("v.y %f\n", v.y);
 	printf("v.z %f\n", v.z);
-	scene->view_u = ft_mult_vector_float_1(u, 1000);
-	scene->view_v = ft_mult_vector_float_1(v, IMAGE_SIDE);
-	printf("scene->view_u.x: %f\n", scene->view_u.x);
-	printf("scene->view_u.y: %f\n", scene->view_u.y);
-	printf("scene->view_u.z: %f\n", scene->view_u.z);
-	printf("scene->view_v.x: %f\n", scene->view_v.x);
-	printf("scene->view_v.y: %f\n", scene->view_v.y);
-	printf("scene->view_v.z: %f\n", scene->view_v.z);
-	temp = IMAGE_SIDE / scene->image_side;
+	view_u.x = u.x * IMAGE_SIDE;
+	view_u.y = u.y * IMAGE_SIDE;
+	view_u.z = u.z * IMAGE_SIDE;
+	view_v.x = v.x * IMAGE_SIDE;
+	view_v.y = v.y * IMAGE_SIDE;
+	view_v.z = v.z * IMAGE_SIDE;
+	printf("scene->view_u.x: %f\n", view_u.x);
+	printf("scene->view_u.y: %f\n", view_u.y);
+	printf("scene->view_u.z: %f\n", view_u.z);
+	printf("scene->view_v.x: %f\n", view_v.x);
+	printf("scene->view_v.y: %f\n", view_v.y);
+	printf("scene->view_v.z: %f\n", view_v.z);
+	temp = scene->viewport_side / scene->image_side;
 	printf("temp %f\n", temp);
 	scene->delta_u = ft_mult_vector_float(u, temp);
 	v = ft_mult_vector_float(v, -1);
@@ -82,11 +87,16 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 	printf("scene->delta_v.x: %f\n", scene->delta_v.x);
 	printf("scene->delta_v.y: %f\n", scene->delta_v.y);
 	printf("scene->delta_v.z: %f\n", scene->delta_v.z);
-	w = ft_mult_vector_float(w, scene->focal_length);
-	upper_left = ft_sub_vectors(scene->camera.pov, w);
-	upper_left = ft_sub_vectors(upper_left, ft_div_vector_float(scene->view_u, 2));
-	upper_left = ft_sub_vectors(upper_left, ft_div_vector_float(scene->view_v, 2));
-	i = ft_mult_vector_float(scene->delta_u, 0.5);
-	i = ft_add_vectors(ft_mult_vector_float(scene->delta_v, 0.5), i);
-	scene->pixel00 = ft_add_vectors(upper_left, i);	
+	upper_left.x = scene->camera.pov.x - w.x * scene->focal_length -
+		view_u.x / 2 - view_v.x / 2;
+	upper_left.y = scene->camera.pov.y - w.y * scene->focal_length -
+		view_u.y / 2 - view_v.y / 2;
+	upper_left.z = scene->camera.pov.z - w.z * scene->focal_length -
+		view_u.z / 2 - view_v.z / 2;
+	scene->pixel00.x = upper_left.x + 0.5 *
+	(scene->delta_u.x + scene->delta_v.x);
+	scene->pixel00.y = upper_left.y + 0.5 *
+	(scene->delta_u.y + scene->delta_v.y);
+	scene->pixel00.z = upper_left.z + 0.5 *
+	(scene->delta_u.z + scene->delta_v.z);
 }
