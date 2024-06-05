@@ -12,37 +12,41 @@
 
 #include "minirt.h"
 
-t_ray	ft_get_ray(t_scene *scene, int j, int i)
+void	ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i)
 {
-	t_ray	ray;
-	t_vector	inc;
-
-	ray.origin.x = scene->camera.pov.x;
-	ray.origin.y = scene->camera.pov.y;
-	ray.origin.z = scene->camera.pov.z;
-	inc = ft_mult_vector_float(scene->delta_u, i);
-	inc = ft_add_vectors(inc, ft_mult_vector_float(scene->delta_v, j));
-	ray.pixel_center = ft_add_vectors(scene->pixel00, inc);
-	ray.direction = ft_sub_vectors(ray.pixel_center, scene->camera.pov);
-	// if (i == 0 && j == 0)
-	// {
-	// 	printf("ray.direction.x: %f\n", ray.direction.x);
-	// 	printf("ray.direction.y: %f\n", ray.direction.y);
-	// 	printf("ray.direction.z: %f\n", ray.direction.z);
-	// }
-	return (ray);
+	inter->ray.origin.x = scene->camera.pov.x;
+	inter->ray.origin.y = scene->camera.pov.y;
+	inter->ray.origin.z = scene->camera.pov.z;
+	inter->ray.pixel_center.x = scene->pixel00.x +
+		(i * scene->delta_u.x) + (j * scene->delta_v.x);
+	inter->ray.pixel_center.y = scene->pixel00.y +
+		(i * scene->delta_u.y) + (j * scene->delta_v.y);
+	inter->ray.pixel_center.z = scene->pixel00.z +
+		(i * scene->delta_u.z) + (j * scene->delta_v.z);
+	inter->ray.direction.x = inter->ray.pixel_center.x - scene->camera.pov.x;
+	inter->ray.direction.y = inter->ray.pixel_center.y - scene->camera.pov.y;
+	inter->ray.direction.z = inter->ray.pixel_center.z - scene->camera.pov.z;
+	if ((i == 0 || i == 1 || i == 2) && j == 0)
+	{
+		printf("ray.direction.x: %f\n", inter->ray.direction.x);
+		printf("ray.direction.y: %f\n", inter->ray.direction.y);
+		printf("ray.direction.z: %f\n", inter->ray.direction.z);
+	}
+	return ;
 }
 
-void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter)
+void	ft_hit_something(t_scene *scene, t_intersection *inter)
 {
 	t_element	*c_element;
 
 
 	//inter->state = 0;
-	ft_get_inter_ray(ray, inter);
+	// ft_get_inter_ray(ray, inter);
 	c_element = scene->elements;
+	// printf("c_element->identifier: %s\n", c_element->identifier);
 	while (c_element)
 	{
+		printf("c_element->identifier: %s\n", c_element->identifier);
 		if (ft_strncmp(c_element->identifier, "sp", 3) == 0)
 			ft_inter_sp(inter, c_element);
 		else if (ft_strncmp(c_element->identifier, "pl", 3) == 0)

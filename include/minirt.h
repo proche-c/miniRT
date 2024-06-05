@@ -72,34 +72,6 @@ typedef struct s_ray
 	struct s_vector		direction;
 	struct s_vector		pixel_center;
 }	t_ray;
-// typedef struct s_spheres
-// {
-// 	char				identifier;
-// 	struct s_vector		position;
-// 	float				diameter;
-// 	struct s_color		color;
-// 	struct s_spheres	*next;
-// }	t_spheres;
-
-// typedef struct s_planes
-// {
-// 	char				identifier;
-// 	struct s_vector		position;
-// 	struct s_vector		n_vector;
-// 	struct s_color		color;
-// 	struct s_planes		*next;
-// }	t_planes;
-
-// typedef struct s_cylinders
-// {
-// 	char				identifier;
-// 	struct s_vector		position;
-// 	struct s_vector		n_vector;
-// 	float				diameter;
-// 	float				height;
-// 	struct s_color		color;
-// 	struct s_cylinders	*next;
-// }	t_cylinders;
 
 typedef struct s_element
 {
@@ -247,11 +219,11 @@ t_vector	ft_unit_vector(t_vector v);
 	/*viewport*/
 void	ft_get_viewport(t_scene *scene);
 t_vector	ft_get_vup(t_vector w);
-void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup);
+void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w);
 
 	/*intersections*/
-t_ray	ft_get_ray(t_scene *scene, int j, int i);
-void	ft_hit_something(t_ray ray, t_scene *scene, t_intersection *inter);
+void	ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i);
+void	ft_hit_something(t_scene *scene, t_intersection *inter);
 void	ft_get_inter_ray(t_ray ray, t_intersection *inter);
 
 	/*inter_sphere*/

@@ -17,35 +17,35 @@ int	ft_execute(t_scene *scene)
 {
 	int	i = 0;
 	int	j = 0;
-	t_ray	ray;
-	t_intersection	*intersection;
+	// t_ray	ray;
+	t_intersection	*inter;
 	
-	intersection = malloc(sizeof(t_intersection *));
+	inter = malloc(sizeof(t_intersection *));
 	ft_get_viewport(scene);   //PAULA
 	ft_print_viewport(scene);
 	while (j < scene->image_side)
 	{
 		while (i < scene->image_side)
 		{
-			intersection->state = 0;
-			ray = ft_get_ray(scene, j, i);	//PAULA
-			ft_hit_something(ray, scene, intersection);
-			// if (intersection->state == 1)
-			// 	printf("hit something\n");
+			inter->state = 0;
+			ft_get_ray(scene, inter, j, i);	//PAULA
+			ft_hit_something(scene, inter);
+			if (inter->state == 1)
+				printf("hit something\n");
 			// else
 			// 	printf("nothing\n");
-			if (intersection->state == 1)	//PAULA
+			if (inter->state == 1)	//PAULA
 			{
-				write_pixel_object(scene, intersection, j, i); //ALEX
+				write_pixel_object(scene, inter, j, i); //ALEX
 			}
 			else
 				write_pixel_no_object(scene, j, i); //ALEX
 
-			i = i + 10;
+			i = i + 100;
 		}
-		j = j + 10;
+		j = j + 100;
 	}
-	free(intersection);
+	free(inter);
 	printf("OUT FT_EXECUTE\n");
 	return (0);
 }

@@ -24,7 +24,7 @@ void	ft_get_viewport(t_scene *scene)
 	scene->viewport_side = 2 * scene->h * scene->focal_length;
 	w = ft_mult_vector_float(scene->camera.orientation, -1);
 	vup = ft_get_vup(w);
-	ft_get_pixel00(scene, w, vup);
+	ft_get_pixel00(scene, vup, w);
 	return ;
 }
 
@@ -44,7 +44,7 @@ t_vector	ft_get_vup(t_vector w)
 	return (vup);
 }
 
-void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
+void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 {
 	t_vector	upper_left;
 	t_vector	u;
@@ -53,9 +53,7 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 	t_vector	view_v;
 	float		temp;
 
-	printf("w.x %f\n", w.x);
-	printf("w.y %f\n", w.y);
-	printf("w.z %f\n", w.z);
+	
 	u = ft_unit_vector(ft_cross(vup, w));
 	printf("u.x %f\n", u.x);
 	printf("u.y %f\n", u.y);
@@ -67,9 +65,9 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 	view_u.x = u.x * IMAGE_SIDE;
 	view_u.y = u.y * IMAGE_SIDE;
 	view_u.z = u.z * IMAGE_SIDE;
-	view_v.x = v.x * IMAGE_SIDE;
-	view_v.y = v.y * IMAGE_SIDE;
-	view_v.z = v.z * IMAGE_SIDE;
+	view_v.x = v.x * IMAGE_SIDE * -1;
+	view_v.y = v.y * IMAGE_SIDE * -1;
+	view_v.z = v.z * IMAGE_SIDE * -1;
 	printf("scene->view_u.x: %f\n", view_u.x);
 	printf("scene->view_u.y: %f\n", view_u.y);
 	printf("scene->view_u.z: %f\n", view_u.z);
@@ -79,20 +77,23 @@ void	ft_get_pixel00(t_scene *scene, t_vector w, t_vector vup)
 	temp = scene->viewport_side / scene->image_side;
 	printf("temp %f\n", temp);
 	scene->delta_u = ft_mult_vector_float(u, temp);
-	v = ft_mult_vector_float(v, -1);
-	scene->delta_v = ft_mult_vector_float(v, temp);
+	// v = ft_mult_vector_float(v, -1);
+	scene->delta_v = ft_mult_vector_float(v, -temp);
 	printf("scene->delta_u.x: %f\n", scene->delta_u.x);
 	printf("scene->delta_u.y: %f\n", scene->delta_u.y);
 	printf("scene->delta_u.z: %f\n", scene->delta_u.z);
 	printf("scene->delta_v.x: %f\n", scene->delta_v.x);
 	printf("scene->delta_v.y: %f\n", scene->delta_v.y);
 	printf("scene->delta_v.z: %f\n", scene->delta_v.z);
-	upper_left.x = scene->camera.pov.x - w.x * scene->focal_length -
-		view_u.x / 2 - view_v.x / 2;
-	upper_left.y = scene->camera.pov.y - w.y * scene->focal_length -
-		view_u.y / 2 - view_v.y / 2;
-	upper_left.z = scene->camera.pov.z - w.z * scene->focal_length -
-		view_u.z / 2 - view_v.z / 2;
+	upper_left.x = scene->camera.pov.x - w.x *
+		scene->focal_length - view_u.x / 2 - view_v.x / 2;
+	upper_left.y = scene->camera.pov.y - w.y *
+		scene->focal_length - view_u.y / 2 - view_v.y / 2;
+	upper_left.z = scene->camera.pov.z - w.z *
+		scene->focal_length - view_u.z / 2 - view_v.z / 2;
+	printf("upper_left.x: %f\n", upper_left.x);
+	printf("upper_left.y: %f\n", upper_left.y);
+	printf("upper_left.z: %f\n", upper_left.z);
 	scene->pixel00.x = upper_left.x + 0.5 *
 	(scene->delta_u.x + scene->delta_v.x);
 	scene->pixel00.y = upper_left.y + 0.5 *
