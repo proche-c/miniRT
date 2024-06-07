@@ -115,6 +115,7 @@ typedef struct s_intersection
 {
 	struct s_vector		position;
 	struct s_element	*element;
+	struct s_vector		normal;
 }	t_intersection;
 
 
@@ -229,5 +230,6 @@ int		add_light_test(t_scene *scene);
 int		reflect_tester(t_scene *scene);
 t_vector normalize(t_vector v);
 double  dot_product(t_vector a, t_vector b);
+t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);
 
 #endif

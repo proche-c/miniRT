@@ -92,19 +92,53 @@ int pixel_print(t_scene *scene)
 	return (0);
 }
 
+t_vector calculate_normal_at_intersection(t_element *element, t_intersection *inter, t_vector normal) 
+{
+    if (element->identifier == "sp") 
+            return calculate_sphere_normal(element, inter, normal);
+    else if (element->identifier == "pl")
+            return calculate_plane_normal(element, inter, normal);
+    else if (element->identifier == "cy")
+            return calculate_cylinder_normal(element, inter, normal);
+    else
+            return (t_vector){0, 0, 0}; // Default normal if type is unknown
+    
+}
+
 int calc_and_print(t_scene *scene)
 
 {
-    add_light_test(scene);
-    reflect_tester(scene);
+    //add_light_test(scene);
+    //reflect_tester(scene);
     
-    
+    if (mlx_initiator(scene) == -1) {
+        return (-1);
+    }
 	
 
 	
-	mlx_initiator(scene);
+	//mlx_initiator(scene);
 	hook_init(scene);
-	pixel_print(scene);
+
+    if (pixel_print(scene) == -1) {
+        return (-1);
+    }
+	//pixel_print(scene);
+    t_intersection inter;
+    t_vector view_dir = {0, 0, -1}; // Assuming the viewer is looking down the negative z-axis (possibly need to add the camera position there)
+    t_vector inter_point;
+    t_element c_element; // You should initialize this with the actual element details
+    for (int y = 0; y < IMG_HEIGHT; y++) {
+        for (int x = 0; x < IMG_WIDTH; x++) {
+            inter_point = ft_get_closest_point(&inter, inter_point, &c_element);
+
+            t_vector normal = calculate_normal_at_intersection(scene->element, inter, normal); // Implement this function to get the normal at the intersection point
+            t_color color = calculate_lighting(scene, &inter, normal, view_dir);
+            //int rgb = (color.r << 16) | (color.g << 8) | color.b;
+            ft_pixel_put(&scene->img, x, y, element->color);
+        }
+    }
+
     mlx_loop(scene->mlx_ptr);
     return (0);
 }
