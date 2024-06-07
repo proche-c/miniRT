@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		ft_putstr_fd("error: wrong arguments\n", 1);
 		return (1);
 	}
-	scene = malloc(sizeof(t_scene *));
+	scene = malloc(sizeof(t_scene));
 	if (!scene)
 		return (1);
 	// init params in scene
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_execute(scene);
-	calc_and_print(scene);	
+	//calc_and_print(scene);	
 	ft_free_scene(scene);
 	return (0);
 }

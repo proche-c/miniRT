@@ -94,6 +94,12 @@ float	ft_atof(char *str)
 	float	num2;
 	char	**parts;
 
+	// printf("char: %s\n", str);
+	if (ft_strchr(str, '.') == NULL)
+	{
+		result = (float)atoi(str);
+		return (result);
+	}
 	parts = ft_split(str, '.');
 	num1 = ft_atoi(parts[0]);
 	if (parts[1] != NULL)

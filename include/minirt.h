@@ -21,7 +21,7 @@
 # include "./pixel.h"
 
 #define DEBUG 0
-#define DEBUGEXEC 1
+#define DEBUGEXEC 0
 #define MAX_LEN	10000
 #define pi 3.1415926535897932385
 #define ASPECT_RATIO 1
@@ -195,8 +195,11 @@ void	ft_print_camera(t_scene *scene);
 void	ft_print_ambient(t_scene *scene);
 void	ft_print_light(t_scene *scene);
 void	ft_print_params(char **params);
+void	ft_print_element(t_element *element);
 void	ft_print_elements(t_scene *scene);
 void	ft_print_viewport(t_scene *scene);
+void	ft_print_ray(t_ray ray);
+void	ft_print_intersection(t_intersection *inter);
 
 //EXECUTE
 	/*execute*/

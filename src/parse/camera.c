@@ -141,18 +141,22 @@ int	ft_is_normalized(char **co)
 	print_in_out("IN FT_IS_NORMALIZED\n");
 	int	i;
 	float	length;
+	float	vec[3];
 
+	vec[0] = ft_atof(co[0]);
+	vec[1] = ft_atof(co[1]);
+	vec[2] = ft_atof(co[2]);
 	i = 0;
 	length = 0;
-	while (co[i])
+	while (i < 3)
 	{
 		// each parameter must be 1 or 0
-		if (ft_atof(co[i]) > 1 || ft_atof(co[i]) < - 1)
+		if (vec[i] > 1 || vec[i] < - 1)
 		{
 			print_in_out("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
 			return (0);
 		}
-		length = length + ft_atof(co[i]) * ft_atof(co[i]);
+		length = length + vec[i] * vec[i];
 		i++;
 	}
 	if (length != 1)

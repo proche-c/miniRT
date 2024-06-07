@@ -22,7 +22,7 @@ NAME = minirt
 
 HEADER = ./include/minirt.h
 
-CC = gcc
+CC = gcc -fsanitize=address -g
 
 CFLAGS = -Wall -Wextra -Werror -g $(INC)
 
@@ -79,4 +79,4 @@ test: clean re
 
 leaks: all
 	@clear
-	@leaks  -atExit -- ./minirt scene.rt
+	@leaks  -atExit -- ./minirt test.rt
