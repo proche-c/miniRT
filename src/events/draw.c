@@ -1,4 +1,5 @@
 # include "../include/minirt.h"
+# include <string.h> //ceck if it is allowed to use
 
 int mlx_initiator(t_scene *scene)
 {
@@ -94,15 +95,15 @@ int pixel_print(t_scene *scene)
 
 t_vector calculate_normal_at_intersection(t_element *element, t_intersection *inter, t_vector normal) 
 {
-    if (element->identifier == "sp") 
+    if (strcmp(element->identifier, "sp") == 0) 
             return calculate_sphere_normal(element, inter, normal);
-    else if (element->identifier == "pl")
-            return calculate_plane_normal(element, inter, normal);
-    else if (element->identifier == "cy")
+    else if (strcmp(element->identifier, "pl") == 0)
+            return calculate_plane_normal(element, normal);
+    else if (strcmp(element->identifier, "cy") == 0)
             return calculate_cylinder_normal(element, inter, normal);
     else
             return (t_vector){0, 0, 0}; // Default normal if type is unknown
-    
+    return (normal); 
 }
 
 int calc_and_print(t_scene *scene)
@@ -126,17 +127,22 @@ int calc_and_print(t_scene *scene)
 	//pixel_print(scene);
     t_intersection inter;
     t_vector view_dir = {0, 0, -1}; // Assuming the viewer is looking down the negative z-axis (possibly need to add the camera position there)
-    t_vector inter_point;
-    t_element c_element; // You should initialize this with the actual element details
-    for (int y = 0; y < IMG_HEIGHT; y++) {
-        for (int x = 0; x < IMG_WIDTH; x++) {
-            inter_point = ft_get_closest_point(&inter, inter_point, &c_element);
-
-            t_vector normal = calculate_normal_at_intersection(scene->element, inter, normal); // Implement this function to get the normal at the intersection point
+    t_element c_element; 
+   
+    int y = 0;
+    while (y < IMG_HEIGHT) 
+    {
+        int x = 0;
+        while (x < IMG_WIDTH)  
+        {
+            ft_get_closest_point(&inter, inter_point, &c_element);
+            t_vector normal = calculate_normal_at_intersection(scene->elements, &inter, normal);
             t_color color = calculate_lighting(scene, &inter, normal, view_dir);
-            //int rgb = (color.r << 16) | (color.g << 8) | color.b;
-            ft_pixel_put(&scene->img, x, y, element->color);
+            int rgb = (color.r << 16) | (color.g << 8) | color.b;
+            ft_pixel_put(&scene->img, x, y, rgb);
+            x++;
         }
+        y++;
     }
 
     mlx_loop(scene->mlx_ptr);

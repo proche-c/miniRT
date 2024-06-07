@@ -231,5 +231,10 @@ int		reflect_tester(t_scene *scene);
 t_vector normalize(t_vector v);
 double  dot_product(t_vector a, t_vector b);
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);
+t_vector calculate_sphere_normal(t_element *element, t_intersection *inter, t_vector normal);
+t_vector calculate_plane_normal(t_element *element, t_vector normal);
+t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_position, t_vector n_vector);
+t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector);
+t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_vector normal);
 
 #endif

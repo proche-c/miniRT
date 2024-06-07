@@ -7,7 +7,8 @@
 
 
 // Function to calculate the reflection vector
-t_vector reflect_vector(t_vector light_dir, t_vector normal) {
+t_vector reflect_vector(t_vector light_dir, t_vector normal) 
+{
     double dot = dot_product(normal, light_dir);
     t_vector reflection = {
         2 * dot * normal.x - light_dir.x,
@@ -18,7 +19,8 @@ t_vector reflect_vector(t_vector light_dir, t_vector normal) {
 }
 
 // Calculate lighting at an intersection point
-t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir) {
+t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir) 
+{
     t_color color = {0, 0, 0};
     t_light *light = &scene->light;
     t_ambient *ambient = &scene->ambient;
