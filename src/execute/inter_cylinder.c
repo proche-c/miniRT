@@ -18,6 +18,10 @@ void	ft_inter_cy(t_scene *scene, t_intersection *inter, t_element *c_element)
 	(void)scene;
 	(void)inter;
 	(void)c_element;
+	// t_vector	oc;
+
+	// // cal
+	// oc = ft_sub_vectors(c_element->position, inter->ray.origin);
 
 	return ;
 }
