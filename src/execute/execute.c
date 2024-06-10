@@ -23,9 +23,9 @@ int	ft_execute(t_scene *scene)
 	inter = malloc(sizeof(t_intersection));
 	ft_get_viewport(scene);   //PAULA
 	// ft_print_viewport(scene);
-	// mlx_initiator(scene);
-	// hook_init(scene);
-	// pixel_print(scene);
+	 mlx_initiator(scene);
+	 hook_init(scene);
+	 pixel_print(scene);
 	while (j < scene->image_side)
 	{
 		while (i < scene->image_side)
@@ -48,7 +48,7 @@ int	ft_execute(t_scene *scene)
 		}
 		j = j + 100;
 	}
-	// mlx_loop(scene->mlx_ptr);
+	 mlx_loop(scene->mlx_ptr);
 	//free(inter);
 	printf("OUT FT_EXECUTE\n");
 	return (0);

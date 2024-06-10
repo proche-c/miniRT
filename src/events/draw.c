@@ -108,8 +108,8 @@ int calc_and_print(t_scene *scene)
 
 	
 	mlx_initiator(scene);
-	hook_init(scene);
-	pixel_print(scene);
-    mlx_loop(scene->mlx_ptr);
+	//hook_init(scene);
+	//pixel_print(scene);
+    //mlx_loop(scene->mlx_ptr);
     return (0);
 }
