@@ -7,15 +7,19 @@
 
 
 // Function to calculate the reflection vector
-t_vector reflect_vector(t_vector light_dir, t_vector normal) 
+
+t_vector reflect_vector(t_vector incident, t_vector normal)
 {
-    double dot = dot_product(normal, light_dir);
-    t_vector reflection = {
-        2 * dot * normal.x - light_dir.x,
-        2 * dot * normal.y - light_dir.y,
-        2 * dot * normal.z - light_dir.z
+    double dot_product = incident.x * normal.x + incident.y * normal.y + incident.z * normal.z;
+    t_vector reflected = 
+    {
+        .x = incident.x - 2 * dot_product * normal.x,
+        .y = incident.y - 2 * dot_product * normal.y,
+        .z = incident.z - 2 * dot_product * normal.z,
+        .length_squared = 0,  // Initialize or calculate if needed
+        .length = 0           // Initialize or calculate if needed
     };
-    return reflection;
+    return reflected;
 }
 
 // Calculate lighting at an intersection point
@@ -32,10 +36,14 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
 
     // Calculate vector from intersection point to light source
     t_vector light_dir = {
-        light->position.x - inter->position.x,
-        light->position.y - inter->position.y,
-        light->position.z - inter->position.z
+        .x = light->position.x - inter->position.x,
+        .y = light->position.y - inter->position.y,
+        .z = light->position.z - inter->position.z,
+        .length_squared = 0,  // Initialize or calculate if needed
+        .length = 0           // Initialize or calculate if needed
     };
+
+    // Normalize the light direction
     light_dir = normalize(light_dir);
 
     // Diffuse lighting

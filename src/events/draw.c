@@ -1,5 +1,11 @@
 # include "../include/minirt.h"
 
+// Function to calculate dot product of two vectors
+double dot_product(t_vector a, t_vector b) 
+{
+    return (a.x * b.x + a.y * b.y + a.z * b.z);
+}
+
 int mlx_initiator(t_scene *scene)
 {
 	scene->mlx_ptr = mlx_init(); 
@@ -17,11 +23,11 @@ int mlx_initiator(t_scene *scene)
     return (0);
 }
 
-void	ft_pixel_put(t_img *img, int x, int y, int color)
+void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene)
 {
 	int	offset;
 
-    if (x < 0 || x >= IMG_WIDTH || y < 0 || y >= IMG_HEIGHT)
+    if (x < 0 || x >= scene->image_side || y < 0 || y >= scene->image_side)
     {
         printf("Error: Invalid coordinates (%d, %d)\n", x, y);
         return;
@@ -34,7 +40,7 @@ void	ft_pixel_put(t_img *img, int x, int y, int color)
     //(img->size_line * y) = calc how many oct are necessary to reach the line y
     //(x * (img->bpp / 8)) = calc how many oct are necessary to reach the x position in the line y (converts bpp in octets pp )
 	//printf("IMG_WIDTH: %d * IMG_HEIGHT: %d * (img->bpp / 8): %d = %d\n", IMG_WIDTH, IMG_HEIGHT, (img->bpp / 8), IMG_WIDTH * IMG_HEIGHT * (img->bpp / 8));
-    if (offset < 0 || offset >= IMG_WIDTH * IMG_HEIGHT * (img->bpp / 8))
+    if (offset < 0 || offset >= scene->image_side * scene->image_side * (img->bpp / 8))
     {
         printf("Error: Invalid offset %d for pixel (%d, %d)\n", offset, x, y);
         return;
@@ -51,13 +57,13 @@ void	color_screen(t_scene *scene, int color)
 
     y = 0;
   
-    while (y < IMG_HEIGHT)
+    while (y < scene->image_side)
     {
         x = 0;
-        while (x < IMG_WIDTH)
+        while (x < scene->image_side)
         {
             
-            ft_pixel_put(&scene->img, x, y, color);
+            ft_pixel_put(&scene->img, x, y, color, scene);
            
             x++;
         }

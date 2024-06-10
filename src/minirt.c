@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_execute(scene);
-	//calc_and_print(scene);	
+	calc_and_print(scene);	
 	ft_free_scene(scene);
 	return (0);
 }

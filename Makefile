@@ -22,7 +22,7 @@ NAME = minirt
 
 HEADER = ./include/minirt.h
 
-CC = gcc -fsanitize=address -g
+CC = gcc #-fsanitize=address -g
 
 CFLAGS = -Wall -Wextra -Werror -g $(INC)
 

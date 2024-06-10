@@ -265,5 +265,8 @@ void	color_screen(t_scene *scene, int color);
 int calc_and_print(t_scene *scene);
 int mlx_initiator(t_scene *scene);
 int pixel_print(t_scene *scene);
+double dot_product(t_vector a, t_vector b);
+t_vector normalize(t_vector v);
+t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector);
 
 #endif
