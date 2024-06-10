@@ -28,6 +28,7 @@ int	ft_execute(t_scene *scene)
 	 pixel_print(scene);
 	while (j < scene->image_side)
 	{
+		i = 0;
 		while (i < scene->image_side)
 		{
 			inter->state = 0;
