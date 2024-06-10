@@ -145,6 +145,7 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     int color_int = (color.r << 16) | (color.g << 8) | color.b;
 
     // Put the pixel on the image
+    printf("Writing pixel at (%d, %d) with color (%d, %d, %d)\n", i, j, color.r, color.g, color.b);
     ft_pixel_put(&scene->img, i, j, color_int, scene);
 }
 
