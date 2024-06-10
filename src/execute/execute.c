@@ -28,8 +28,13 @@ int	ft_execute(t_scene *scene)
 	 pixel_print(scene);
 	while (j < scene->image_side)
 	{
+		//printf("j: %d\n", j);
+		//printf("i: %d\n", i);
+		
+		
 		while (i < scene->image_side)
 		{
+			//printf("i: %d\n", i);
 			inter->state = 0;
 			ft_get_ray(scene, inter, j, i);	//PAULA
 			ft_hit_something(scene, inter);
