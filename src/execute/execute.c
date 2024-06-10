@@ -63,6 +63,7 @@ void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 	return ;
 }
 */
+/*
 void	write_pixel_no_object(t_scene *scene, int j, int i)
 {
 	(void)scene;
@@ -70,3 +71,4 @@ void	write_pixel_no_object(t_scene *scene, int j, int i)
 	(void)j;
 	return ;
 }
+*/

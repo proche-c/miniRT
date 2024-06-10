@@ -147,3 +147,15 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     // Put the pixel on the image
     ft_pixel_put(&scene->img, i, j, color_int, scene);
 }
+
+void write_pixel_no_object(t_scene *scene, int j, int i)
+{
+    // Define the background color, for instance, a simple blue sky color
+    t_color background_color = {135, 206, 235};  // Sky blue
+
+    // Convert the t_color background color to int
+    int color_int = (background_color.r << 16) | (background_color.g << 8) | background_color.b;
+
+    // Put the pixel on the image
+    ft_pixel_put(&scene->img, i, j, color_int, scene);
+}
