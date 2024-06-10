@@ -31,7 +31,6 @@ int	ft_execute(t_scene *scene)
 		//printf("j: %d\n", j);
 		//printf("i: %d\n", i);
 		
-		
 		while (i < scene->image_side)
 		{
 			//printf("i: %d\n", i);
@@ -44,6 +43,7 @@ int	ft_execute(t_scene *scene)
 			// 	printf("nothing\n");
 			if (inter->state == 1)	//PAULA
 			{
+				//ft_pixel_put(&scene->img, i, j, );
 				write_pixel_object(scene, inter, j, i); //ALEX
 				printf("write_pixel_object\n");
 			}

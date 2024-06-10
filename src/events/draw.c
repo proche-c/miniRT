@@ -86,7 +86,7 @@ int pixel_print(t_scene *scene)
 		printf("Error creating image.\n");
 		return (-1);
 	}
-	printf("Image created.\n");
+	printf("NEW image initiated.\n");
 
 	scene->img.img_pixel_str = mlx_get_data_addr(scene->img.img_ptr, &scene->img.bpp, &scene->img.size_line, &scene->img.endian);
 	if (!scene->img.img_pixel_str)
@@ -141,8 +141,11 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     // Calculate the color at the intersection point
     color = calculate_lighting(scene, intersection, normal, view_dir);
 
+    printf("Color at intersection point: R=%d, G=%d, B=%d\n", color.r, color.g, color.b);
+
     // Convert color from t_color to int
     int color_int = (color.r << 16) | (color.g << 8) | color.b;
+    printf("color_int: %d\n", color_int);
 
     // Put the pixel on the image
     printf("Writing pixel at (%d, %d) with color (%d, %d, %d)\n", i, j, color.r, color.g, color.b);
