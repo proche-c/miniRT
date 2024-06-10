@@ -40,15 +40,23 @@ int	ft_execute(t_scene *scene)
 			if (inter->state == 1)	//PAULA
 			{
 				write_pixel_object(scene, inter, j, i); //ALEX
+				printf("write_pixel_object\n");
 			}
 			else
+			{
 				write_pixel_no_object(scene, j, i); //ALEX
+				printf("write_pixel_no_object\n");
+			}
 
-			i = i + 100;
+			i++;
 		}
-		j = j + 100;
+		j++;
 	}
-	 mlx_loop(scene->mlx_ptr);
+	int start_x = (WIN_WIDTH - scene->image_side) / 2;
+    int start_y = (WIN_HEIGHT - scene->image_side) / 2;
+    
+    mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr, scene->img.img_ptr, start_x, start_y);
+	mlx_loop(scene->mlx_ptr);
 	//free(inter);
 	printf("OUT FT_EXECUTE\n");
 	return (0);
