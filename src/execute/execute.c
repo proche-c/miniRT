@@ -53,7 +53,7 @@ int	ft_execute(t_scene *scene)
 	printf("OUT FT_EXECUTE\n");
 	return (0);
 }
-
+/*
 void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i)
 {
 	(void)scene;
@@ -62,7 +62,7 @@ void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 	(void)j;
 	return ;
 }
-
+*/
 void	write_pixel_no_object(t_scene *scene, int j, int i)
 {
 	(void)scene;

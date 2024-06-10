@@ -113,3 +113,37 @@ int calc_and_print(t_scene *scene)
     //mlx_loop(scene->mlx_ptr);
     return (0);
 }
+
+void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i)
+{
+    t_vector normal;
+    t_vector view_dir;
+    t_color color;
+
+    // Determine the normal based on the type of the intersected element
+    if (ft_strncmp(intersection->element->identifier, "sp", 3) == 0)
+        normal = calculate_sphere_normal(intersection->element, intersection, normal);
+    else if (ft_strncmp(intersection->element->identifier, "pl", 3) == 0)
+        normal = calculate_plane_normal(intersection->element, normal);
+    else if (ft_strncmp(intersection->element->identifier, "cy", 3) == 0)
+        normal = calculate_cylinder_normal(intersection->element, intersection, normal);
+    
+    // Calculate the view direction vector
+    view_dir = (t_vector) {
+        .x = scene->camera.pov.x - intersection->position.x,
+        .y = scene->camera.pov.y - intersection->position.y,
+        .z = scene->camera.pov.z - intersection->position.z,
+        .length_squared = 0,
+        .length = 0
+    };
+    view_dir = normalize(view_dir);
+
+    // Calculate the color at the intersection point
+    color = calculate_lighting(scene, intersection, normal, view_dir);
+
+    // Convert color from t_color to int
+    int color_int = (color.r << 16) | (color.g << 8) | color.b;
+
+    // Put the pixel on the image
+    ft_pixel_put(&scene->img, i, j, color_int, scene);
+}
