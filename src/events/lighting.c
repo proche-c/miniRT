@@ -26,7 +26,7 @@ t_vector reflect_vector(t_vector incident, t_vector normal)
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir) 
 {
     t_color color = {0, 0, 0};
-    t_light *light = &scene->light;
+    //t_light *light = &scene->light;
     t_ambient *ambient = &scene->ambient;
 
     // Ambient lighting
@@ -34,6 +34,10 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     color.g += ambient->color.g * ambient->ratio;
     color.b += ambient->color.b * ambient->ratio;
 
+    (void)inter;
+    (void)normal;
+    (void)view_dir;
+/*
     // Calculate vector from intersection point to light source
     t_vector light_dir = {
         .x = light->position.x - inter->position.x,
@@ -63,6 +67,6 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     color.r = fmin(color.r, 255);
     color.g = fmin(color.g, 255);
     color.b = fmin(color.b, 255);
-
+*/
     return color;
 }
