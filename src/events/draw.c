@@ -118,9 +118,10 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 {
     t_vector normal;
     t_vector view_dir;
-    t_color color;
+    int color_int;
 
     // Determine the normal based on the type of the intersected element
+    printf("Element identifier: %s\n", intersection->element->identifier);
     if (ft_strncmp(intersection->element->identifier, "sp", 3) == 0)
         normal = calculate_sphere_normal(intersection->element, intersection, normal);
     else if (ft_strncmp(intersection->element->identifier, "pl", 3) == 0)
@@ -139,16 +140,12 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     view_dir = normalize(view_dir);
 
     // Calculate the color at the intersection point
-    color = calculate_lighting(scene, intersection, normal, view_dir);
+    //color = calculate_lighting(scene, intersection, normal, view_dir);
 
-    printf("Color at intersection point: R=%d, G=%d, B=%d\n", color.r, color.g, color.b);
+    //printf("Color at intersection point: R=%d, G=%d, B=%d\n", color.r, color.g, color.b);
 
-    // Convert color from t_color to int
-    int color_int = (color.r << 16) | (color.g << 8) | color.b;
-    printf("color_int: %d\n", color_int);
-
-    // Put the pixel on the image
-    printf("Writing pixel at (%d, %d) with color (%d, %d, %d)\n", i, j, color.r, color.g, color.b);
+    //printf("Writing pixel at (%d, %d) with color (%d, %d, %d)\n", i, j, color.r, color.g, color.b);
+    color_int = color2rgb(intersection->element->color);
     ft_pixel_put(&scene->img, i, j, color_int, scene);
 }
 

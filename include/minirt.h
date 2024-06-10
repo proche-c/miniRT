@@ -274,5 +274,7 @@ t_vector calculate_plane_normal(t_element *element, t_vector normal);
 t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_position, t_vector n_vector);
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);
 void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene);
+t_color	rgb2color(int rgb);
+int		color2rgb(t_color c);
 
 #endif

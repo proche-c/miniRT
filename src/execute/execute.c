@@ -44,6 +44,9 @@ int	ft_execute(t_scene *scene)
 			if (inter->state == 1)	//PAULA
 			{
 				//ft_pixel_put(&scene->img, i, j, );
+				//printf("inter->element->color.r: %d\n", inter->element->color.r);
+
+				//color_screen(scene, inter->element->color.r);
 				write_pixel_object(scene, inter, j, i); //ALEX
 				printf("write_pixel_object\n");
 			}
