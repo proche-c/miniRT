@@ -44,3 +44,4 @@ t_color	mix_color(t_color c1, float p1, t_color c2, float p2)
 	dst.b = c1.b * p1 + c2.b * p2;
 	return (dst);
 }
+

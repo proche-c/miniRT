@@ -94,21 +94,26 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     printf("inter_color.b: %d\n", inter_color.b);
 
 
-
-
 /*
-
-    // Specular lighting
+    // Specular lighting // Shininess factor (maybe not mandatory)
     t_vector reflection = reflect_vector(light_dir, normal);
-    double spec = pow(fmax(dot_product(reflection, view_dir), 0.0), 32); // Shininess factor
-    color.r += light->ratio * 255 * spec;
-    color.g += light->ratio * 255 * spec;
-    color.b += light->ratio * 255 * spec;
+    double spec = pow(fmax(dot_product(reflection, view_dir), 0.0), 32); // 32 is the shininess factor
+    inter_color.r += light->ratio * 255 * spec;
+    inter_color.g += light->ratio * 255 * spec;
+    inter_color.b += light->ratio * 255 * spec;
 
-    // Clamp color values to [0, 255]
-    color.r = fmin(color.r, 255);
-    color.g = fmin(color.g, 255);
-    color.b = fmin(color.b, 255);
+    if (inter_color.r > 255)
+        inter_color.r = 255;
+    if (inter_color.g > 255)
+        inter_color.g = 255;
+    if (inter_color.b > 255)
+        inter_color.b = 255;
+    if (inter_color.r < 0)
+        inter_color.r = 0;
+    if (inter_color.g < 0)
+        inter_color.g = 0;
+    if (inter_color.b < 0)
+        inter_color.b = 0;
 */
     return inter_color;
 }
