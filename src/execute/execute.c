@@ -61,9 +61,10 @@ int	ft_execute(t_scene *scene)
 		}
 		j++;
 	}
-	
+	printf("scene->image_side: %d\n", scene->image_side);
 	int start_x = (WIN_WIDTH - scene->image_side) / 2;
     int start_y = (WIN_HEIGHT - scene->image_side) / 2;
+	printf("start_x: %d, start_y: %d\n", start_x, start_y);
     
     mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr, scene->img.img_ptr, start_x, start_y);
 	

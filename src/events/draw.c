@@ -14,7 +14,7 @@ int mlx_initiator(t_scene *scene)
         printf("Error initializing MLX.\n");
         return (-1);
     }
-	scene->window_ptr = mlx_new_window(scene->mlx_ptr, scene->image_side, scene->image_side, "miniRT");
+	scene->window_ptr = mlx_new_window(scene->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "miniRT");
     if (!scene->window_ptr)
     {
         printf("Error creating window.\n");
