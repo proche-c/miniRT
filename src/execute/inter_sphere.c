@@ -31,7 +31,7 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	c = ft_get_length_squared(oc) - (c_element->diameter * c_element->diameter);
 	// printf("c: %f\n", c);
 	disc = h * h - a * c;
-	// printf("disc: %f\n", disc);
+	printf("disc: %f\n", disc);
 	if (disc >= 0)
 	{
 		t = (h - sqrtf(disc)) / a;

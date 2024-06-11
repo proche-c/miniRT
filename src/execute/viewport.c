@@ -47,37 +47,35 @@ t_vector	ft_get_vup(t_vector w)
 void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 {
 	t_vector	upper_left;
-	t_vector	u;
-	t_vector	v;
-	t_vector	view_u;
-	t_vector	view_v;
 	float		temp;
 
-	
-	u = ft_unit_vector(ft_cross(vup, w));
+	scene->u = ft_unit_vector(ft_cross(vup, w));
 	// printf("u.x %f\n", u.x);
 	// printf("u.y %f\n", u.y);
 	// printf("u.z %f\n", u.z);
-	v = ft_cross(w, u);
+	scene->v = ft_cross(w, scene->u);
 	// printf("v.x %f\n", v.x);
 	// printf("v.y %f\n", v.y);
 	// printf("v.z %f\n", v.z);
-	view_u.x = u.x * IMAGE_SIDE;
-	view_u.y = u.y * IMAGE_SIDE;
-	view_u.z = u.z * IMAGE_SIDE;
-	view_v.x = v.x * IMAGE_SIDE * -1;
-	view_v.y = v.y * IMAGE_SIDE * -1;
-	view_v.z = v.z * IMAGE_SIDE * -1;
+	scene->view_u = ft_mult_vector_float(scene->u, scene->viewport_side);
+	temp = scene->viewport_side * -1;
+	scene->view_v = ft_mult_vector_float(scene->v, temp);
+	// view_u.x = u.x * scene->viewport_side;
+	// view_u.y = u.y * scene->viewport_side;
+	// view_u.z = u.z *scene->viewport_side;
+	// view_v.x = v.x * scene->viewport_side * -1;
+	// view_v.y = v.y * scene->viewport_side * -1;
+	// view_v.z = v.z * scene->viewport_side * -1;
 	// printf("scene->view_u.x: %f\n", view_u.x);
 	// printf("scene->view_u.y: %f\n", view_u.y);
 	// printf("scene->view_u.z: %f\n", view_u.z);
 	// printf("scene->view_v.x: %f\n", view_v.x);
 	// printf("scene->view_v.y: %f\n", view_v.y);
 	// printf("scene->view_v.z: %f\n", view_v.z);
-	temp = scene->viewport_side / scene->image_side;
+	temp = 1 / scene->image_side;
 	// printf("temp %f\n", temp);
-	scene->delta_u = ft_mult_vector_float(u, temp);
-	scene->delta_v = ft_mult_vector_float(v, -temp);
+	scene->delta_u = ft_mult_vector_float(scene->view_u, temp);
+	scene->delta_v = ft_mult_vector_float(scene->view_v, temp);
 	// printf("scene->delta_u.x: %f\n", scene->delta_u.x);
 	// printf("scene->delta_u.y: %f\n", scene->delta_u.y);
 	// printf("scene->delta_u.z: %f\n", scene->delta_u.z);
@@ -85,11 +83,11 @@ void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 	// printf("scene->delta_v.y: %f\n", scene->delta_v.y);
 	// printf("scene->delta_v.z: %f\n", scene->delta_v.z);
 	upper_left.x = scene->camera.pov.x - w.x *
-		scene->focal_length - view_u.x / 2 - view_v.x / 2;
+		scene->focal_length - scene->view_u.x / 2 - scene->view_v.x / 2;
 	upper_left.y = scene->camera.pov.y - w.y *
-		scene->focal_length - view_u.y / 2 - view_v.y / 2;
+		scene->focal_length - scene->view_u.y / 2 - scene->view_v.y / 2;
 	upper_left.z = scene->camera.pov.z - w.z *
-		scene->focal_length - view_u.z / 2 - view_v.z / 2;
+		scene->focal_length - scene->view_u.z / 2 - scene->view_v.z / 2;
 	// printf("upper_left.x: %f\n", upper_left.x);
 	// printf("upper_left.y: %f\n", upper_left.y);
 	// printf("upper_left.z: %f\n", upper_left.z);
