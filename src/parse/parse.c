@@ -33,7 +33,7 @@ int	ft_parse(t_scene *scene)
 		i++;
 	}
 	ft_free_params(lines);
-	//ft_print_camera(scene);
+	// ft_print_camera(scene);
 	// ft_print_ambient(scene);
 	// ft_print_light(scene);
 	// ft_print_elements(scene);
@@ -84,7 +84,11 @@ int	ft_get_data(char **params, t_scene *scene)
 
 	result = 0;
 	if (ft_strncmp(params[0], "C", 2) == 0)
+	{
+	
 		result = ft_get_camera(params, scene);
+
+	}
 	else if (ft_strncmp(params[0], "A", 2) == 0)
 		result = ft_get_ambient(params, scene);
 	else if (ft_strncmp(params[0], "L", 2) == 0)
