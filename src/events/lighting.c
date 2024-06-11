@@ -25,19 +25,29 @@ t_vector reflect_vector(t_vector incident, t_vector normal)
 // Calculate lighting at an intersection point
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir) 
 {
-    t_color color = {0, 0, 0};
-    //t_light *light = &scene->light;
+    t_color inter_color = inter->element->color;
+    t_light *light = &scene->light;
     t_ambient *ambient = &scene->ambient;
 
     // Ambient lighting
-    color.r += ambient->color.r * ambient->ratio;
-    color.g += ambient->color.g * ambient->ratio;
-    color.b += ambient->color.b * ambient->ratio;
+    /*
+    printf("inter_color.r: %d ambient_color.r: %d ambient_ratio: %f\n", inter_color.r, ambient->color.r, ambient->ratio);
+    printf("inter_color.g: %d ambient_color.g: %d ambient_ratio: %f\n", inter_color.g, ambient->color.g, ambient->ratio);
+    printf("inter_color.b: %d ambient_color.b: %d ambient_ratio: %f\n", inter_color.b, ambient->color.b, ambient->ratio);
+    */
+    inter_color = add_light(inter_color, ambient->color, ambient->ratio);
+
+/*
+    printf("inter_color.r: %d\n", inter_color.r);
+    printf("inter_color.g: %d\n", inter_color.g);
+    printf("inter_color.b: %d\n", inter_color.b);
+    */
+  
 
     (void)inter;
     (void)normal;
     (void)view_dir;
-/*
+
     // Calculate vector from intersection point to light source
     t_vector light_dir = {
         .x = light->position.x - inter->position.x,
@@ -46,10 +56,14 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
         .length_squared = 0,  // Initialize or calculate if needed
         .length = 0           // Initialize or calculate if needed
     };
+    printf("light->position: (%f, %f, %f)\n", light->position.x, light->position.y, light->position.z);
+    printf("inter->position: (%f, %f, %f)\n", inter->position.x, inter->position.y, inter->position.z);
+    printf("light_dir: (%f, %f, %f)\n", light_dir.x, light_dir.y, light_dir.z); 
 
     // Normalize the light direction
     light_dir = normalize(light_dir);
-
+    printf("Normalized light_dir: (%f, %f, %f)\n", light_dir.x, light_dir.y, light_dir.z);
+/*
     // Diffuse lighting
     double diff = fmax(dot_product(normal, light_dir), 0.0);
     color.r += light->ratio * inter->element->color.r * diff;
@@ -68,5 +82,5 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     color.g = fmin(color.g, 255);
     color.b = fmin(color.b, 255);
 */
-    return color;
+    return inter_color;
 }

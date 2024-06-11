@@ -78,7 +78,7 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
 
 //     return 0;
 // }
-
+/*
 int    add_light_test(t_scene *scene)
 {
 	t_color scene_color;
@@ -94,4 +94,4 @@ int    add_light_test(t_scene *scene)
 
     printf("red + light = %d\n", scene_color.r);
     return (0);
-}
+}*/

@@ -119,9 +119,10 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 {
     t_vector normal;
     t_vector view_dir;
-    int color_int;
+    //int color_int;
     t_color color_calc;
     int color_int2;
+
 
     // Determine the normal based on the type of the intersected element
     printf("Element identifier: %s\n", intersection->element->identifier);
@@ -145,12 +146,12 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     // Calculate the color at the intersection point
     color_calc = calculate_lighting(scene, intersection, normal, view_dir);
 
-    //printf("Color at intersection point: R=%d, G=%d, B=%d\n", color.r, color.g, color.b);
-
     //printf("Writing pixel at (%d, %d) with color (%d, %d, %d)\n", i, j, color.r, color.g, color.b);
-    color_int = color2rgb(intersection->element->color);
+    //color_int = color2rgb(intersection->element->color);
     color_int2 = color2rgb(color_calc);
-    printf("Converted color: %d\n", color_int);
+
+    //printf("Converted color: %d\n", color_int);
+    //ft_pixel_put(&scene->img, i, j,  color_int, scene);
     ft_pixel_put(&scene->img, i, j, color_int2, scene);
     
     printf("Pixel written at (%d, %d)\n", i, j);
@@ -160,10 +161,10 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 void write_pixel_no_object(t_scene *scene, int j, int i)
 {
     int no_col;
+    t_color background_color = {0,0,0};
 
-    no_col = 0x000000;
-    // Define the background color
-    //t_color background_color = {0, 0, 0};  
+    no_col = color2rgb(background_color);
+  
 
     // Convert the t_color background color to int
     //int color_int = (background_color.r << 16) | (background_color.g << 8) | background_color.b;
