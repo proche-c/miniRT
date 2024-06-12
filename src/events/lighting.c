@@ -106,14 +106,7 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
 */
 
 
-    // Specular lighting // Shininess factor (not mandatory)
-    /*
-    t_vector reflection = reflect_vector(light_dir, normal);
-    double spec = pow(fmax(dot_product(reflection, view_dir), 0.0), 32); // 32 is the shininess factor
-    inter_color.r += light->ratio * 255 * spec;
-    inter_color.g += light->ratio * 255 * spec;
-    inter_color.b += light->ratio * 255 * spec;
-*/
+
 
 t_color ambient_diffuse_color = {
         .r = ambient->ratio * ambient->color.r + light->ratio * inter->element->color.r * diff,
@@ -122,20 +115,25 @@ t_color ambient_diffuse_color = {
     };
     inter_color = add_light(inter_color, ambient_diffuse_color, ambient->ratio);
 
-    if (inter_color.r > 255)
-        inter_color.r = 255;
-    if (inter_color.g > 255)
-        inter_color.g = 255;
-    if (inter_color.b > 255)
-        inter_color.b = 255;
-    if (inter_color.r < 0)
-        inter_color.r = 0;
-    if (inter_color.g < 0)
-        inter_color.g = 0;
-    if (inter_color.b < 0)
-        inter_color.b = 0;
+ 
 
-        
-
+            // Specular lighting // Shininess factor (not mandatory)
+    /*
+    t_vector reflection = reflect_vector(light_dir, normal);
+    double spec = pow(fmax(dot_product(reflection, view_dir), 0.0), 32); // 32 is the shininess factor
+    inter_color.r += light->ratio * 255 * spec;
+    inter_color.g += light->ratio * 255 * spec;
+    inter_color.b += light->ratio * 255 * spec;
+*/
+/*
+   t_vector reflection = reflect_vector(light_dir, normal);
+    double spec = pow(fmax(dot_product(reflection, view_dir), 0.0), 32); // 32 is the shininess factor
+    t_color specular_color = {
+        .r = light->ratio * 255 * spec,
+        .g = light->ratio * 255 * spec,
+        .b = light->ratio * 255 * spec
+    };
+    inter_color = add_light(inter_color, specular_color, 0.2);
+*/
     return inter_color;
 }
