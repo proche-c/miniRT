@@ -261,13 +261,13 @@ void	ft_free_spheres(t_scene *scene);
 void	ft_free_cylinders(t_scene *scene);
 
 t_vector ft_mult_vector_float_1(t_vector v, float f);
-t_color	add_light(t_color color,  float p2);
+t_color add_light(t_color color, t_color light, float ratio);
 void	hook_init(t_scene *scene);
 void	color_screen(t_scene *scene, int color);
-int calc_and_print(t_scene *scene);
-int mlx_initiator(t_scene *scene);
-int pixel_print(t_scene *scene);
-double dot_product(t_vector a, t_vector b);
+int 	calc_and_print(t_scene *scene);
+int 	mlx_initiator(t_scene *scene);
+int 	pixel_print(t_scene *scene);
+double 	dot_product(t_vector a, t_vector b);
 t_vector normalize(t_vector v);
 t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector);
 t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_vector normal);
@@ -275,4 +275,8 @@ t_vector calculate_sphere_normal(t_element *element, t_intersection *inter, t_ve
 t_vector calculate_plane_normal(t_element *element, t_vector normal);
 t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_position, t_vector n_vector);
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);
+void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene);
+t_color	rgb2color(int rgb);
+int		color2rgb(t_color c);
+
 #endif

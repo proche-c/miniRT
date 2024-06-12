@@ -14,7 +14,7 @@ int mlx_initiator(t_scene *scene)
         printf("Error initializing MLX.\n");
         return (-1);
     }
-	scene->window_ptr = mlx_new_window(scene->mlx_ptr, scene->image_side, scene->image_side, "miniRT");
+	scene->window_ptr = mlx_new_window(scene->mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "miniRT");
     if (!scene->window_ptr)
     {
         printf("Error creating window.\n");
@@ -46,6 +46,7 @@ void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene)
         return;
     } 
     *((unsigned int *)( img->img_pixel_str + offset)) = color;
+    //printf("Pixel put at (%d, %d) with color %d (offset %d)\n", x, y, color, offset);
     //printf("color_screen done\n");
     //converts the address of the pixel to a pointer
 }
@@ -86,7 +87,7 @@ int pixel_print(t_scene *scene)
 		printf("Error creating image.\n");
 		return (-1);
 	}
-	printf("Image created.\n");
+	printf("NEW image initiated.\n");
 
 	scene->img.img_pixel_str = mlx_get_data_addr(scene->img.img_ptr, &scene->img.bpp, &scene->img.size_line, &scene->img.endian);
 	if (!scene->img.img_pixel_str)
@@ -118,9 +119,13 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 {
     t_vector normal;
     t_vector view_dir;
-    t_color color;
+    //int color_int;
+    t_color color_calc;
+    int color_int2;
+
 
     // Determine the normal based on the type of the intersected element
+    printf("Element identifier: %s\n", intersection->element->identifier);
     if (ft_strncmp(intersection->element->identifier, "sp", 3) == 0)
         normal = calculate_sphere_normal(intersection->element, intersection, normal);
     else if (ft_strncmp(intersection->element->identifier, "pl", 3) == 0)
@@ -139,23 +144,31 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     view_dir = normalize(view_dir);
 
     // Calculate the color at the intersection point
-    color = calculate_lighting(scene, intersection, normal, view_dir);
+    color_calc = calculate_lighting(scene, intersection, normal, view_dir);
 
-    // Convert color from t_color to int
-    int color_int = (color.r << 16) | (color.g << 8) | color.b;
+    //printf("Writing pixel at (%d, %d) with color (%d, %d, %d)\n", i, j, color.r, color.g, color.b);
+    //color_int = color2rgb(intersection->element->color);
+    color_int2 = color2rgb(color_calc);
 
-    // Put the pixel on the image
-    ft_pixel_put(&scene->img, i, j, color_int, scene);
+    //printf("Converted color: %d\n", color_int);
+    //ft_pixel_put(&scene->img, i, j,  color_int, scene);
+    ft_pixel_put(&scene->img, i, j, color_int2, scene);
+    
+    printf("Pixel written at (%d, %d)\n", i, j);
+    
 }
 
 void write_pixel_no_object(t_scene *scene, int j, int i)
 {
-    // Define the background color, for instance, a simple blue sky color
-    t_color background_color = {255, 255, 255};  
+    int no_col;
+    t_color background_color = {0,0,0};
+
+    no_col = color2rgb(background_color);
+  
 
     // Convert the t_color background color to int
-    int color_int = (background_color.r << 16) | (background_color.g << 8) | background_color.b;
+    //int color_int = (background_color.r << 16) | (background_color.g << 8) | background_color.b;
 
     // Put the pixel on the image
-    ft_pixel_put(&scene->img, i, j, color_int, scene);
+    ft_pixel_put(&scene->img, i, j, no_col, scene);
 }

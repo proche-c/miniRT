@@ -39,7 +39,7 @@ t_color	rgb2color(int rgb)
 	c.b = (float)(rgb & 0xff) / 255;
 	return (c);
 }
-
+/*
 //converts normalized color to rgb
 int	color2rgb(t_color c)
 {
@@ -49,4 +49,9 @@ int	color2rgb(t_color c)
 	color += (int)(c.g * 255) << 8;
 	color += (int)(c.b * 255);
 	return (color);
+}*/
+
+int color2rgb(t_color color) 
+{
+    return (color.r << 16) | (color.g << 8) | color.b;
 }
