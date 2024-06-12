@@ -20,19 +20,27 @@ void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 	t_vector	ocn;
 	t_vector	dn;
 	float		t[2];
+	float		disc;
 	// float			a;
 	// float			b;
 	// float			c;
 	// float			r;
 
+	// printf("ft_inter_cy\n");
 	// r = c_element->diameter / 2;
 	quadratic = malloc(sizeof(t_quadratic));
 	oc = ft_sub_vectors(inter->ray.origin, c_element->position);
 	ocn = ft_cross(oc, c_element->n_vector);
 	dn = ft_cross(inter->ray.direction, c_element->n_vector);
 	ft_get_quadratic(c_element, quadratic, ocn, dn);
+	disc = quadratic->b * quadratic->b - 4 * quadratic->a * quadratic->c;
+	// printf("disc: %f\n", disc);
+	if (disc < 0)
+		return ;
 	t[0] = (-quadratic->b + sqrtf(quadratic->b * quadratic->b - 4 * quadratic->a * quadratic->c)) / (2 * quadratic->a);
 	t[1] = (-quadratic->b - sqrtf(quadratic->b * quadratic->b - 4 * quadratic->a * quadratic->c)) / (2 * quadratic->a);
+	// printf("t[0]: %f\n", t[0]);
+	// printf("t[1]: %f\n", t[1]);
 	if (t[0] > 0 && t[1] > 0)
 		ft_get_inter_cy_1(inter, c_element, t);
 	else if (t[0] > 0)
@@ -42,6 +50,10 @@ void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 	else if (t[1] > 0)
 	{
 		ft_get_inter_cy_2(inter, c_element, t[1]);
+	}
+	if (inter->state == 1)
+	{
+		ft_print_intersection(inter);
 	}
 	// a = ft_dot(c_element->n_vector, c_element->n_vector);
 	// b = 2 * ft_dot(ocn, dn);
@@ -76,6 +88,8 @@ void	ft_get_inter_cy_1(t_intersection *inter, t_element *c_element, float t[2])
 	inter_point_2 = ft_add_vectors(inter->ray.origin, ft_mult_vector_float(inter->ray.direction, t[1]));
 	inter_point_1_proj = ft_dot(ft_sub_vectors(inter_point_1, c_element->position), c_element->n_vector);
 	inter_point_2_proj = ft_dot(ft_sub_vectors(inter_point_2, c_element->position), c_element->n_vector);
+	// printf("inter_point_1_proj: %f\n", inter_point_1_proj);
+	// printf("inter_point_2_proj: %f\n", inter_point_2_proj);
 	if (inter_point_1_proj >= 0 && inter_point_1_proj <= c_element->height)
 	{
 		if (inter->state == 0)

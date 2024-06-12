@@ -36,10 +36,10 @@ int	ft_execute(t_scene *scene)
 			//printf("i: %d\n", i);
 			inter->state = 0;
 			ft_get_ray(scene, inter, j, i);	//PAULA
-			// ft_print_ray(inter->ray);
+			ft_print_ray(inter->ray);
 			ft_hit_something(scene, inter);
-			if (inter->state == 1)
-				ft_print_intersection(inter);
+			// if (inter->state == 1)
+			// 	ft_print_intersection(inter);
 			// else
 			// 	printf("nothing\n");
 			if (inter->state == 1)	//PAULA
@@ -62,7 +62,7 @@ int	ft_execute(t_scene *scene)
 		}
 		j++;
 	}
-	//printf("scene->image_side: %d\n", scene->image_side);
+	printf("scene->image_side: %d\n", scene->image_side);
 	int start_x = (WIN_WIDTH - scene->image_side) / 2;
     int start_y = (WIN_HEIGHT - scene->image_side) / 2;
 	//printf("start_x: %d, start_y: %d\n", start_x, start_y);
@@ -71,26 +71,8 @@ int	ft_execute(t_scene *scene)
 	
 	printf("img2win\n");
 	mlx_loop(scene->mlx_ptr);
-	//free(inter);
+	free(inter);
 	printf("OUT FT_EXECUTE\n");
 	return (0);
 }
-/*
-void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i)
-{
-	(void)scene;
-	(void)intersection;
-	(void)i;
-	(void)j;
-	return ;
-}
-*/
-/*
-void	write_pixel_no_object(t_scene *scene, int j, int i)
-{
-	(void)scene;
-	(void)i;
-	(void)j;
-	return ;
-}
-*/
+

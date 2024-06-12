@@ -154,7 +154,7 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     //ft_pixel_put(&scene->img, i, j,  color_int, scene);
     ft_pixel_put(&scene->img, i, j, color_int2, scene);
     
-    printf("Pixel written at (%d, %d)\n", i, j);
+    //printf("Pixel written at (%d, %d)\n", i, j);
     
 }
 
