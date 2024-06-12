@@ -39,24 +39,25 @@ t_vector normalize(t_vector v)
 }
 
 
-t_vector    calculate_sphere_normal(t_element *element, t_intersection *inter, t_vector normal)
+t_vector    calculate_sphere_normal(t_element *element, t_intersection *inter)
 {
     //vector from the center of the sphere to the intersection point
+    t_vector normal;
     normal.x = inter->position.x - element->position.x;
     normal.y = inter->position.y - element->position.y;
     normal.z = inter->position.z - element->position.z;
     //normalize the vector
     normal = normalize(normal);
-    printf("Normal vector: %f %f %f\n", normal.x, normal.y, normal.z);
+    //printf("Normal vector: %f %f %f\n", normal.x, normal.y, normal.z);
     return (normal);
 }
 
 t_vector    calculate_plane_normal(t_element *element, t_vector normal)
 {
-    normal.x = element->position.x;
-    normal.y = element->position.y;
-    normal.z = element->position.z;
-    printf("Normal vector: %f %f %f\n", normal.x, normal.y, normal.z);
+    normal.x = element->n_vector.x;
+    normal.y = element->n_vector.y;
+    normal.z = element->n_vector.z;
+    //printf("Normal vector: %f %f %f\n", normal.x, normal.y, normal.z);
     return (normal);
 }
 
@@ -102,7 +103,7 @@ t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_pos
     local_point.length_squared = 0; // Initialize or calculate if needed
     local_point.length = 0; // Initialize or calculate if needed
 
-    printf("Local cylinder point: %f %f %f\n", local_point.x, local_point.y, local_point.z);
+    //printf("Local cylinder point: %f %f %f\n", local_point.x, local_point.y, local_point.z);
     return local_point;
 }
 
@@ -120,7 +121,7 @@ t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_
     local_normal = normalize(local_normal);
     normal = transform_point_to_world(local_normal, element->n_vector);
 
-    printf("Normal cylinder vector: %f %f %f\n", normal.x, normal.y, normal.z);
+    //printf("Normal cylinder vector: %f %f %f\n", normal.x, normal.y, normal.z);
     return normal;
 }
 
@@ -158,6 +159,6 @@ t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector)
     world_normal.length_squared = 0; // Initialize or calculate if needed
     world_normal.length = 0; // Initialize or calculate if needed
 
-    printf("World cylinder normal: %f %f %f\n", world_normal.x, world_normal.y, world_normal.z);
+    //printf("World cylinder normal: %f %f %f\n", world_normal.x, world_normal.y, world_normal.z);
     return world_normal;
 }

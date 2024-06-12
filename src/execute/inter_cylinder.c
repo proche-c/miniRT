@@ -125,7 +125,6 @@ void	ft_get_inter_cy_2(t_intersection *inter, t_element *c_element, float t)
 			ft_get_closest_point(inter, inter_point, c_element);
 	}
 }
-	
 
 // void	ft_get_inter_sp(t_intersection *inter, float disc, float h, float a)
 // {
