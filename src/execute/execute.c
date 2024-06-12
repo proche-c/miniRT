@@ -33,9 +33,11 @@ int	ft_execute(t_scene *scene)
 		{
 			inter->state = 0;
 			ft_get_ray(scene, inter, j, i);	//PAULA
+			// ft_print_ray(inter->ray);
 			ft_hit_something(scene, inter);
-			if (inter->state == 1)
-				ft_print_intersection(inter);
+			// if (inter->state == 1)
+			// 	printf("something\n");
+			// 	// ft_print_intersection(inter);
 			// else
 			// 	printf("nothing\n");
 			if (inter->state == 1)	//PAULA
