@@ -35,7 +35,8 @@ int handle_input(int keycode, t_scene *scene)
 	return (0);
 }
 
-int close_window(t_scene *scene) {
+int close_window(t_scene *scene) 
+{
     mlx_destroy_window(scene->mlx_ptr, scene->window_ptr);
 	ft_free_scene(scene);
     exit(0);

@@ -22,10 +22,10 @@ int	ft_execute(t_scene *scene)
 	
 	inter = malloc(sizeof(t_intersection));
 	ft_get_viewport(scene);   //PAULA
-	ft_print_viewport(scene);
-	mlx_initiator(scene);
-	hook_init(scene);
-	pixel_print(scene);
+	// ft_print_viewport(scene);
+	 mlx_initiator(scene);
+	 hook_init(scene);
+	 pixel_print(scene);
 	while (j < scene->image_side)
 	{
 		i = 0;
@@ -39,25 +39,44 @@ int	ft_execute(t_scene *scene)
 			// if (inter->state == 1)
 			// 	printf("something\n");
 			// 	// ft_print_intersection(inter);
+			//if (inter->state == 1)
+			//	ft_print_intersection(inter);
 			// else
 			// 	printf("nothing\n");
 			if (inter->state == 1)	//PAULA
 			{
+				//ft_pixel_put(&scene->img, i, j, );
+				//printf("inter->element->color.r: %d\n", inter->element->color.r);
+
+				//color_screen(scene, inter->element->color.r);
 				write_pixel_object(scene, inter, j, i); //ALEX
+				printf("write_pixel_object\n");
 			}
 			else
+			{
 				write_pixel_no_object(scene, j, i); //ALEX
-
-			i = i + 250;
+				//color_screen(scene, 0xff00);
+				printf("write_pixel_no_object\n");
+			}
+			
+			i++;
 		}
-		j = j + 250;
+		j++;
 	}
+	//printf("scene->image_side: %d\n", scene->image_side);
+	int start_x = (WIN_WIDTH - scene->image_side) / 2;
+    int start_y = (WIN_HEIGHT - scene->image_side) / 2;
+	//printf("start_x: %d, start_y: %d\n", start_x, start_y);
+    
+    mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr, scene->img.img_ptr, start_x, start_y);
+	
+	printf("img2win\n");
 	mlx_loop(scene->mlx_ptr);
-	free(inter);
+	//free(inter);
 	printf("OUT FT_EXECUTE\n");
 	return (0);
 }
-
+/*
 void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i)
 {
 	(void)scene;
@@ -66,7 +85,8 @@ void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 	(void)j;
 	return ;
 }
-
+*/
+/*
 void	write_pixel_no_object(t_scene *scene, int j, int i)
 {
 	(void)scene;
@@ -74,3 +94,4 @@ void	write_pixel_no_object(t_scene *scene, int j, int i)
 	(void)j;
 	return ;
 }
+*/

@@ -19,26 +19,32 @@ typedef struct s_color {
 } t_color;*/
 
 typedef struct s_surface {
-    t_vec3 position;
-    t_vec3 normal;
+    t_vector position;
+    t_vector normal;
     t_color color;
 } t_surface;
 
-// Function to calculate dot product of two vectors
-double dot_product(t_vec3 a, t_vec3 b) {
-    return (a.x * b.x + a.y * b.y + a.z * b.z);
-}
+
 
 // Function to normalize a vector
-t_vec3 normalize(t_vec3 v) {
+/*
+t_vector normalize(t_vector v) 
+{
     double length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-    t_vec3 norm = {v.x / length, v.y / length, v.z / length};
+    double length_squared = v.x * v.x + v.y * v.y + v.z * v.z;
+    t_vector norm = {
+        .x = v.x / length,
+        .y = v.y / length,
+        .z = v.z / length,
+        .length_squared = length_squared,
+        .length = length
+    };
     return norm;
-}
-
+}*/
+/*
 // Function to calculate the Lambertian reflection
 t_color lambertian_reflection(t_surface surface, t_light light) {
-    t_vec3 light_dir = {light.position.x - surface.position.x, 
+    t_vector light_dir = {light.position.x - surface.position.x, 
                         light.position.y - surface.position.y, 
                         light.position.z - surface.position.z};
     light_dir = normalize(light_dir);
@@ -56,7 +62,7 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
     if (result.b > 255) result.b = 255;
 
     return result;
-}
+}*/
 
 
 // int reflect_tester(t_scene *scene) 
@@ -72,7 +78,7 @@ t_color lambertian_reflection(t_surface surface, t_light light) {
 
 //     return 0;
 // }
-
+/*
 int    add_light_test(t_scene *scene)
 {
 	t_color scene_color;
@@ -88,4 +94,4 @@ int    add_light_test(t_scene *scene)
 
     printf("red + light = %d\n", scene_color.r);
     return (0);
-}
+}*/

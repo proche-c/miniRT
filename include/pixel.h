@@ -2,11 +2,8 @@
 #ifndef PIXEL_H
 # define PIXEL_H
 
-#define WIN_HEIGHT 600
-#define WIN_WIDTH 800
-#define IMG_HEIGHT 400
-#define IMG_WIDTH 600
-
+#define WIN_HEIGHT 1080
+#define WIN_WIDTH 1920
 //HOOKS
 
 # ifdef __APPLE__

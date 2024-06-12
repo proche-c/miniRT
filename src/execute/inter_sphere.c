@@ -31,7 +31,7 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	c = ft_get_length_squared(oc) - (c_element->diameter * c_element->diameter);
 	// printf("c: %f\n", c);
 	disc = h * h - a * c;
-	// printf("disc: %f\n", disc);
+	//printf("disc: %f\n", disc);
 	if (disc >= 0)
 	{
 		t = (h - sqrtf(disc)) / a;
@@ -45,6 +45,7 @@ void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 
 	inter_point = ft_mult_vector_float(inter->ray.direction, t);
 	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
+	//printf("inter_state: %d\n", inter->state);
 	if (inter->state == 0)
 	{
 		inter->position.x = inter_point.x;
