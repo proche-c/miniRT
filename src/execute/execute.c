@@ -49,13 +49,13 @@ int	ft_execute(t_scene *scene)
 
 				//color_screen(scene, inter->element->color.r);
 				write_pixel_object(scene, inter, j, i); //ALEX
-				printf("write_pixel_object\n");
+				//printf("write_pixel_object\n");
 			}
 			else
 			{
 				write_pixel_no_object(scene, j, i); //ALEX
 				//color_screen(scene, 0xff00);
-				printf("write_pixel_no_object\n");
+				//printf("write_pixel_no_object\n");
 			}
 			
 			i++;

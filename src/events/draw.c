@@ -125,9 +125,9 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
 
 
     // Determine the normal based on the type of the intersected element
-    printf("Element identifier: %s\n", intersection->element->identifier);
+    //printf("Element identifier: %s\n", intersection->element->identifier);
     if (ft_strncmp(intersection->element->identifier, "sp", 3) == 0)
-        normal = calculate_sphere_normal(intersection->element, intersection, normal);
+        normal = calculate_sphere_normal(intersection->element, intersection);
     else if (ft_strncmp(intersection->element->identifier, "pl", 3) == 0)
         normal = calculate_plane_normal(intersection->element, normal);
     else if (ft_strncmp(intersection->element->identifier, "cy", 3) == 0)
