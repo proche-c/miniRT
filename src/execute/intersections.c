@@ -52,7 +52,7 @@ void	ft_hit_something(t_scene *scene, t_intersection *inter)
 		else if (ft_strncmp(c_element->identifier, "pl", 3) == 0)
 			ft_inter_pl(inter, c_element);
 		else if (ft_strncmp(c_element->identifier, "cy", 3) == 0)
-			ft_inter_cy(scene, inter, c_element);
+			ft_inter_cy(inter, c_element);
 		c_element = c_element->next;
 	}
 	// if (ray.pixel_center.x == scene->pixel00.x && ray.pixel_center.y == scene->pixel00.y

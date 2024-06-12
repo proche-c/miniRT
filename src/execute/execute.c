@@ -23,14 +23,15 @@ int	ft_execute(t_scene *scene)
 	inter = malloc(sizeof(t_intersection));
 	ft_get_viewport(scene);   //PAULA
 	ft_print_viewport(scene);
-	// mlx_initiator(scene);
-	// hook_init(scene);
-	// pixel_print(scene);
+	mlx_initiator(scene);
+	hook_init(scene);
+	pixel_print(scene);
 	while (j < scene->image_side)
 	{
 		i = 0;
 		while (i < scene->image_side)
 		{
+
 			inter->state = 0;
 			ft_get_ray(scene, inter, j, i);	//PAULA
 			// ft_print_ray(inter->ray);
@@ -40,19 +41,19 @@ int	ft_execute(t_scene *scene)
 			// 	// ft_print_intersection(inter);
 			// else
 			// 	printf("nothing\n");
-			// if (inter->state == 1)	//PAULA
-			// {
-			// 	write_pixel_object(scene, inter, j, i); //ALEX
-			// }
-			// else
-			// 	write_pixel_no_object(scene, j, i); //ALEX
+			if (inter->state == 1)	//PAULA
+			{
+				write_pixel_object(scene, inter, j, i); //ALEX
+			}
+			else
+				write_pixel_no_object(scene, j, i); //ALEX
 
-			i = i + 200;
+			i = i + 250;
 		}
-		j = j + 200;
+		j = j + 250;
 	}
-	// mlx_loop(scene->mlx_ptr);
-	//free(inter);
+	mlx_loop(scene->mlx_ptr);
+	free(inter);
 	printf("OUT FT_EXECUTE\n");
 	return (0);
 }

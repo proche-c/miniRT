@@ -38,6 +38,13 @@ typedef struct s_vector
 	float				length;
 }	t_vector;
 
+typedef struct s_quadratic
+{
+	float				a;
+	float				b;
+	float				c;
+}	t_quadratic;
+
 typedef struct s_color
 {
 	int					r;
@@ -243,7 +250,11 @@ void	ft_inter_pl(t_intersection *inter, t_element *c_element);
 void	ft_get_inter_pl(t_intersection *inter, t_element *c_element, float t);
 
 	/*inter_cylinder*/
-void	ft_inter_cy(t_scene *scene, t_intersection *inter, t_element *c_element);
+void	ft_inter_cy(t_intersection *inter, t_element *c_element);
+void	ft_get_quadratic(t_element *c_element, t_quadratic *quadratic,
+	t_vector ocn, t_vector dn);
+void	ft_get_inter_cy_1(t_intersection *inter, t_element *c_element, float t[2]);
+void	ft_get_inter_cy_2(t_intersection *inter, t_element *c_element, float t);
 
 // CLEAN
 
