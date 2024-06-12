@@ -21,7 +21,7 @@
 # include "./pixel.h"
 
 #define DEBUG 0
-#define DEBUGEXEC 1
+#define DEBUGEXEC 0
 #define MAX_LEN	10000
 #define pi 3.1415926535897932385
 #define ASPECT_RATIO 1

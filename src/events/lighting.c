@@ -70,7 +70,7 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     // with fmax, we make sure that the value is not negative 
     // (if the angle between the normal and the light direction is greater than 90 degrees, the dot product will be negative)
     // so we clamp the value to 0
-    printf("diff: %f\n", diff);
+    //printf("diff: %f\n", diff);
     inter_color.r += light->ratio * inter->element->color.r * diff;
     inter_color.g += light->ratio * inter->element->color.g * diff;
     inter_color.b += light->ratio * inter->element->color.b * diff;
@@ -88,11 +88,11 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     if (inter_color.b < 0)
         inter_color.b = 0;
     
-    
+    /*
     printf("inter_color.r: %d\n", inter_color.r);
     printf("inter_color.g: %d\n", inter_color.g);
     printf("inter_color.b: %d\n", inter_color.b);
-
+*/
 
 /*
     // Specular lighting // Shininess factor (maybe not mandatory)
