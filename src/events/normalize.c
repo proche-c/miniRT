@@ -54,9 +54,9 @@ t_vector    calculate_sphere_normal(t_element *element, t_intersection *inter)
 
 t_vector    calculate_plane_normal(t_element *element, t_vector normal)
 {
-    normal.x = element->position.x;
-    normal.y = element->position.y;
-    normal.z = element->position.z;
+    normal.x = element->n_vector.x;
+    normal.y = element->n_vector.y;
+    normal.z = element->n_vector.z;
     //printf("Normal vector: %f %f %f\n", normal.x, normal.y, normal.z);
     return (normal);
 }
