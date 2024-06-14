@@ -11,9 +11,17 @@
 /* ************************************************************************** */
 
 #include "minirt.h"
+/*
+t_vector ft_multiply_vector_scalar(t_vector v, float scalar) {
+    t_vector result;
 
+    result.x = v.x * scalar;
+    result.y = v.y * scalar;
+    result.z = v.z * scalar;
 
-
+    return result;
+}*/
+/*
 void ft_inter_sp(t_intersection *inter, t_element *c_element) //including the matrix
 {
     t_vector	oc;
@@ -31,7 +39,7 @@ void ft_inter_sp(t_intersection *inter, t_element *c_element) //including the ma
     t_vector transformed_direction = inter->ray.direction;  // La direction du rayon ne change pas avec une simple translation
 
     // Calculer oc avec la sphère transformée
-    oc = ft_sub_vectors(transformed_origin, (t_vector){0, 0, 0}); // Centre de la sphère est maintenant à l'origine
+    oc = ft_sub_vectors((t_vector){0, 0, 0, 0, 0}, transformed_origin ); // Centre de la sphère est maintenant à l'origine
     a = ft_get_length_squared(transformed_direction);
     h = ft_dot(transformed_direction, oc);
     c = ft_get_length_squared(oc) - (c_element->diameter / 2.0) * (c_element->diameter / 2.0);
@@ -42,10 +50,12 @@ void ft_inter_sp(t_intersection *inter, t_element *c_element) //including the ma
         t = (h - sqrtf(disc)) / a;
         ft_get_inter_sp(inter, c_element, t);
     }
-}
+}*/
 
 
-/*   ///PAULA'S CODE
+   ///PAULA'S CODE commentend
+
+
 void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 {
 	t_vector	oc;
@@ -55,20 +65,23 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	float		disc;
 	float	t;
 
+	t_matrix translation_matrix = create_translation_matrix(-c_element->position.x, -c_element->position.y, -c_element->position.z);
+	t_vector transformed_origin = apply_matrix(translation_matrix, inter->ray.origin);
+	t_vector transformed_direction = inter->ray.direction;
+	//(void)transformed_origin;
+	//(void)transformed_direction;
 	
+	printf("OC: (%f, %f, %f, %f, %f)\n", oc.x, oc.y, oc.z, oc.length_squared, oc.length);
 
 	// printf("entro en inter_sp.....\n");
-	//oc = ft_sub_vectors(c_element->position, inter->ray.origin);  (PAULA)
-	
-	
-	
-	
-	
-	a = ft_get_length_squared(inter->ray.direction);
-
+	oc = ft_sub_vectors((t_vector){0, 0, 0, 0, 0}, transformed_origin);// Centre de la sphère est maintenant à l'origine
+	//oc = ft_sub_vectors(c_element->position, inter->ray.origin);
+	a = ft_get_length_squared(transformed_direction);
+	//a = ft_get_length_squared(inter->ray.direction);
+	//h = ft_dot(transformed_direction, oc);
 	h = ft_dot(inter->ray.direction, oc);
 	// printf("h: %f\n", h);
-	c = ft_get_length_squared(oc) - (c_element->diameter * c_element->diameter);
+	c = ft_get_length_squared(oc) - ((c_element->diameter / 2.0) * (c_element->diameter / 2.0));
 	// printf("c: %f\n", c);
 	disc = h * h - a * c;
 	//printf("disc: %f\n", disc);
@@ -77,7 +90,8 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 		t = (h - sqrtf(disc)) / a;
 		ft_get_inter_sp(inter, c_element, t);
 	}
-}*/
+}
+
 
 void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 {

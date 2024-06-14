@@ -9,6 +9,14 @@ t_matrix create_translation_matrix(float tx, float ty, float tz)
         {0, 0, 1, tz},
         {0, 0, 0,  1}
     }};
+    /*
+        printf("matrix = %f\n", mat.m[0][0]);
+        printf("matriy = %f\n", mat.m[0][1]);
+        printf("matriz = %f\n", mat.m[0][2]);
+        printf("matriw = %f\n", mat.m[0][3]);
+        printf("-----------------\n");
+*/
+    
     return mat;
 }
 
@@ -62,6 +70,13 @@ t_vector apply_matrix(t_matrix mat, t_vector vec)
     result.x = mat.m[0][0] * vec.x + mat.m[0][1] * vec.y + mat.m[0][2] * vec.z + mat.m[0][3] * 1.0f; // 1.0f is the w component
     result.y = mat.m[1][0] * vec.x + mat.m[1][1] * vec.y + mat.m[1][2] * vec.z + mat.m[1][3] * 1.0f;
     result.z = mat.m[2][0] * vec.x + mat.m[2][1] * vec.y + mat.m[2][2] * vec.z + mat.m[2][3] * 1.0f;
+    /*
+    printf("resultx = %f\n", result.x);
+    printf("resulty = %f\n", result.y);
+    printf("resultz = %f\n", result.z);
+*/
+    
+    
     return result;
 }
 
