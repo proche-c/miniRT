@@ -15,165 +15,115 @@
 
 void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 {
-	t_quadratic	*quadratic;
-	t_vector	oc;
-	t_vector	ocn;
-	t_vector	dn;
-	float		t[2];
-	float		disc;
-	// float			a;
-	// float			b;
-	// float			c;
-	// float			r;
+	t_element	*plane;
+	t_intersection *tmp_inter;
 
-	// printf("ft_inter_cy\n");
-	// r = c_element->diameter / 2;
-	quadratic = malloc(sizeof(t_quadratic));
-	oc = ft_sub_vectors(inter->ray.origin, c_element->position);
-	ocn = ft_cross(oc, c_element->n_vector);
-	dn = ft_cross(inter->ray.direction, c_element->n_vector);
-	ft_get_quadratic(c_element, quadratic, ocn, dn);
-	disc = quadratic->b * quadratic->b - 4 * quadratic->a * quadratic->c;
-	// printf("disc: %f\n", disc);
-	if (disc < 0)
-		return ;
-	t[0] = (-quadratic->b + sqrtf(quadratic->b * quadratic->b - 4 * quadratic->a * quadratic->c)) / (2 * quadratic->a);
-	t[1] = (-quadratic->b - sqrtf(quadratic->b * quadratic->b - 4 * quadratic->a * quadratic->c)) / (2 * quadratic->a);
-	// printf("t[0]: %f\n", t[0]);
-	// printf("t[1]: %f\n", t[1]);
-	if (t[0] > 0 && t[1] > 0)
-		ft_get_inter_cy_1(inter, c_element, t);
-	else if (t[0] > 0)
+	tmp_inter = malloc(sizeof(t_intersection));
+	plane = malloc(sizeof(t_element));
+	ft_init_tmp_inter(tmp_inter, inter);
+	ft_init_tmp_plane(plane, c_element, 1);
+	ft_inter_pl(tmp_inter, plane);
+	if (tmp_inter->state == 1 &&
+		ft_get_vector_length(ft_sub_vectors(tmp_inter->position,
+			plane->position)) <=c_element->diameter * 0.5)
 	{
-		ft_get_inter_cy_2(inter, c_element, t[0]);
+			ft_get_inter_data(inter, tmp_inter, c_element);			
 	}
-	else if (t[1] > 0)
+	tmp_inter->state = 0;
+	ft_init_tmp_plane(plane, c_element, 2);
+	ft_inter_pl(tmp_inter, plane);
+	if (tmp_inter->state == 1 &&
+		ft_get_vector_length(ft_sub_vectors(tmp_inter->position,
+			plane->position)) <=c_element->diameter * 0.5)
 	{
-		ft_get_inter_cy_2(inter, c_element, t[1]);
+			ft_get_inter_data(inter, tmp_inter, c_element);			
 	}
-	if (inter->state == 1)
+	tmp_inter->state = 0;
+	ft_inter_inf_cy(tmp_inter, c_element);
+	if (tmp_inter->state == 1 && powf(ft_get_vector_length(ft_sub_vectors
+		(c_element->position, tmp_inter->position)), 2) <=
+			powf(c_element->height * 0.5, 2) + 
+				c_element->diameter * c_element->diameter * 0.25)
 	{
-		ft_print_intersection(inter);
+		ft_get_inter_data(inter, tmp_inter, c_element);
 	}
-	// a = ft_dot(c_element->n_vector, c_element->n_vector);
-	// b = 2 * ft_dot(ocn, dn);
-	// c = ft_dot(ocn, ocn) - r * r *
-	// 	ft_dot(c_element->n_vector, c_element->n_vector);
-	// printf("a: %f; quadratic->a: %f\n", a, quadratic->a);
-	// printf("b: %f; quadratic->b: %f\n", b, quadratic->b);
-	// printf("c: %f; quadratic->c: %f\n", c, quadratic->c);
 	return ;
 }
 
-void	ft_get_quadratic(t_element *c_element, t_quadratic *quadratic,
-	t_vector ocn, t_vector dn)
+void	ft_init_tmp_inter(t_intersection *tmp_inter, t_intersection *inter)
 {
-	float		r;
+	tmp_inter->state = 0;
+	tmp_inter->ray.origin.x = inter->ray.origin.x;
+	tmp_inter->ray.origin.y = inter->ray.origin.y;
+	tmp_inter->ray.origin.z = inter->ray.origin.z;
+	tmp_inter->ray.direction.x = inter->ray.direction.x;
+	tmp_inter->ray.direction.y = inter->ray.direction.y;
+	tmp_inter->ray.direction.z = inter->ray.direction.z;
+	tmp_inter->ray.pixel_center.x = inter->ray.pixel_center.x;
+	tmp_inter->ray.pixel_center.y = inter->ray.pixel_center.y;
+	tmp_inter->ray.pixel_center.z = inter->ray.pixel_center.z;
+}
 
-	r = c_element->diameter / 2;
-	quadratic->a = ft_dot(c_element->n_vector, c_element->n_vector);
-	quadratic->b = 2 * ft_dot(ocn, dn);
-	quadratic->c = ft_dot(ocn, ocn) - r * r *
-		ft_dot(c_element->n_vector, c_element->n_vector);	
+void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point)
+{
+	plane->n_vector.x = c_element->n_vector.x;
+	plane->n_vector.y = c_element->n_vector.y;
+	plane->n_vector.z = c_element->n_vector.z;
+	if (point == 1)
+	{
+		plane->position = ft_add_vectors(ft_mult_vector_float(c_element->n_vector,
+			-0.5 * c_element->height), c_element->position);
+	}
+	else if (point == 2)
+	{
+		plane->position = ft_add_vectors(ft_mult_vector_float(c_element->n_vector,
+			0.5 * c_element->height), c_element->position);
+	}
+}
+
+void	ft_get_inter_data(t_intersection *inter, t_intersection *tmp_inter,
+	t_element *c_element)
+{
+	if (inter->state == 0)
+	{
+		inter->position.x = tmp_inter->position.x;
+		inter->position.y = tmp_inter->position.y;
+		inter->position.z = tmp_inter->position.z;
+		inter->element = c_element;
+		inter->state = 1;
+	}
+	else
+		ft_get_closest_point(inter, tmp_inter->position, c_element);
+}
+
+void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element)
+{
+	t_quadratic	q;
+	t_vector	u;
+	t_vector	v;
+
+	u = ft_cross(tmp_inter->ray.direction, c_element->n_vector);
+	v = ft_cross(ft_sub_vectors(c_element->position, tmp_inter->ray.origin),
+		c_element->n_vector);
+	q.a = ft_dot(u, u);
+	q.b = 2 * ft_dot(u, v);
+	q.c = ft_dot(v, v) - c_element->diameter * c_element->diameter * 0.25;
+	if (ft_get_quadratic(&q) == 0 || (q.t2 <= E && q.t1 <= E))
+		return ;
+	if (q.t1 <= E || (q.t2 > E && (q.t2 < q.t1)))
+		q.t1 = 	q.t2;
+	tmp_inter->state = 1;
+	tmp_inter->position = ft_add_vectors(tmp_inter->ray.origin,
+		ft_mult_vector_float(tmp_inter->ray.direction, q.t1));
+}
+
+int	ft_get_quadratic(t_quadratic *q)
+{
+	q->disc = q->b * q->b - 4 * q->a * q->c;
+	if (q->disc < 0)
+		return (0);
+	q->t1 = (-q->b - sqrt(q->disc)) / (q->a * 2);
+	q->t2 = (-q->b + sqrt(q->disc)) / (q->a * 2);
+	return (1);	
 }
 	
-void	ft_get_inter_cy_1(t_intersection *inter, t_element *c_element, float t[2])
-{
-	t_vector	inter_point_1;
-	t_vector	inter_point_2;
-	float		inter_point_1_proj;
-	float		inter_point_2_proj;
-
-	inter_point_1 = ft_add_vectors(inter->ray.origin, ft_mult_vector_float(inter->ray.direction, t[0]));
-	inter_point_2 = ft_add_vectors(inter->ray.origin, ft_mult_vector_float(inter->ray.direction, t[1]));
-	inter_point_1_proj = ft_dot(ft_sub_vectors(inter_point_1, c_element->position), c_element->n_vector);
-	inter_point_2_proj = ft_dot(ft_sub_vectors(inter_point_2, c_element->position), c_element->n_vector);
-	// printf("inter_point_1_proj: %f\n", inter_point_1_proj);
-	// printf("inter_point_2_proj: %f\n", inter_point_2_proj);
-	if (inter_point_1_proj >= 0 && inter_point_1_proj <= c_element->height)
-	{
-		if (inter->state == 0)
-		{
-			inter->position.x = inter_point_1.x;
-			inter->position.y = inter_point_1.y;
-			inter->position.z = inter_point_1.z;
-			inter->element = c_element;
-			inter->state = 1;
-		}
-		else
-			ft_get_closest_point(inter, inter_point_1, c_element);
-	}
-	if (inter_point_2_proj >= 0 && inter_point_2_proj <= c_element->height)
-	{
-		if (inter->state == 0)
-		{
-			inter->position.x = inter_point_2.x;
-			inter->position.y = inter_point_2.y;
-			inter->position.z = inter_point_2.z;
-			inter->element = c_element;
-			inter->state = 1;
-		}
-		else
-			ft_get_closest_point(inter, inter_point_1, c_element);
-	}
-}
-
-void	ft_get_inter_cy_2(t_intersection *inter, t_element *c_element, float t)
-{
-	t_vector	inter_point;
-	float		inter_point_proj;
-
-	inter_point = ft_add_vectors(inter->ray.origin, ft_mult_vector_float(inter->ray.direction, t));
-	inter_point_proj = ft_dot(ft_sub_vectors(inter_point, c_element->position), c_element->n_vector);
-	if (inter_point_proj >= 0 && inter_point_proj <= c_element->height)
-	{
-		if (inter->state == 0)
-		{
-			inter->position.x = inter_point.x;
-			inter->position.y = inter_point.y;
-			inter->position.z = inter_point.z;
-			inter->element = c_element;
-			inter->state = 1;
-		}
-		else
-			ft_get_closest_point(inter, inter_point, c_element);
-	}
-}
-
-// void	ft_get_inter_sp(t_intersection *inter, float disc, float h, float a)
-// {
-// 	t_vector	inter_point;
-// 	float		t;
-
-// 	t = (h - sqrtf(disc)) / a;
-// 	inter_point = ft_mult_vector_float(inter->ray.direction, t);
-// 	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
-// 	if (inter->state == 0)
-// 	{
-// 		inter->position.x = inter_point.x;
-// 		inter->position.y = inter_point.y;
-// 		inter->position.z = inter_point.z;
-// 		inter->state = 1;
-// 	}
-// 	else
-// 		ft_get_closest_point(inter, inter_point);
-// }
-
-// void	ft_get_closest_point(t_intersection *inter, t_vector inter_point)
-// {
-// 	float		length1;
-// 	float		length2;
-// 	t_vector	v1;
-// 	t_vector	v2;
-
-// 	v1 = ft_sub_vectors(inter_point, inter->ray.pixel_center);
-// 	length1 = ft_get_vector_length(v1);
-// 	v2 = ft_sub_vectors(inter->position, inter->ray.pixel_center);
-// 	length2 = ft_get_vector_length(v2);
-// 	if (length1 < length2)
-// 	{
-// 		inter->position.x = inter_point.x;
-// 		inter->position.y = inter_point.y;
-// 		inter->position.z = inter_point.z;		
-// 	}
-// }

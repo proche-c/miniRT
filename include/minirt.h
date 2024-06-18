@@ -43,6 +43,9 @@ typedef struct s_quadratic
 	float				a;
 	float				b;
 	float				c;
+	float				t1;
+	float				t2;
+	float				disc;
 }	t_quadratic;
 
 typedef struct s_color
@@ -251,10 +254,12 @@ void	ft_get_inter_pl(t_intersection *inter, t_element *c_element, float t);
 
 	/*inter_cylinder*/
 void	ft_inter_cy(t_intersection *inter, t_element *c_element);
-void	ft_get_quadratic(t_element *c_element, t_quadratic *quadratic,
-	t_vector ocn, t_vector dn);
-void	ft_get_inter_cy_1(t_intersection *inter, t_element *c_element, float t[2]);
-void	ft_get_inter_cy_2(t_intersection *inter, t_element *c_element, float t);
+void	ft_init_tmp_inter(t_intersection *tmp_inter, t_intersection *inter);
+void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point);
+void	ft_get_inter_data(t_intersection *inter, t_intersection *tmp_inter,
+	t_element *c_element);
+void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element);
+int	ft_get_quadratic(t_quadratic *q);
 
 // CLEAN
 
