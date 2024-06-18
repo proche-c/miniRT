@@ -71,15 +71,15 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	//(void)transformed_origin;
 	//(void)transformed_direction;
 	
-	printf("OC: (%f, %f, %f, %f, %f)\n", oc.x, oc.y, oc.z, oc.length_squared, oc.length);
+	//printf("OC: (%f, %f, %f, %f, %f)\n", oc.x, oc.y, oc.z, oc.length_squared, oc.length);
 
 	// printf("entro en inter_sp.....\n");
 	oc = ft_sub_vectors((t_vector){0, 0, 0, 0, 0}, transformed_origin);// Centre de la sphère est maintenant à l'origine
 	//oc = ft_sub_vectors(c_element->position, inter->ray.origin);
 	a = ft_get_length_squared(transformed_direction);
 	//a = ft_get_length_squared(inter->ray.direction);
-	//h = ft_dot(transformed_direction, oc);
-	h = ft_dot(inter->ray.direction, oc);
+	h = ft_dot(transformed_direction, oc);
+	//h = ft_dot(inter->ray.direction, oc);
 	// printf("h: %f\n", h);
 	c = ft_get_length_squared(oc) - ((c_element->diameter / 2.0) * (c_element->diameter / 2.0));
 	// printf("c: %f\n", c);
@@ -99,6 +99,11 @@ void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 
 	inter_point = ft_mult_vector_float(inter->ray.direction, t);
 	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
+	
+	// Remettre le point d'intersection dans le repère initial
+    t_matrix inverse_translation_matrix = create_translation_matrix(c_element->position.x, c_element->position.y, c_element->position.z);
+    inter_point = apply_matrix(inverse_translation_matrix, inter_point);
+
 	//printf("inter_state: %d\n", inter->state);
 	if (inter->state == 0)
 	{
