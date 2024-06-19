@@ -102,8 +102,8 @@ void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
 	
 	// Remettre le point d'intersection dans le repère initial
-    t_matrix inverse_translation_matrix = create_translation_matrix(c_element->position.x, c_element->position.y, c_element->position.z);
-    inter_point = apply_matrix(inverse_translation_matrix, inter_point);
+    //t_matrix inverse_translation_matrix = create_translation_matrix(c_element->position.x, c_element->position.y, c_element->position.z);
+    //inter_point = apply_matrix(inverse_translation_matrix, inter_point);
 
 	//printf("inter_state: %d\n", inter->state);
 	if (inter->state == 0)
