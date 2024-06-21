@@ -27,7 +27,7 @@
 #define ASPECT_RATIO 1
 #define DISTANCE_VIEWPORT 1
 #define IMAGE_SIDE 1000
-#define E 0.0000000001
+#define E 0.0001
 
 typedef struct s_vector
 {
@@ -98,7 +98,9 @@ typedef struct s_element
 typedef struct s_intersection
 {
 	int					state;
+	int					cy_base;
 	struct s_vector		position;
+	struct s_vector		normal;
 	struct s_ray		ray;
 	struct s_element	*element;
 }	t_intersection;
@@ -232,6 +234,7 @@ float	ft_get_vector_length(t_vector v);
 float	ft_dot(t_vector v1, t_vector v2);
 t_vector	ft_cross(t_vector v1, t_vector v2);
 t_vector	ft_unit_vector(t_vector v);
+float	ft_distance(t_vector v1, t_vector v2);
 
 	/*viewport*/
 void	ft_get_viewport(t_scene *scene);
@@ -256,10 +259,13 @@ void	ft_get_inter_pl(t_intersection *inter, t_element *c_element, float t);
 void	ft_inter_cy(t_intersection *inter, t_element *c_element);
 void	ft_init_tmp_inter(t_intersection *tmp_inter, t_intersection *inter);
 void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point);
-void	ft_get_inter_data(t_intersection *inter, t_intersection *tmp_inter,
+void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
+	t_element *c_element);
+void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element);
 void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element);
 int	ft_get_quadratic(t_quadratic *q);
+void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_element *c_element);
 
 // CLEAN
 
@@ -287,8 +293,11 @@ double 	dot_product(t_vector a, t_vector b);
 t_vector normalize(t_vector v);
 t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector);
 t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_vector normal);
+t_vector calculate_cylinder_normal_2(t_intersection *inter, t_vector normal);
 t_vector calculate_sphere_normal(t_element *element, t_intersection *inter);
+void    calculate_sphere_normal_2(t_intersection *inter);
 t_vector calculate_plane_normal(t_element *element, t_vector normal);
+void    calculate_plane_normal_2(t_intersection *inter);
 t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_position, t_vector n_vector);
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);
 void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene);

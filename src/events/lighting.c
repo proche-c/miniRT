@@ -76,7 +76,7 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     //printf("diff: %f\n", diff);
     /*
     //printf("diff: %f\n", diff);
-    /*
+
     inter_color.r += light->ratio * inter->element->color.r * diff;
     inter_color.g += light->ratio * inter->element->color.g * diff;
     inter_color.b += light->ratio * inter->element->color.b * diff;
