@@ -31,21 +31,6 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
 
     t_vector light_dir = ft_sub_vectors(light->position, inter->position);
 
-  
-    /*
-    // Calculate vector from intersection point to light source
-    t_vector light_dir = {
-        .x = light->position.x - inter->position.x,
-        .y = light->position.y - inter->position.y,
-        .z = light->position.z - inter->position.z,
-        .length_squared = 0,  // Initialize or calculate if needed
-        .length = 0           // Initialize or calculate if needed
-    };*/
-    /*
-    printf("light->position: (%f, %f, %f)\n", light->position.x, light->position.y, light->position.z);
-    printf("inter->position: (%f, %f, %f)\n", inter->position.x, inter->position.y, inter->position.z);
-    printf("light_dir: (%f, %f, %f)\n", light_dir.x, light_dir.y, light_dir.z); 
-*/
     // Normalize the light direction
     light_dir = normalize(light_dir);
     normal = normalize(normal);
