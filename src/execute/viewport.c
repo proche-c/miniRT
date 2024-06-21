@@ -20,7 +20,7 @@ void	ft_get_viewport(t_scene *scene)
 
 	scene->image_side = IMAGE_SIDE;
 	scene->focal_length = DISTANCE_VIEWPORT;
-	scene->h = tanf(ft_degrees_to_radians(scene->camera.fov));
+	scene->h = tanf(ft_degrees_to_radians(scene->camera.fov / 2.0));
 	scene->viewport_side = 2 * scene->h * scene->focal_length;
 	w = ft_mult_vector_float(scene->camera.orientation, -1);
 	vup = ft_get_vup(w);

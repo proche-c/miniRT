@@ -139,8 +139,8 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
         .x = scene->camera.pov.x - intersection->position.x,
         .y = scene->camera.pov.y - intersection->position.y,
         .z = scene->camera.pov.z - intersection->position.z,
-        .length_squared = 0,
-        .length = 0
+        //.length_squared = 0,
+        //.length = 0
     };
     view_dir = normalize(view_dir);
 
