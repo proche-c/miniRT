@@ -9,14 +9,6 @@ t_matrix create_translation_matrix(float tx, float ty, float tz)
         {0, 0, 1, tz},
         {0, 0, 0,  1}
     }};
-    /*
-        printf("matrix = %f\n", mat.m[0][0]);
-        printf("matriy = %f\n", mat.m[0][1]);
-        printf("matriz = %f\n", mat.m[0][2]);
-        printf("matriw = %f\n", mat.m[0][3]);
-        printf("-----------------\n");
-*/
-    
     return mat;
 }
 

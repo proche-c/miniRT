@@ -56,10 +56,4 @@ typedef struct s_matrix
     float m[4][4];
 } t_matrix;
 
-
-
-
-
-
-
 #endif

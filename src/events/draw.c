@@ -99,22 +99,6 @@ int pixel_print(t_scene *scene)
 	return (0);
 }
 
-int calc_and_print(t_scene *scene)
-
-{
-    //add_light_test(scene);
-    //reflect_tester(scene);
-    
-	
-
-	
-	mlx_initiator(scene);
-	//hook_init(scene);
-	//pixel_print(scene);
-    //mlx_loop(scene->mlx_ptr);
-    return (0);
-}
-
 void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i)
 {
     t_vector normal;
@@ -164,11 +148,6 @@ void write_pixel_no_object(t_scene *scene, int j, int i)
     t_color background_color = {0,0,0};
 
     no_col = color2rgb(background_color);
-  
 
-    // Convert the t_color background color to int
-    //int color_int = (background_color.r << 16) | (background_color.g << 8) | background_color.b;
-
-    // Put the pixel on the image
     ft_pixel_put(&scene->img, i, j, no_col, scene);
 }
