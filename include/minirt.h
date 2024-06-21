@@ -38,6 +38,16 @@ typedef struct s_vector
 	float				length;
 }	t_vector;
 
+typedef struct s_quadratic
+{
+	float				a;
+	float				b;
+	float				c;
+	float				t1;
+	float				t2;
+	float				disc;
+}	t_quadratic;
+
 typedef struct s_color
 {
 	int					r;
@@ -243,7 +253,13 @@ void	ft_inter_pl(t_intersection *inter, t_element *c_element);
 void	ft_get_inter_pl(t_intersection *inter, t_element *c_element, float t);
 
 	/*inter_cylinder*/
-void	ft_inter_cy(t_scene *scene, t_intersection *inter, t_element *c_element);
+void	ft_inter_cy(t_intersection *inter, t_element *c_element);
+void	ft_init_tmp_inter(t_intersection *tmp_inter, t_intersection *inter);
+void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point);
+void	ft_get_inter_data(t_intersection *inter, t_intersection *tmp_inter,
+	t_element *c_element);
+void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element);
+int	ft_get_quadratic(t_quadratic *q);
 
 // CLEAN
 
@@ -271,7 +287,7 @@ double 	dot_product(t_vector a, t_vector b);
 t_vector normalize(t_vector v);
 t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector);
 t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_vector normal);
-t_vector calculate_sphere_normal(t_element *element, t_intersection *inter, t_vector normal);
+t_vector calculate_sphere_normal(t_element *element, t_intersection *inter);
 t_vector calculate_plane_normal(t_element *element, t_vector normal);
 t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_position, t_vector n_vector);
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);

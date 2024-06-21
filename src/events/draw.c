@@ -124,10 +124,11 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     int color_int2;
 
 
+    normal = (t_vector){0,0,0,0,0}; // I added the initializer because I got the error that normal wasn't initialized
     // Determine the normal based on the type of the intersected element
-    printf("Element identifier: %s\n", intersection->element->identifier);
+    //printf("Element identifier: %s\n", intersection->element->identifier);
     if (ft_strncmp(intersection->element->identifier, "sp", 3) == 0)
-        normal = calculate_sphere_normal(intersection->element, intersection, normal);
+        normal = calculate_sphere_normal(intersection->element, intersection);
     else if (ft_strncmp(intersection->element->identifier, "pl", 3) == 0)
         normal = calculate_plane_normal(intersection->element, normal);
     else if (ft_strncmp(intersection->element->identifier, "cy", 3) == 0)
@@ -154,7 +155,7 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     //ft_pixel_put(&scene->img, i, j,  color_int, scene);
     ft_pixel_put(&scene->img, i, j, color_int2, scene);
     
-    printf("Pixel written at (%d, %d)\n", i, j);
+    //printf("Pixel written at (%d, %d)\n", i, j);
     
 }
 
