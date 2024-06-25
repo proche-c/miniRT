@@ -145,6 +145,7 @@ int			ft_get_parameter(char *line, t_scene *scene);
 int			ft_get_data(char **params, t_scene *scene);
 int			ft_is_vector(char **co);
 int			ft_is_normalized(char **co);
+void	ft_normalize_params(t_vector vector);
 
 	/*camera.c*/
 int	 		ft_get_camera(char **params, t_scene *scene);

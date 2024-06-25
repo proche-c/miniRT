@@ -32,7 +32,7 @@ int	ft_execute(t_scene *scene)
 		}
 		j++;
 	}
-	ft_launch_window(scene);
+	//ft_launch_window(scene);
 	int start_x = (WIN_WIDTH - scene->image_side) / 2;
     int start_y = (WIN_HEIGHT - scene->image_side) / 2;
     mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr,

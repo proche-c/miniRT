@@ -124,3 +124,13 @@ int	ft_is_normalized(char **co)
 		return (0);
 	return (1);
 }
+
+void	ft_normalize_params(t_vector vector)
+{
+	float	length;
+
+	length = ft_get_vector_length(vector);
+	vector.x = vector.x / length;
+	vector.y = vector.y / length;
+	vector.z = vector.z / length;
+}
