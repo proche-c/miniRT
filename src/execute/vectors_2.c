@@ -93,3 +93,18 @@ t_vector	ft_unit_vector(t_vector v)
 	return (ft_div_vector_float(v, ft_get_vector_length(v)));
 }
 
+float	ft_distance(t_vector v1, t_vector v2)
+{
+	float	x;
+	float	y;
+	float	z;
+
+	x = v1.x - v2.x;
+	y = v1.y - v2.y;
+	z = v1.z - v2.z;
+	x = pow(x, 2);
+	y = pow(y, 2);
+	z = pow(z, 2);
+	return(sqrt(x + y + z));
+}
+

@@ -36,7 +36,7 @@ int	ft_parse(t_scene *scene)
 	// ft_print_camera(scene);
 	// ft_print_ambient(scene);
 	// ft_print_light(scene);
-	// ft_print_elements(scene);
+	ft_print_elements(scene);
 	if (scene->camera.defined == 0 || scene->ambient.defined == 0
 		|| scene->light.defined == 0 || scene->elements == NULL)
 	{
@@ -113,4 +113,16 @@ int	ft_init_elements(t_scene *scene)
 {
 	(void)scene;
 	return (0);
+}
+
+t_vector	ft_normalize_params(t_vector vector)
+{
+	float	length;
+	t_vector	new_vector;
+
+	length = ft_get_vector_length(vector);
+	new_vector.x = vector.x / length;
+	new_vector.y = vector.y / length;
+	new_vector.z = vector.z / length;
+	return (new_vector);
 }

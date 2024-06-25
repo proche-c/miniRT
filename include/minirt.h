@@ -98,6 +98,7 @@ typedef struct s_element
 typedef struct s_intersection
 {
 	int					state;
+	int					cy_base;
 	struct s_vector		position;
 	struct s_ray		ray;
 	struct s_element	*element;
@@ -139,6 +140,7 @@ int	ft_parse(t_scene *scene);
 int		ft_get_parameter(char *line, t_scene *scene);
 int		ft_get_data(char **params, t_scene *scene);
 int		ft_init_elements(t_scene *scene);
+t_vector	ft_normalize_params(t_vector vector);
 
 	/*camera.c*/
 int	 	ft_get_camera(char **params, t_scene *scene);
@@ -232,6 +234,7 @@ float	ft_get_vector_length(t_vector v);
 float	ft_dot(t_vector v1, t_vector v2);
 t_vector	ft_cross(t_vector v1, t_vector v2);
 t_vector	ft_unit_vector(t_vector v);
+float	ft_distance(t_vector v1, t_vector v2);
 
 	/*viewport*/
 void	ft_get_viewport(t_scene *scene);
@@ -256,10 +259,13 @@ void	ft_get_inter_pl(t_intersection *inter, t_element *c_element, float t);
 void	ft_inter_cy(t_intersection *inter, t_element *c_element);
 void	ft_init_tmp_inter(t_intersection *tmp_inter, t_intersection *inter);
 void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point);
-void	ft_get_inter_data(t_intersection *inter, t_intersection *tmp_inter,
+void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
+	t_element *c_element);
+void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element);
 void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element);
 int	ft_get_quadratic(t_quadratic *q);
+void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_element *c_element);
 
 // CLEAN
 
