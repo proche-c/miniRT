@@ -26,7 +26,6 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	t_vector transformed_direction = inter->ray.direction;
 	//transformed_direction = normalize(transformed_direction);//
 
-	
 	//printf("OC: (%f, %f, %f, %f, %f)\n", oc.x, oc.y, oc.z, oc.length_squared, oc.length);
 
 	// printf("entro en inter_sp.....\n");
