@@ -292,5 +292,7 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
 void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene);
 t_color	rgb2color(int rgb);
 int		color2rgb(t_color c);
+t_vector apply_matrix(t_matrix mat, t_vector vec);
+t_matrix create_translation_matrix(float tx, float ty, float tz);
 
 #endif
