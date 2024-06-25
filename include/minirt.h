@@ -99,7 +99,6 @@ typedef struct s_intersection
 {
 	int					state;
 	int					cy_base;
-	int					cy_base;
 	struct s_vector		position;
 	struct s_vector		normal;
 	struct s_ray		ray;
