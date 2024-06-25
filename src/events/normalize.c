@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   normalize.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageiser <ageiser@student.42barcelo>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/15 15:32:58 by ageiser           #+#    #+#             */
+/*   Updated: 2022/09/20 15:41:05 by ageiser          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minirt.h"
 
 t_vector normalize(t_vector v) 
@@ -47,7 +59,8 @@ t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_pos
 
     if (fabs(n_vector.y) > 0.99) 
     {
-        up = (t_vector){
+        up = (t_vector)
+        {
             .x = 1,
             .y = 0,
             .z = 0,
