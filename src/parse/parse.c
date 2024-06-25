@@ -125,6 +125,8 @@ int	ft_is_normalized(char **co)
 	return (1);
 }
 
+
+
 t_vector	ft_normalize_params(t_vector vector)
 {
 	float	length;

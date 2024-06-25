@@ -99,6 +99,7 @@ typedef struct s_intersection
 {
 	int					state;
 	int					cy_base;
+	int					cy_base;
 	struct s_vector		position;
 	struct s_vector		normal;
 	struct s_ray		ray;
@@ -266,9 +267,13 @@ void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point);
 void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element);
 void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
+void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
+	t_element *c_element);
+void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element);
 void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element);
 int	ft_get_quadratic(t_quadratic *q);
+void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_element *c_element);
 void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_element *c_element);
 
 // CLEAN
@@ -285,10 +290,8 @@ t_vector ft_mult_vector_float_1(t_vector v, float f);
 t_color add_light(t_color color, t_color light, float ratio);
 void	hook_init(t_scene *scene);
 void	color_screen(t_scene *scene, int color);
-int 	calc_and_print(t_scene *scene);
 int 	mlx_initiator(t_scene *scene);
 int 	pixel_print(t_scene *scene);
-double 	dot_product(t_vector a, t_vector b);
 t_vector normalize(t_vector v);
 t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector);
 t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_vector normal);
@@ -302,16 +305,7 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
 void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene);
 t_color	rgb2color(int rgb);
 int		color2rgb(t_color c);
-
-//matrix
-t_matrix create_translation_matrix(float tx, float ty, float tz);
-t_matrix create_rotation_matrix_x(float angle);
-t_matrix create_rotation_matrix_y(float angle);
-t_matrix create_rotation_matrix_z(float angle);
-t_matrix create_scaling_matrix(float sx, float sy, float sz);
 t_vector apply_matrix(t_matrix mat, t_vector vec);
-t_matrix multiply_matrices(t_matrix m1, t_matrix m2);
-
-
+t_matrix create_translation_matrix(float tx, float ty, float tz);
 
 #endif

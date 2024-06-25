@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   matrix.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageiser <ageiser@student.42barcelo>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/15 15:32:58 by ageiser           #+#    #+#             */
+/*   Updated: 2022/09/20 15:41:05 by ageiser          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minirt.h"
 
 //4d vector (adding a vect)
@@ -9,14 +21,6 @@ t_matrix create_translation_matrix(float tx, float ty, float tz)
         {0, 0, 1, tz},
         {0, 0, 0,  1}
     }};
-    /*
-        printf("matrix = %f\n", mat.m[0][0]);
-        printf("matriy = %f\n", mat.m[0][1]);
-        printf("matriz = %f\n", mat.m[0][2]);
-        printf("matriw = %f\n", mat.m[0][3]);
-        printf("-----------------\n");
-*/
-    
     return mat;
 }
 

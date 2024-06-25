@@ -22,11 +22,14 @@ void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 	plane = malloc(sizeof(t_element));
 	ft_init_tmp_inter(tmp_inter, inter);
 	ft_init_tmp_plane(plane, c_element, 1);
+	//printf("plane n_vector: %f %f %f\n", plane->n_vector.x, plane->n_vector.y, plane->n_vector.z);
 	ft_inter_pl(tmp_inter, plane);
 	if (tmp_inter->state == 1 &&
 		ft_get_vector_length(ft_sub_vectors(tmp_inter->position,
 			plane->position)) <=c_element->diameter * 0.5)
 	{
+		//printf("cy_base");
+			ft_get_inter_data_1(inter, tmp_inter, c_element);			
 		//printf("cy_base");
 			ft_get_inter_data_1(inter, tmp_inter, c_element);			
 	}
@@ -39,13 +42,19 @@ void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 	{
 		//printf("cy_base");
 			ft_get_inter_data_1(inter, tmp_inter, c_element);			
+		//printf("cy_base");
+			ft_get_inter_data_1(inter, tmp_inter, c_element);			
 	}
 	tmp_inter->state = 0;
 	ft_inter_inf_cy(tmp_inter, c_element);
 	if (tmp_inter->state == 1 && pow(ft_distance(c_element->position, tmp_inter->position), 2) <= (pow(c_element->height * 0.5, 2) + c_element->diameter * c_element->diameter * 0.25))
+	if (tmp_inter->state == 1 && pow(ft_distance(c_element->position, tmp_inter->position), 2) <= (pow(c_element->height * 0.5, 2) + c_element->diameter * c_element->diameter * 0.25))
 	{
 		ft_get_inter_data_2(inter, tmp_inter, c_element);
+		ft_get_inter_data_2(inter, tmp_inter, c_element);
 	}
+	free(plane);
+	free(tmp_inter);
 	free(plane);
 	free(tmp_inter);
 	return ;
@@ -99,6 +108,23 @@ void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
 }
 
 void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
+void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
+	t_element *c_element)
+{
+	if (inter->state == 0)
+	{
+		inter->position.x = tmp_inter->position.x;
+		inter->position.y = tmp_inter->position.y;
+		inter->position.z = tmp_inter->position.z;
+		inter->element = c_element;
+		inter->cy_base = 1;
+		inter->state = 1;
+	}
+	else
+		ft_get_closest_point_cy(inter, tmp_inter->position, c_element);
+}
+
+void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element)
 {
 	if (inter->state == 0)
@@ -121,9 +147,20 @@ void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element)
 
 	u = ft_cross(tmp_inter->ray.direction, c_element->n_vector);
 	v = ft_cross(ft_sub_vectors(tmp_inter->ray.origin, c_element->position),
+	v = ft_cross(ft_sub_vectors(tmp_inter->ray.origin, c_element->position),
 		c_element->n_vector);
 	q.a = ft_dot(u, u);
 	q.b = 2 * ft_dot(u, v);
+	q.c = ft_dot(v, v) - c_element->diameter * c_element->diameter * 0.25 * ft_dot(c_element->n_vector, c_element->n_vector);
+	q.disc = q.b * q.b - 4 * q.a * q.c;
+	// printf("q.disc: %f\n", q.disc);
+	if (q.disc < 0)
+		return;
+	q.t1 = (-q.b - sqrt(q.disc)) / (q.a * 2);
+	q.t2 = (-q.b + sqrt(q.disc)) / (q.a * 2);
+	// printf("q.t1: %f\n", q.t1);
+	// printf("q.t2: %f\n", q.t2);
+	if (q.t2 <= E && q.t1 <= E)
 	q.c = ft_dot(v, v) - c_element->diameter * c_element->diameter * 0.25 * ft_dot(c_element->n_vector, c_element->n_vector);
 	q.disc = q.b * q.b - 4 * q.a * q.c;
 	// printf("q.disc: %f\n", q.disc);
@@ -138,7 +175,9 @@ void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element)
 	if (q.t1 <= E || (q.t2 > E && (q.t2 < q.t1)))
 		q.t1 = 	q.t2;
 	// printf("%f\n", q.t1);
+	// printf("%f\n", q.t1);
 	tmp_inter->state = 1;
+	// printf("cy");
 	// printf("cy");
 	tmp_inter->position = ft_add_vectors(tmp_inter->ray.origin,
 		ft_mult_vector_float(tmp_inter->ray.direction, q.t1));

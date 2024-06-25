@@ -1,5 +1,16 @@
-#include "../../include/minirt.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   normalize.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageiser <ageiser@student.42barcelo>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/15 15:32:58 by ageiser           #+#    #+#             */
+/*   Updated: 2022/09/20 15:41:05 by ageiser          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "../../include/minirt.h"
 
 //new color structure in float
 t_color	newcolor(float r, float g, float b)
@@ -39,17 +50,6 @@ t_color	rgb2color(int rgb)
 	c.b = (float)(rgb & 0xff) / 255;
 	return (c);
 }
-/*
-//converts normalized color to rgb
-int	color2rgb(t_color c)
-{
-	int	color;
-
-	color = (int)(c.r * 255) << 16;
-	color += (int)(c.g * 255) << 8;
-	color += (int)(c.b * 255);
-	return (color);
-}*/
 
 int color2rgb(t_color color) 
 {
