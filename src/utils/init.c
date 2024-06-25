@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,13 @@
 
 #include "minirt.h"
 
-void	ft_free_scene(t_scene *scene)
+void	ft_initialize_scene(t_scene *scene)
 {
-	printf("**ENTRO EN FT_FREE_SCENE**\n");
-	free(scene->str_scene);
-	if (scene->elements != NULL)
-		ft_free_all_elements(scene);
-	free(scene);
-	printf("**SALGO DE FT_FREE_SCENE**\n");
-}
-
-void	ft_free_all_elements(t_scene *scene)
-{
-	t_element	*element;
-	t_element	*to_delete;
-
-	element = scene->elements;
-	while (element != NULL)
-	{
-		to_delete = element;
-		element = element->next;
-		if (to_delete->identifier != NULL)
-			free(to_delete->identifier);
-		free(to_delete);
-	}
-}
-
-
-
-void	ft_free_params(char **params)
-{
-	int	i;
-
-	i = 0;
-	while (params[i])
-	{
-		free(params[i]);
-		i++;
-	}
-	free(params);
+	print_in_out("ENTRO EN FT_INITIALIZE SCENE\n");
+	scene->camera.defined = 0;
+	scene->ambient.defined = 0;
+	scene->light.defined = 0;
+	scene->flag = 0;
+	scene->elements = NULL;
+	print_in_out("SALGO DE FT_INITIALIZE SCENE\n");
 }

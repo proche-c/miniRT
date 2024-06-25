@@ -12,8 +12,6 @@
 
 #include "minirt.h"
 
-
-
 void	ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i)
 {
 	inter->ray.origin.x = scene->camera.pov.x;

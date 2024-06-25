@@ -27,7 +27,7 @@
 #define ASPECT_RATIO 1
 #define DISTANCE_VIEWPORT 1
 #define IMAGE_SIDE 1000
-#define E 0.0001
+#define E 0.0000000001
 
 typedef struct s_vector
 {
@@ -100,7 +100,6 @@ typedef struct s_intersection
 	int					state;
 	int					cy_base;
 	struct s_vector		position;
-	struct s_vector		normal;
 	struct s_ray		ray;
 	struct s_element	*element;
 }	t_intersection;
@@ -129,59 +128,55 @@ typedef struct s_scene
 	void				*window_ptr;
 }	t_scene;
 
-	/*minirt*/
-void		ft_initialize_scene(t_scene *scene);
-
 // CHECKERS
 
-int			ft_check(char *file_name, t_scene *scene);
-int			ft_check_extension(char *file_name);
-int			ft_check_file(int fd, t_scene *scene);
+int		ft_check(char *file_name, t_scene *scene);
+int		ft_check_extension(char *file_name);
+int		ft_check_file(int fd, t_scene *scene);
 
 // PARSE
 	/*parse.c*/
-int			ft_parse(t_scene *scene);
-int			ft_get_parameter(char *line, t_scene *scene);
-int			ft_get_data(char **params, t_scene *scene);
-int			ft_is_vector(char **co);
-int			ft_is_normalized(char **co);
+int	ft_parse(t_scene *scene);
+int		ft_get_parameter(char *line, t_scene *scene);
+int		ft_get_data(char **params, t_scene *scene);
+int		ft_init_elements(t_scene *scene);
 t_vector	ft_normalize_params(t_vector vector);
 
 	/*camera.c*/
-int	 		ft_get_camera(char **params, t_scene *scene);
-int			ft_data_camera(char **params, t_scene *scene);
-int			ft_get_fov(char **params, t_scene *scene);
-int			ft_get_orientation(char **params, t_scene *scene);
-int			ft_get_pov(char **params, t_scene *scene);
+int	 	ft_get_camera(char **params, t_scene *scene);
+int		ft_data_camera(char **params, t_scene *scene);
+int		ft_get_fov(char **params, t_scene *scene);
+int		ft_get_orientation(char **params, t_scene *scene);
+int		ft_is_vector(char **co);
+int		ft_is_normalized(char **co);
+int		ft_get_pov(char **params, t_scene *scene);
 
 	/*ambient.c*/
-int	 		ft_get_ambient(char **params, t_scene *scene);
-int			ft_data_ambient(char **params, t_scene *scene);
-int			ft_get_ambient_ratio(char **params, t_scene *scene);
-int			ft_get_color(char **params, t_scene *scene);
-int			ft_is_color(char **col);
+int	 	ft_get_ambient(char **params, t_scene *scene);
+int		ft_data_ambient(char **params, t_scene *scene);
+int		ft_get_ambient_ratio(char **params, t_scene *scene);
+int		ft_get_color(char **params, t_scene *scene);
+int		ft_is_color(char **col);
 
 	/*light.c*/
-int	 		ft_get_light(char **params, t_scene *scene);
-int			ft_data_light(char **params, t_scene *scene);
-int			ft_get_position(char **params, t_scene *scene);
-int			ft_get_light_ratio(char **params, t_scene *scene);
+int	 	ft_get_light(char **params, t_scene *scene);
+int		ft_data_light(char **params, t_scene *scene);
+int		ft_get_position(char **params, t_scene *scene);
+int		ft_get_light_ratio(char **params, t_scene *scene);
 
 	/*elements*/
-int	 		ft_get_element(char **params, t_scene *scene);
-int			ft_data_first_element(char **params, t_scene *scene);
-int			ft_data_add_element(char **params, t_scene *scene);
-int			ft_data_element(t_element *new_element, char **params);
-
-	/*list_elements*/
-void		ft_add_element(t_element **lst, t_element *new);
+int	 	ft_get_element(char **params, t_scene *scene);
+int	ft_data_first_element(char **params, t_scene *scene);
+int	ft_data_add_element(char **params, t_scene *scene);
+int		ft_data_element(t_element *new_element, char **params);
+int		ft_get_e_position(t_element *new_element, char *param);
+int		ft_get_e_color(t_element *new_element, char *param);
+void	ft_add_element(t_element **lst, t_element *new);
 t_element	*ft_elelast(t_element *lst);
 
 	/*planes.c*/
 int	 	ft_get_plane(t_element *new_element, char **params);
 int		ft_get_e_n_vector(t_element *new_element, char *param);
-int		ft_get_e_position(t_element *new_element, char *param);
-int		ft_get_e_color(t_element *new_element, char *param);
 
 	/*spheres.c*/
 int 	ft_get_sphere(t_element *new_element, char **params);
@@ -202,6 +197,12 @@ float	ft_atof(char *str);
 	/*utils_execute*/
 float	ft_degrees_to_radians(float degrees);
 
+	/*init*/
+void	ft_initialize_scene(t_scene *scene);
+int		ft_init_camera(t_scene *scene);
+int		ft_init_ambient(t_scene *scene);
+int		ft_init_light(t_scene *scene);
+
 	/*print*/
 void	print_in_out(char *str);
 void	ft_print_camera(t_scene *scene);
@@ -217,11 +218,6 @@ void	ft_print_intersection(t_intersection *inter);
 //EXECUTE
 	/*execute*/
 int		ft_execute(t_scene *scene);
-void	ft_init_window(t_scene *scene);
-void	ft_paint(t_scene *scene, t_intersection *inter, int i, int j);
-
-
-
 void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i);
 void	write_pixel_no_object(t_scene *scene, int j, int i);
 
@@ -266,13 +262,9 @@ void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point);
 void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element);
 void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
-void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
-	t_element *c_element);
-void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element);
 void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element);
 int	ft_get_quadratic(t_quadratic *q);
-void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_element *c_element);
 void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_element *c_element);
 
 // CLEAN
@@ -285,6 +277,11 @@ void	ft_free_ambient(t_scene *scene);
 void	ft_free_light(t_scene *scene);
 void	ft_free_params(char **params);
 
+/*clean_elements.c*/
+void	ft_free_planes(t_scene *scene);
+void	ft_free_spheres(t_scene *scene);
+void	ft_free_cylinders(t_scene *scene);
+
 t_vector ft_mult_vector_float_1(t_vector v, float f);
 t_color add_light(t_color color, t_color light, float ratio);
 void	hook_init(t_scene *scene);
@@ -294,11 +291,8 @@ int 	pixel_print(t_scene *scene);
 t_vector normalize(t_vector v);
 t_vector transform_point_to_world(t_vector local_normal, t_vector n_vector);
 t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_vector normal);
-t_vector calculate_cylinder_normal_2(t_intersection *inter, t_vector normal);
 t_vector calculate_sphere_normal(t_element *element, t_intersection *inter);
-void    calculate_sphere_normal_2(t_intersection *inter);
 t_vector calculate_plane_normal(t_element *element, t_vector normal);
-void    calculate_plane_normal_2(t_intersection *inter);
 t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_position, t_vector n_vector);
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);
 void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene);

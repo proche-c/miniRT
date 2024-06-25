@@ -7,6 +7,13 @@ UTILS =	$(wildcard ./src/utils/*.c)
 CLEAN = $(wildcard ./src/clean/*.c)
 EVENT = $(wildcard ./src/events/*.c)
 
+# LISTS = ./src/lists/parse.c \
+# 	./src/lists/envp.c \
+# 	./src/lists/redir.c \
+# 	./src/lists/files.c \
+# 	./src/lists/args.c \
+
+
 MAIN = ./src/minirt.c \
 
 OBJS = $(SRCS:.c=.o)
@@ -72,4 +79,4 @@ test: clean re
 
 leaks: all
 	@clear
-	@leaks  -atExit -- ./minirt scenes/paula.rt
+	@leaks  -atExit -- ./minirt scenes/test.rt

@@ -37,31 +37,12 @@ t_vector    calculate_sphere_normal(t_element *element, t_intersection *inter)
     return (normal);
 }
 
-void    calculate_sphere_normal_2(t_intersection *inter)
-{
-    //vector from the center of the sphere to the intersection point
-    inter->normal.x = inter->position.x - inter->element->position.x;
-    inter->normal.y = inter->position.y - inter->element->position.y;
-    inter->normal.z = inter->position.z - inter->element->position.z;
-    //normalize the vector
-    inter->normal = normalize(inter->normal);
-    //printf("Normal vector: %f %f %f\n", normal.x, normal.y, normal.z);
-}
-
 t_vector    calculate_plane_normal(t_element *element, t_vector normal)
 {
     normal.x = element->n_vector.x;
     normal.y = element->n_vector.y;
     normal.z = element->n_vector.z;
     return (normal);
-}
-
-void    calculate_plane_normal_2(t_intersection *inter)
-{
-    inter->normal.x = inter->element->n_vector.x;
-    inter->normal.y = inter->element->n_vector.y;
-    inter->normal.z = inter->element->n_vector.z;
-    //printf("Normal vector: %f %f %f\n", normal.x, normal.y, normal.z);
 }
 
 // Transforms a point to the local coordinate system of the cylinder
@@ -123,20 +104,6 @@ t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter, t_
     local_normal = normalize(local_normal);
     normal = transform_point_to_world(local_normal, element->n_vector);
     return normal;
-}
-
-t_vector calculate_cylinder_normal_2(t_intersection *inter, t_vector normal)
-{
-
-    t_vector    v;
-
-    v = ft_sub_vectors(inter->element->position, inter->position);
-    normal = ft_cross(v, inter->element->n_vector);
-    normal = ft_cross(normal, inter->element->n_vector);
-    normal = normalize(normal);
-    if (ft_dot(normal, inter->ray.direction))
-        normal = ft_mult_vector_float(normal, -1);
-    return (normal);
 }
 
 // Transforms a normal vector back to the world coordinate system from the local system
