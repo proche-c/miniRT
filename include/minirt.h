@@ -72,6 +72,8 @@ typedef struct s_ray
 	struct s_vector		origin;
 	struct s_vector		direction;
 	struct s_vector		pixel_center;
+	int 				t_min;
+	int 				t_max;
 }	t_ray;
 
 typedef struct s_element
@@ -115,6 +117,7 @@ typedef struct s_scene
 	struct s_img		img;
 	void				*mlx_ptr;
 	void				*window_ptr;
+	int                 num_objects;
 }	t_scene;
 
 // CHECKERS
@@ -287,6 +290,7 @@ t_matrix create_rotation_matrix_z(float angle);
 t_matrix create_scaling_matrix(float sx, float sy, float sz);
 t_vector apply_matrix(t_matrix mat, t_vector vec);
 t_matrix multiply_matrices(t_matrix m1, t_matrix m2);
+t_vector reflect_vector(t_vector incident, t_vector normal);
 
 
 

@@ -30,6 +30,7 @@ int	ft_parse(t_scene *scene)
 			print_in_out("OUT FT_PARSE IN 1\n");
 			return (1);
 		}
+		scene->num_objects = i;
 		i++;
 	}
 	ft_free_params(lines);
