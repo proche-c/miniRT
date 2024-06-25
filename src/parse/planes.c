@@ -30,14 +30,15 @@ int	ft_get_plane(t_element *new_element, char **params)
 int	ft_get_e_n_vector(t_element *new_element, char *param)
 {
 	char	**co;
+	t_vector	vector;
 
 	co = ft_split(param, ',');
 	if (ft_is_vector(co) == 1)
 	{
-		new_element->n_vector.x = ft_atof(co[0]);
-		new_element->n_vector.y = ft_atof(co[1]);
-		new_element->n_vector.z = ft_atof(co[2]);
-		ft_normalize_params(new_element->n_vector);
+		vector.x = ft_atof(co[0]);
+		vector.y = ft_atof(co[1]);
+		vector.z = ft_atof(co[2]);
+		new_element->n_vector = ft_normalize_params(vector);
 		ft_free_params(co);
 		return (0);
 	}
