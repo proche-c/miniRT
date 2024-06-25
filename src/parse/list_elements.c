@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean_elements.c                                   :+:      :+:    :+:   */
+/*   list_elements.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,20 +12,32 @@
 
 #include "minirt.h"
 
-void	ft_free_planes(t_scene *scene)
+void	ft_add_element(t_element **lst, t_element *new)
 {
-	(void)scene;
-	return ;
+	t_element	*last;
+
+	if (lst && new)
+	{
+		if (*lst)
+		{
+			last = ft_elelast(*lst);
+			last->next = new;
+		}
+		else
+			*lst = new;
+	}
 }
 
-void	ft_free_spheres(t_scene *scene)
+t_element	*ft_elelast(t_element *lst)
 {
-	(void)scene;
-	return ;
-}
+	t_element	*temp;
 
-void	ft_free_cylinders(t_scene *scene)
-{
-	(void)scene;
-	return ;
+	temp = lst;
+	if (lst)
+	{
+		while (temp->next)
+			temp = temp->next;
+		return (temp);
+	}
+	return (NULL);
 }

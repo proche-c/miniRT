@@ -14,12 +14,10 @@
 
 void	ft_free_scene(t_scene *scene)
 {
-	printf("**ENTRO EN FT_FREE_SCENE**\n");
 	free(scene->str_scene);
 	if (scene->elements != NULL)
 		ft_free_all_elements(scene);
 	free(scene);
-	printf("**SALGO DE FT_FREE_SCENE**\n");
 }
 
 void	ft_free_all_elements(t_scene *scene)
@@ -37,8 +35,6 @@ void	ft_free_all_elements(t_scene *scene)
 		free(to_delete);
 	}
 }
-
-
 
 void	ft_free_params(char **params)
 {
