@@ -51,10 +51,9 @@ typedef struct s_img
 	int		endian;
 }			t_img;
 
-
-
-
-
-
+typedef struct s_matrix
+{
+    float m[4][4];
+} t_matrix;
 
 #endif
