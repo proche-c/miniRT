@@ -19,7 +19,8 @@ void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 	t_intersection *tmp_inter;
 
 	tmp_inter = malloc(sizeof(t_intersection));
-	plane = malloc(sizeof(t_element));
+	.
+	;
 	ft_init_tmp_inter(tmp_inter, inter);
 	ft_init_tmp_plane(plane, c_element, 1);
 	//printf("plane n_vector: %f %f %f\n", plane->n_vector.x, plane->n_vector.y, plane->n_vector.z);
