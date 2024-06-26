@@ -55,7 +55,7 @@ void ft_inter_sp(t_intersection *inter, t_element *c_element) //including the ma
 
    ///PAULA'S CODE commentend
 
-
+/*
 void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 {
 	t_vector	oc;
@@ -89,33 +89,41 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	if (disc >= 0)
 	{
 		t = (h - sqrtf(disc)) / a;
+		if (t < inter->distance && t > 0.001)
+		{
 		ft_get_inter_sp(inter, c_element, t);
+		}
 	}
 }
+*/
 
-
-void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
+void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 {
-	t_vector	inter_point;
+	t_vector	oc;
+	float		a;
+	float		h;
+	float		c;
+	float		disc;
+	float		t;
 
-	inter_point = ft_mult_vector_float(inter->ray.direction, t);
-	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
+	t_matrix translation_matrix = create_translation_matrix(-c_element->position.x, -c_element->position.y, -c_element->position.z);
+	t_vector transformed_origin = apply_matrix(translation_matrix, inter->ray.origin);
+	t_vector transformed_direction = inter->ray.direction;
 	
-	// Remettre le point d'intersection dans le repère initial
-    //t_matrix inverse_translation_matrix = create_translation_matrix(c_element->position.x, c_element->position.y, c_element->position.z);
-    //inter_point = apply_matrix(inverse_translation_matrix, inter_point);
+	oc = ft_sub_vectors((t_vector){0, 0, 0, 0, 0}, transformed_origin); // Centre de la sphère est maintenant à l'origine
+	a = ft_get_length_squared(transformed_direction);
+	h = ft_dot(transformed_direction, oc);
+	c = ft_get_length_squared(oc) - ((c_element->diameter / 2.0) * (c_element->diameter / 2.0));
+	disc = h * h - a * c;
 
-	//printf("inter_state: %d\n", inter->state);
-	if (inter->state == 0)
+	if (disc >= 0)
 	{
-		inter->position.x = inter_point.x;
-		inter->position.y = inter_point.y;
-		inter->position.z = inter_point.z;
-		inter->element = c_element;
-		inter->state = 1;
+		t = (h - sqrtf(disc)) / a;
+		if (t < inter->distance && t > 0.001)
+		{
+			ft_get_inter_sp(inter, c_element, t);
+		}
 	}
-	else
-		ft_get_closest_point(inter, inter_point, c_element);
 }
 
 
@@ -135,6 +143,29 @@ void	ft_get_closest_point(t_intersection *inter, t_vector inter_point, t_element
 		inter->position.x = inter_point.x;
 		inter->position.y = inter_point.y;
 		inter->position.z = inter_point.z;
-		inter->element = c_element;	
+		inter->element = c_element;
+		inter->distance = length1;
+	}
+}
+
+void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
+{
+	t_vector	inter_point;
+
+	inter_point = ft_mult_vector_float(inter->ray.direction, t);
+	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
+
+	if (inter->state == 0 || t < inter->distance)
+	{
+		inter->position.x = inter_point.x;
+		inter->position.y = inter_point.y;
+		inter->position.z = inter_point.z;
+		inter->element = c_element;
+		inter->state = 1;
+		inter->distance = t;
+	}
+	else
+	{
+		ft_get_closest_point(inter, inter_point, c_element);
 	}
 }

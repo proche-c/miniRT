@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <float.h>
 # include "../libft/libft.h"
 # include "mlx.h"
 # include "./pixel.h"
@@ -93,6 +94,7 @@ typedef struct s_intersection
 	struct s_vector		position;
 	struct s_ray		ray;
 	struct s_element	*element;
+	float				distance;
 }	t_intersection;
 
 typedef struct s_scene
@@ -291,6 +293,9 @@ t_matrix create_scaling_matrix(float sx, float sy, float sz);
 t_vector apply_matrix(t_matrix mat, t_vector vec);
 t_matrix multiply_matrices(t_matrix m1, t_matrix m2);
 t_vector reflect_vector(t_vector incident, t_vector normal);
+t_ray create_shadow_ray(t_vector origin, t_vector light_position);
+int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light);
+
 
 
 
