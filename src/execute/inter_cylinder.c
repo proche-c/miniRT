@@ -86,7 +86,7 @@ void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point)
 void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element)
 {
-	if (inter->state == 0)
+	if (inter->state == 0 || tmp_inter->distance < inter->distance)
 	{
 		inter->position.x = tmp_inter->position.x;
 		inter->position.y = tmp_inter->position.y;
@@ -94,6 +94,7 @@ void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
 		inter->element = c_element;
 		inter->cy_base = 1;
 		inter->state = 1;
+		inter->distance = tmp_inter->distance;
 	}
 	else
 		ft_get_closest_point_cy(inter, tmp_inter->position, c_element);
@@ -102,13 +103,14 @@ void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
 void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element)
 {
-	if (inter->state == 0)
+	if (inter->state == 0 || tmp_inter->distance < inter->distance)
 	{
 		inter->position.x = tmp_inter->position.x;
 		inter->position.y = tmp_inter->position.y;
 		inter->position.z = tmp_inter->position.z;
 		inter->element = c_element;
 		inter->state = 1;
+		inter->distance = tmp_inter->distance;
 	}
 	else
 		ft_get_closest_point(inter, tmp_inter->position, c_element);

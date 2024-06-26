@@ -12,18 +12,13 @@
 
 #include "../../include/minirt.h"
 
-t_vector normalize(t_vector v) 
-{
+t_vector normalize(t_vector v) {
     double length = sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
-    double length_squared = v.x * v.x + v.y * v.y + v.z * v.z;
-    t_vector norm = {
-        .x = v.x / length,
-        .y = v.y / length,
-        .z = v.z / length,
-        .length_squared = length_squared,
-        .length = length
-    };
-    return norm;
+    if (length == 0) { // Gestion du cas de la division par zéro
+        return (t_vector){0, 0, 0, 0, 0};
+    }
+    double length_squared = length * length;
+    return (t_vector){v.x / length, v.y / length, v.z / length, length_squared, length};
 }
 
 
