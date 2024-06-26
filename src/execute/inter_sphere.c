@@ -89,7 +89,7 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 	if (disc >= 0)
 	{
 		t = (h - sqrtf(disc)) / a;
-		if (t < inter->distance && t > 0.001)
+		if (t > 0.001)
 		{
 		ft_get_inter_sp(inter, c_element, t);
 		}

@@ -82,12 +82,13 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     int in_shadow = is_in_shadow(scene, shadow_ray, light, inter);
 
     // If the point is in shadow, only ambient light applies
+    
     if (in_shadow)
     {
         return (t_color){
-            .r = ambient->ratio * ambient->color.r,
-            .g = ambient->ratio * ambient->color.g,
-            .b = ambient->ratio * ambient->color.b
+            .r = ambient->ratio * inter->element->color.r,
+        .g = ambient->ratio * inter->element->color.g,
+        .b = ambient->ratio * inter->element->color.b 
         };
     }
 
