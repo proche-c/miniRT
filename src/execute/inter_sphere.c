@@ -143,7 +143,7 @@ void	ft_get_closest_point(t_intersection *inter, t_vector inter_point, t_element
 		inter->position.y = inter_point.y;
 		inter->position.z = inter_point.z;
 		inter->element = c_element;
-		inter->distance = length1;
+		inter->distance = ft_distance(inter->ray.origin, inter_point);
 	}
 }
 
@@ -153,6 +153,7 @@ void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 
 	inter_point = ft_mult_vector_float(inter->ray.direction, t);
 	inter_point = ft_add_vectors(inter->ray.origin, inter_point);
+	//printf("inter->distace = %f\n", inter->distance); //
 
 	if (inter->state == 0 || t < inter->distance)
 	{
@@ -161,7 +162,7 @@ void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 		inter->position.z = inter_point.z;
 		inter->element = c_element;
 		inter->state = 1;
-		inter->distance = t;
+		inter->distance = ft_distance(inter->ray.origin, inter_point);
 	}
 	else
 	{

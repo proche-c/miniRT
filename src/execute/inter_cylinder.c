@@ -132,6 +132,8 @@ void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element)
 	// printf("q.disc: %f\n", q.disc);
 	if (q.disc < 0)
 		return;
+	if(q.a < E)
+		return ;
 	q.t1 = (-q.b - sqrt(q.disc)) / (q.a * 2);
 	q.t2 = (-q.b + sqrt(q.disc)) / (q.a * 2);
 	// printf("q.t1: %f\n", q.t1);
@@ -149,6 +151,11 @@ void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element * c_element)
 
 int	ft_get_quadratic(t_quadratic *q)
 {
+	if (q->a == 0) {
+        // Si a est zéro, ce n'est pas une équation quadratique
+        return (0);
+    }
+
 	q->disc = q->b * q->b - 4 * q->a * q->c;
 	if (q->disc < 0)
 		return (0);
@@ -168,6 +175,7 @@ void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_elem
 	length1 = ft_get_vector_length(v1);
 	v2 = ft_sub_vectors(inter->position, inter->ray.pixel_center);
 	length2 = ft_get_vector_length(v2);
+	
 	if (length1 < length2)
 	{
 		inter->position.x = inter_point.x;
@@ -175,6 +183,7 @@ void	ft_get_closest_point_cy(t_intersection *inter, t_vector inter_point, t_elem
 		inter->position.z = inter_point.z;
 		inter->element = c_element;
 		inter->cy_base = 1;
+		inter->distance = ft_distance(inter->ray.origin, inter_point);
 	}
 }
 	
