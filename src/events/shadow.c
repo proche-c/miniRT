@@ -26,8 +26,9 @@ int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light, t_intersectio
 
     if (shadow_inter->state && shadow_inter->distance < max_distance)
     {
+        free(shadow_inter);
         return 1; // Une intersection est trouvée avant d'atteindre la lumière
     }
-
+    free(shadow_inter);
     return 0; // Aucune intersection trouvée, le point n'est pas dans l'ombre
 }

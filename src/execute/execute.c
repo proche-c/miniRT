@@ -32,8 +32,7 @@ int	ft_execute(t_scene *scene)
 		while (i < scene->image_side)
 		{
 			inter->state = 0;
-			inter->shadow = 0;
-			inter->shadow_element = NULL;
+
 			ft_get_ray(scene, inter, j, i);	//PAULA
 			//ft_print_ray(inter->ray);
 			ft_hit_something(scene, inter);

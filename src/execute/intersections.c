@@ -57,7 +57,7 @@ void	ft_hit_something(t_scene *scene, t_intersection *inter)
 			ft_inter_cy(inter, c_element);
 		c_element = c_element->next;
 	}
-	ft_calculate_shadow(scene, inter, c_element);
+
 }
 
 void	ft_get_inter_ray(t_ray ray, t_intersection *inter)
