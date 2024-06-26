@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <math.h>
+# include <float.h>
 # include "../libft/libft.h"
 # include "mlx.h"
 # include "./pixel.h"
@@ -82,6 +83,8 @@ typedef struct s_ray
 	struct s_vector		origin;
 	struct s_vector		direction;
 	struct s_vector		pixel_center;
+	int 				t_min;
+	int 				t_max;
 }	t_ray;
 
 typedef struct s_element
@@ -102,6 +105,7 @@ typedef struct s_intersection
 	struct s_vector		position;
 	struct s_ray		ray;
 	struct s_element	*element;
+	float				distance;
 }	t_intersection;
 
 typedef struct s_scene
@@ -126,6 +130,7 @@ typedef struct s_scene
 	struct s_img		img;
 	void				*mlx_ptr;
 	void				*window_ptr;
+	int                 num_objects;
 }	t_scene;
 
 // CHECKERS
@@ -300,5 +305,20 @@ t_color	rgb2color(int rgb);
 int		color2rgb(t_color c);
 t_vector apply_matrix(t_matrix mat, t_vector vec);
 t_matrix create_translation_matrix(float tx, float ty, float tz);
+
+//matrix
+t_matrix create_translation_matrix(float tx, float ty, float tz);
+t_matrix create_rotation_matrix_x(float angle);
+t_matrix create_rotation_matrix_y(float angle);
+t_matrix create_rotation_matrix_z(float angle);
+t_matrix create_scaling_matrix(float sx, float sy, float sz);
+t_vector apply_matrix(t_matrix mat, t_vector vec);
+t_matrix multiply_matrices(t_matrix m1, t_matrix m2);
+t_vector reflect_vector(t_vector incident, t_vector normal);
+t_ray create_shadow_ray(t_vector origin, t_vector light_position);
+int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light, t_intersection *inter);
+void	ft_hit_something_2(t_scene *scene, t_intersection *shadow_inter, t_element *inter_element);
+
+
 
 #endif

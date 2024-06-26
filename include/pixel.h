@@ -4,6 +4,7 @@
 
 #define WIN_HEIGHT 1080
 #define WIN_WIDTH 1920
+#define SHADOW_RAY_MIN_DISTANCE 0.0001
 //HOOKS
 
 # ifdef __APPLE__
