@@ -101,7 +101,8 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     int color_int2;
 
 
-    normal = (t_vector){0,0,0,0,0};
+    // Determine the normal based on the type of the intersected element
+    //printf("Element identifier: %s\n", intersection->element->identifier);
     if (ft_strncmp(intersection->element->identifier, "sp", 3) == 0)
         normal = calculate_sphere_normal(intersection->element, intersection);
     else if (ft_strncmp(intersection->element->identifier, "pl", 3) == 0)
@@ -112,8 +113,8 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
         .x = scene->camera.pov.x - intersection->position.x,
         .y = scene->camera.pov.y - intersection->position.y,
         .z = scene->camera.pov.z - intersection->position.z,
-        .length_squared = 0,
-        .length = 0
+        //.length_squared = 0,
+        //.length = 0
     };
     view_dir = normalize(view_dir);
     color_calc = calculate_lighting(scene, intersection, normal, view_dir);
@@ -127,5 +128,6 @@ void write_pixel_no_object(t_scene *scene, int j, int i)
     t_color background_color = {0,0,0};
 
     no_col = color2rgb(background_color);
+
     ft_pixel_put(&scene->img, i, j, no_col, scene);
 }

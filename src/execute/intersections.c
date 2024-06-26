@@ -12,6 +12,8 @@
 
 #include "minirt.h"
 
+
+
 void	ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i)
 {
 	inter->ray.origin.x = scene->camera.pov.x;
@@ -44,7 +46,7 @@ void	ft_hit_something(t_scene *scene, t_intersection *inter)
 	// ft_get_inter_ray(ray, inter);
 	c_element = scene->elements;
 	// printf("c_element->identifier: %s\n", c_element->identifier);
-	while (c_element)
+	while (c_element )
 	{
 		// printf("c_element->identifier: %s\n", c_element->identifier);
 		if (ft_strncmp(c_element->identifier, "sp", 3) == 0)
@@ -65,44 +67,44 @@ void	ft_get_inter_ray(t_ray ray, t_intersection *inter)
 	inter->ray.pixel_center = ray.pixel_center;
 }
 
-void	ft_calculate_shadow(t_scene *scene, t_intersection *inter, t_element *element)
-{
-	t_intersection	*shadow_inter;
-
-	shadow_inter = malloc(sizeof(t_intersection));
-	ft_get_shadow_ray(scene, inter, shadow_inter);
-	ft_hit_something_shadow(scene, shadow_inter, element);
-	if (shadow_inter->state == 1)
-	{
-		inter->shadow = 1;
-		inter->shadow_element = shadow_inter->element;
-	}
-}
-
-void	ft_get_shadow_ray(t_scene *scene, t_intersection *inter, t_intersection *shadow_inter)
-
-{
-	shadow_inter->ray.origin = inter->position;
-	shadow_inter->ray.direction = ft_sub_vectors(scene->light.position, inter->position);
-}
-
-void	ft_hit_something_shadow(t_scene *scene, t_intersection *shadow_inter, t_element *element)
-
+void	ft_hit_something_2(t_scene *scene, t_intersection *shadow_inter, t_element *inter_element)
 {
 	t_element	*c_element;
 
+
+	//inter->state = 0;
+	// ft_get_inter_ray(ray, inter);
 	c_element = scene->elements;
+	// printf("c_element->identifier: %s\n", c_element->identifier);
 	while (c_element)
 	{
-		if (c_element != element)
+		if(c_element != inter_element)
 		{
+		// printf("c_element->identifier: %s\n", c_element->identifier);
 		if (ft_strncmp(c_element->identifier, "sp", 3) == 0)
 			ft_inter_sp(shadow_inter, c_element);
 		else if (ft_strncmp(c_element->identifier, "pl", 3) == 0)
 			ft_inter_pl(shadow_inter, c_element);
 		else if (ft_strncmp(c_element->identifier, "cy", 3) == 0)
 			ft_inter_cy(shadow_inter, c_element);
-		}
+			}
 		c_element = c_element->next;
+		
 	}
+	// if (ray.pixel_center.x == scene->pixel00.x && ray.pixel_center.y == scene->pixel00.y
+	// 	&& ray.pixel_center.z == scene->pixel00.z)
+	// {
+	// 	printf("inter->ray.pixel_center.x: %f\n", inter->ray.pixel_center.x);
+	// 	printf("inter->ray.pixel_center.y: %f\n", inter->ray.pixel_center.y);
+	// 	printf("inter->ray.pixel_center.z: %f\n", inter->ray.pixel_center.z);
+	// 	printf("inter->ray.direction.x: %f\n", inter->ray.direction.x);
+	// 	printf("inter->ray.direction.y: %f\n", inter->ray.direction.y);
+	// 	printf("inter->ray.direction.z: %f\n", inter->ray.direction.z);
+	// 	printf("inter->ray.origin.x: %f\n", inter->ray.origin.x);
+	// 	printf("inter->ray.origin.y: %f\n", inter->ray.origin.y);
+	// 	printf("inter->ray.origin.z: %f\n", inter->ray.origin.z);
+	// }
+	// printf("inter->position.x: %f\n", inter->position.x);
+	// printf("inter->position.x: %f\n", inter->position.x);
+	// printf("inter->position.x: %f\n", inter->position.x);
 }
