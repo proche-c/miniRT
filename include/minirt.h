@@ -102,6 +102,8 @@ typedef struct s_intersection
 	struct s_vector		position;
 	struct s_ray		ray;
 	struct s_element	*element;
+	int					shadow;
+	struct s_element	*shadow_element;
 }	t_intersection;
 
 typedef struct s_scene
@@ -245,6 +247,9 @@ void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w);
 void	ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i);
 void	ft_hit_something(t_scene *scene, t_intersection *inter);
 void	ft_get_inter_ray(t_ray ray, t_intersection *inter);
+void	ft_calculate_shadow(t_scene *scene, t_intersection *inter, t_element *element);
+void	ft_get_shadow_ray(t_scene *scene, t_intersection *inter, t_intersection *shadow_inter);
+void	ft_hit_something_shadow(t_scene *scene, t_intersection *shadow_inter, t_element *element);
 
 	/*inter_sphere*/
 void	ft_inter_sp(t_intersection *inter, t_element *c_element);

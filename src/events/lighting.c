@@ -42,11 +42,20 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
     view_dir = normalize(view_dir);
     double diff = fmax(ft_dot(normal, light_dir), 0.0);
   
-    t_color ambient_diffuse_color = {
-        .r = ambient->ratio * ambient->color.r + light->ratio * inter->element->color.r * diff,
-        .g = ambient->ratio * ambient->color.g + light->ratio * inter->element->color.g * diff,
-        .b = ambient->ratio * ambient->color.b + light->ratio * inter->element->color.b * diff
-    };
+    t_color ambient_diffuse_color;
+    
+    if (inter->shadow == 0)
+    {
+        ambient_diffuse_color.r = ambient->ratio * ambient->color.r + light->ratio * inter->element->color.r * diff;
+        ambient_diffuse_color.g = ambient->ratio * ambient->color.g + light->ratio * inter->element->color.g * diff;
+        ambient_diffuse_color.b = ambient->ratio * ambient->color.b + light->ratio * inter->element->color.b * diff;
+    }
+    else
+    {
+        ambient_diffuse_color.r = ambient->ratio * ambient->color.r + inter->element->color.r * diff;
+        ambient_diffuse_color.g = ambient->ratio * ambient->color.g + inter->element->color.g * diff;
+        ambient_diffuse_color.b = ambient->ratio * ambient->color.b + inter->element->color.b * diff;
+    }
     inter_color = add_light(inter_color, ambient_diffuse_color, ambient->ratio);
 
             // Specular lighting // Shininess factor (not mandatory)
