@@ -12,18 +12,19 @@ t_ray create_shadow_ray(t_vector origin, t_vector light_position)
     return shadow_ray;
 }
 
-int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light)
+int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light, t_intersection *inter)
 {
-    t_intersection inter;
-    inter.distance = FLT_MAX; // Initialisez la distance à une valeur maximale
-    inter.state = 0;
-    inter.ray = shadow_ray;
+    t_intersection *shadow_inter;
+    shadow_inter = malloc(sizeof(t_intersection));
+    shadow_inter->distance = FLT_MAX; // Initialisez la distance à une valeur maximale
+    shadow_inter->state = 0;
+    shadow_inter->ray = shadow_ray;
 
-    ft_hit_something(scene, &inter);
+    ft_hit_something_2(scene, shadow_inter, inter->element);
 
     double max_distance = ft_get_vector_length(ft_sub_vectors(light->position, shadow_ray.origin));
 
-    if (inter.state && inter.distance < max_distance)
+    if (shadow_inter->state && shadow_inter->distance < max_distance)
     {
         return 1; // Une intersection est trouvée avant d'atteindre la lumière
     }

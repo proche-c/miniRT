@@ -294,8 +294,8 @@ t_vector apply_matrix(t_matrix mat, t_vector vec);
 t_matrix multiply_matrices(t_matrix m1, t_matrix m2);
 t_vector reflect_vector(t_vector incident, t_vector normal);
 t_ray create_shadow_ray(t_vector origin, t_vector light_position);
-int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light);
-
+int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light, t_intersection *inter);
+void	ft_hit_something_2(t_scene *scene, t_intersection *shadow_inter, t_element *inter_element);
 
 
 

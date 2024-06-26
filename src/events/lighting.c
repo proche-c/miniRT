@@ -79,7 +79,7 @@ t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector norma
 
     // Create shadow ray
     t_ray shadow_ray = create_shadow_ray(inter->position, light->position);
-    int in_shadow = is_in_shadow(scene, shadow_ray, light);
+    int in_shadow = is_in_shadow(scene, shadow_ray, light, inter);
 
     // If the point is in shadow, only ambient light applies
     if (in_shadow)
