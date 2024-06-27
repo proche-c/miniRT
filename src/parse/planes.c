@@ -12,8 +12,7 @@
 
 #include "minirt.h"
 
-// WORK IN PROGRESS
-int	 ft_get_plane(t_element *new_element, char **params)
+int	ft_get_plane(t_element *new_element, char **params)
 {
 	new_element->next = NULL;
 	if (ft_count_params(params) != 4)
@@ -38,7 +37,7 @@ int	 ft_get_plane(t_element *new_element, char **params)
 
 int	ft_get_e_n_vector(t_element *new_element, char *param)
 {
-	char	**co;
+	char		**co;
 	t_vector	vector;
 
 	co = ft_split(param, ',');

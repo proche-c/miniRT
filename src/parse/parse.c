@@ -14,11 +14,10 @@
 
 int	ft_parse(t_scene *scene)
 {
-	print_in_out("IN FT_PARSE\n");
 	char	**lines;
 	int		i;
 
-	// get the lines in scene->str
+	print_in_out("IN FT_PARSE\n");
 	lines = ft_split(scene->str_scene, '\n');
 	i = 0;
 	while (lines[i])
@@ -27,40 +26,39 @@ int	ft_parse(t_scene *scene)
 		{
 			perror("error: parameter definition\n");
 			ft_free_params(lines);
-			print_in_out("OUT FT_PARSE IN 1\n");
 			return (1);
 		}
 		scene->num_objects = i;
 		i++;
 	}
 	ft_free_params(lines);
-	// ft_print_camera(scene);
-	// ft_print_ambient(scene);
-	// ft_print_light(scene);
-	//ft_print_elements(scene);
 	if (scene->camera.defined == 0 || scene->ambient.defined == 0
 		|| scene->light.defined == 0 || scene->elements == NULL)
 	{
 		printf("error: scene definition: missing mandatory parameters\n");
-		printf("OUT FT_PARSE IN 2\n");
 		return (1);
 	}
-	print_in_out("OUT FT_PARSE IN 3\n");
 	return (0);
 }
+	// ft_print_camera(scene);
+	// ft_print_ambient(scene);
+	// ft_print_light(scene);
+	//ft_print_elements(scene);
+	// get the lines in scene->str
+	//print_in_out("OUT FT_PARSE IN 3\n");
+	//printf("OUT FT_PARSE IN 2\n");
+	//print_in_out("OUT FT_PARSE IN 1\n");
 
 int	ft_get_parameter(char *line, t_scene *scene)
 {
 	char	**params;
 
-	// get rid of spaces and get clean params
 	params = ft_split(line, ' ');
-	// evaluate identifier
 	if (ft_strncmp(params[0], "C", 2) == 0 || ft_strncmp(params[0], "A", 2) == 0
 		|| ft_strncmp(params[0], "L", 2) == 0
-			|| ft_strncmp(params[0], "pl", 3) == 0
-				|| ft_strncmp(params[0], "sp", 3) == 0
-					|| ft_strncmp(params[0], "cy", 3) == 0)
+		|| ft_strncmp(params[0], "pl", 3) == 0
+		|| ft_strncmp(params[0], "sp", 3) == 0
+		|| ft_strncmp(params[0], "cy", 3) == 0)
 	{
 		if (ft_get_data(params, scene) == 1)
 		{
@@ -77,6 +75,8 @@ int	ft_get_parameter(char *line, t_scene *scene)
 	ft_free_params(params);
 	return (0);
 }
+// get rid of spaces and get clean params
+// evaluate identifier
 
 // evaluates type of identifier and call function to get the data
 int	ft_get_data(char **params, t_scene *scene)
@@ -86,9 +86,7 @@ int	ft_get_data(char **params, t_scene *scene)
 	result = 0;
 	if (ft_strncmp(params[0], "C", 2) == 0)
 	{
-	
 		result = ft_get_camera(params, scene);
-
 	}
 	else if (ft_strncmp(params[0], "A", 2) == 0)
 		result = ft_get_ambient(params, scene);
@@ -96,14 +94,12 @@ int	ft_get_data(char **params, t_scene *scene)
 		result = ft_get_light(params, scene);
 	else if (ft_strncmp(params[0], "pl", 3) == 0)
 	{
-		// result = 0;
 		result = ft_get_element(params, scene);
 	}
 	else if (ft_strncmp(params[0], "sp", 3) == 0)
 		result = ft_get_element(params, scene);
 	else if (ft_strncmp(params[0], "cy", 3) == 0)
 	{
-		// result = 0;
 		result = ft_get_element(params, scene);
 	}
 	return (result);
@@ -118,7 +114,7 @@ int	ft_init_elements(t_scene *scene)
 
 t_vector	ft_normalize_params(t_vector vector)
 {
-	float	length;
+	float		length;
 	t_vector	new_vector;
 
 	length = ft_get_vector_length(vector);
