@@ -50,7 +50,7 @@ int	ft_execute(t_scene *scene)
 			}
 			else
 			{
-				write_pixel_no_object(scene, j, i); //ALEX
+				write_pixel_no_object(scene); //ALEX
 				//color_screen(scene, 0xff00);
 				//printf("write_pixel_no_object\n");
 			}

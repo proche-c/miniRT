@@ -57,4 +57,13 @@ typedef struct s_matrix
     float m[4][4];
 } t_matrix;
 
+typedef struct s_pixel_info
+{
+    t_img *img;
+    int x;
+    int y;
+    int color;
+} t_pixel_info;
+
+
 #endif

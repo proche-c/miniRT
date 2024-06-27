@@ -28,44 +28,72 @@ t_vector	reflect_vector(t_vector incident, t_vector normal)
 	return (normalize(reflected));
 }
 
-t_color	calculate_lighting(t_scene *scene, t_intersection *inter, \
-t_vector normal, t_vector view_dir)
+t_color	calculate_shadow(t_scene *scene, t_intersection *inter, t_light *light, \
+t_ambient *ambient)
 {
-	t_color		inter_color;
-	t_light		*light;
-	t_ambient	*ambient;
-	t_vector	light_dir;
-	t_ray		shadow_ray;
-	int			in_shadow;
-	t_color		ambient_diffuse_color;
-	double		diff;
+	t_ray	shadow_ray;
+	int		in_shadow;	
 
-	inter_color = inter->element->color;
-	light = &scene->light;
-	ambient = &scene->ambient;
-	light_dir = ft_sub_vectors(light->position, inter->position);
-	light_dir = ft_unit_vector(light_dir);
-	normal = ft_unit_vector(normal);
-	view_dir = ft_unit_vector(view_dir);
 	shadow_ray = create_shadow_ray(inter->position, light->position);
 	in_shadow = is_in_shadow(scene, shadow_ray, light, inter);
 	if (in_shadow)
 	{
-		return ((t_color){
-			.r = ambient->ratio * inter->element->color.r,
-			.g = ambient->ratio * inter->element->color.g,
-			.b = ambient->ratio * inter->element->color.b
-		});
+		return ((t_color)
+			{
+				.r = ambient->ratio * inter->element->color.r,
+				.g = ambient->ratio * inter->element->color.g,
+				.b = ambient->ratio * inter->element->color.b
+			});
 	}
+	return ((t_color){-1, -1, -1});
+}
+//return (t_color){-1, -1, -1}; Return an invalid color to signify no shadow
+
+t_color	calculate_color(t_intersection *inter, t_vector normal, \
+t_vector light_dir, t_light_ambient *light_ambient)
+{
+	double	diff;
+	t_color	ambient_diffuse_color;
+
 	diff = fmax(ft_dot(normal, light_dir), 0.0);
-	ambient_diffuse_color.r = ambient->ratio * ambient->color.r + \
-	light->ratio * inter->element->color.r * diff;
-	ambient_diffuse_color.g = ambient->ratio * ambient->color.g + \
-	light->ratio * inter->element->color.g * diff;
-	ambient_diffuse_color.b = ambient->ratio * ambient->color.b + \
-	light->ratio * inter->element->color.b * diff;
+	ambient_diffuse_color.r = light_ambient->ambient->ratio * \
+	light_ambient->ambient->color.r + light_ambient->light->ratio * \
+	inter->element->color.r * diff;
+	ambient_diffuse_color.g = light_ambient->ambient->ratio * \
+	light_ambient->ambient->color.g + light_ambient->light->ratio * \
+	inter->element->color.g * diff;
+	ambient_diffuse_color.b = light_ambient->ambient->ratio * \
+	light_ambient->ambient->color.b + light_ambient->light->ratio * \
+	inter->element->color.b * diff;
+	return (ambient_diffuse_color);
+}
+
+t_color	calculate_lighting(t_scene *scene, t_intersection *inter, \
+t_vector normal, t_vector view_dir)
+{
+	t_light_ambient	light_ambient;
+	t_vector		light_dir;
+	t_color			shadow_color;
+	t_color			ambient_diffuse_color;
+	t_color			inter_color;
+
+	light_ambient.light = &scene->light;
+	light_ambient.ambient = &scene->ambient;
+	light_dir = ft_unit_vector(ft_sub_vectors(light_ambient.light->position, \
+	inter->position));
+	normal = ft_unit_vector(normal);
+	view_dir = ft_unit_vector(view_dir);
+	shadow_color = calculate_shadow(scene, inter, \
+	light_ambient.light, light_ambient.ambient);
+	if (shadow_color.r != -1)
+	{
+		return (shadow_color);
+	}
+	ambient_diffuse_color = calculate_color(inter, normal, \
+	light_dir, &light_ambient);
+	inter_color = inter->element->color;
 	inter_color = add_light(inter_color, ambient_diffuse_color, \
-	ambient->ratio);
+	light_ambient.ambient->ratio);
 	return (inter_color);
 }
 

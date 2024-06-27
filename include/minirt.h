@@ -133,6 +133,12 @@ typedef struct s_scene
 	int                 num_objects;
 }	t_scene;
 
+typedef struct s_light_ambient 
+{
+    t_light   *light;
+    t_ambient *ambient;
+}	t_light_ambient;
+
 // CHECKERS
 
 int		ft_check(char *file_name, t_scene *scene);
@@ -224,7 +230,7 @@ void	ft_print_intersection(t_intersection *inter);
 	/*execute*/
 int		ft_execute(t_scene *scene);
 void	write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int i);
-void	write_pixel_no_object(t_scene *scene, int j, int i);
+
 
 	/*vectors_1*/
 t_vector ft_add_vectors(t_vector v1, t_vector v2);
@@ -300,7 +306,7 @@ t_vector calculate_sphere_normal(t_element *element, t_intersection *inter);
 t_vector calculate_plane_normal(t_element *element, t_vector normal);
 t_vector transform_point_to_local(t_vector inter_position, t_vector cylinder_position, t_vector n_vector);
 t_color calculate_lighting(t_scene *scene, t_intersection *inter, t_vector normal, t_vector view_dir);
-void	ft_pixel_put(t_img *img, int x, int y, int color, t_scene *scene);
+void ft_pixel_put(t_pixel_info *pixel_info, int image_side);
 t_color	rgb2color(int rgb);
 int		color2rgb(t_color c);
 t_vector apply_matrix(t_matrix mat, t_vector vec);
@@ -318,7 +324,9 @@ t_vector reflect_vector(t_vector incident, t_vector normal);
 t_ray create_shadow_ray(t_vector origin, t_vector light_position);
 int is_in_shadow(t_scene *scene, t_ray shadow_ray, t_light *light, t_intersection *inter);
 void	ft_hit_something_2(t_scene *scene, t_intersection *shadow_inter, t_element *inter_element);
-
+t_vector calculate_normal(t_intersection *intersection);
+t_vector calculate_view_dir(t_scene *scene, t_intersection *intersection);
+void	write_pixel_no_object(t_scene *scene);
 
 
 #endif
