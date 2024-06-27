@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elements.c                                          :+:      :+:    :+:   */
+/*   elements.c                                          :+:      :+:    :+:  */
 /*                                                    +:+ +:+         +:+     */
 /*   By: proche-c <proche-c@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,8 +12,7 @@
 
 #include "minirt.h"
 
-// WORK IN PROGRESS
-int	 ft_get_element(char **params, t_scene *scene)
+int	ft_get_element(char **params, t_scene *scene)
 {
 	print_in_out("IN FT_GET_ELEMENT\n");
 	if (scene->flag == 0)
@@ -33,16 +32,16 @@ int	 ft_get_element(char **params, t_scene *scene)
 			return (1);
 		}
 	}
-	//ft_print_elements(scene);
 	print_in_out("OUT FT_GET_ELEMENT, OK\n");
 	return (0);
 }
+	//ft_print_elements(scene);
 
 int	ft_data_first_element(char **params, t_scene *scene)
 {
-	print_in_out("IN FT_DATA_FIRST_ELEMENT\n");
 	t_element	*new_element;
 
+	print_in_out("IN FT_DATA_FIRST_ELEMENT\n");
 	new_element = malloc(sizeof(t_element));
 	if (!new_element)
 	{
@@ -60,9 +59,9 @@ int	ft_data_first_element(char **params, t_scene *scene)
 
 int	ft_data_add_element(char **params, t_scene *scene)
 {
-	print_in_out("IN FT_DATA_ADD_ELEMENT\n");
 	t_element	*new_element;
 
+	print_in_out("IN FT_DATA_ADD_ELEMENT\n");
 	new_element = malloc(sizeof(t_element));
 	if (!new_element)
 	{
@@ -94,11 +93,10 @@ int	ft_data_element(t_element *new_element, char **params)
 
 int	ft_get_e_position(t_element *new_element, char *param)
 {
+	char	**co;
+
 	print_in_out("ENTRO EN FT_GET_E_POSITION\n");
-	char **co;
-	
 	co = ft_split(param, ',');
-	// position must be a vector
 	if (ft_is_vector(co) == 1)
 	{
 		new_element->position.x = ft_atof(co[0]);
@@ -108,61 +106,9 @@ int	ft_get_e_position(t_element *new_element, char *param)
 		ft_free_params(co);
 		return (0);
 	}
-	// if position is not a vector, error:
 	ft_free_params(co);
 	print_in_out("OUT FT_GET_E_POSITION EN 2\n");
 	return (1);
 }
-
-int	ft_get_e_color(t_element *new_element, char *param)
-{
-	char **col;
-
-	col = ft_split(param, ',');
-	// col must be a color
-	if (ft_is_color(col) == 1)
-	{
-		new_element->color.r = ft_atoi(col[0]);
-		new_element->color.g = ft_atoi(col[1]);
-		new_element->color.b = ft_atoi(col[2]);
-		ft_free_params(col);
-		return (0);
-	}
-	ft_free_params(col);
-	return (1);
-}
-
-void	ft_add_element(t_element **lst, t_element *new)
-{
-	print_in_out("IN FT_ADD_ELEMENT\n");
-	t_element	*last;
-
-	if (lst && new)
-	{
-		if (*lst)
-		{
-			last = ft_elelast(*lst);
-			last->next = new;
-		}
-		else
-			*lst = new;
-	}
-	print_in_out("OUT FT_ADD_ELEMENT\n");
-}
-
-t_element	*ft_elelast(t_element *lst)
-{
-	print_in_out("IN FT_ELELAST\n");
-	t_element	*temp;
-
-	temp = lst;
-	if (lst)
-	{
-		while (temp->next)
-			temp = temp->next;
-		print_in_out("IN FT_ELELAST IN 1\n");
-		return (temp);
-	}
-	print_in_out("IN FT_ELELAST IN 2\n");
-	return (NULL);
-}
+	// position must be a vector
+	// if position is not a vector, error:

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ageiser <ageiser@student.42barcelo>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/15 15:32:58 by ageiser           #+#    #+#             */
+/*   Updated: 2022/09/20 15:41:05 by ageiser          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../include/minirt.h"
 
 //new color structure in float
@@ -19,6 +31,7 @@ t_color	*color_part(t_color *c, float p)
 	c->b *= c->b * p;
 	return (c);
 }
+
 //new color creation 
 t_color	color_mul(t_color c, float p)
 {
@@ -39,7 +52,7 @@ t_color	rgb2color(int rgb)
 	return (c);
 }
 
-int color2rgb(t_color color) 
+int	color2rgb(t_color color)
 {
-    return (color.r << 16) | (color.g << 8) | color.b;
+	return ((color.r << 16) | (color.g << 8) | color.b);
 }

@@ -12,24 +12,18 @@
 
 #include "minirt.h"
 
-int	 ft_get_light(char **params, t_scene *scene)
+int	ft_get_light(char **params, t_scene *scene)
 {
 	print_in_out("IN FT_GET_LIGHT\n");
-		// check if light is already defined
 	if (scene->light.defined == 0)
 	{
 		scene->light.defined = 1;
-		// if it's not defined, ft_data_light stores data in struc scene
 		if (ft_data_light(params, scene) == 1)
 		{
 			perror("error: light: wrong parameters\n");
 			print_in_out("OUT FT_GET_LIGHT IN 1\n");
 			return (1);
 		}
-		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
-		// ft_print_camera(scene);
-		// ft_print_ambient(scene);
-		// ft_print_light(scene);
 		print_in_out("OUT FT_GET_LIGHT IN 2\n");
 		return (0);
 	}
@@ -37,15 +31,18 @@ int	 ft_get_light(char **params, t_scene *scene)
 	{
 		perror("error: light: camera already defined\n");
 		return (1);
-	}	
+	}
 }
+		// check if light is already defined
+		// if it's not defined, ft_data_light stores data in struc scene
+		// ft_print_camera, ft_print_ambient, ft_print_light are debug functions
+		// ft_print_camera(scene);
+		// ft_print_ambient(scene);
+		// ft_print_light(scene);
 
 int	ft_data_light(char **params, t_scene *scene)
 {
 	print_in_out("IN FT_DATA_LIGHT\n");
-	// params in light must be 4 but we will just use 3 for the mandatory part:
-	// identifier, ratio and position
-	// missing get the ratio, working on it
 	if (ft_count_params(params) != 4)
 	{
 		print_in_out("OUT FT_DATA_LIGHT IN 1\n");
@@ -63,12 +60,15 @@ int	ft_data_light(char **params, t_scene *scene)
 	}
 	return (0);
 }
+	// params in light must be 4 but we will just use 3 for the mandatory part:
+	// identifier, ratio and position
+	// missing get the ratio, working on it
 
 int	ft_get_position(char **params, t_scene *scene)
 {
+	char	**co;
+
 	print_in_out("IN FT_GET_POSITION\n");
-	char **co;
-	
 	co = ft_split(params[1], ',');
 	if (ft_is_vector(co) == 1)
 	{
@@ -79,7 +79,6 @@ int	ft_get_position(char **params, t_scene *scene)
 		ft_free_params(co);
 		return (0);
 	}
-	
 	ft_free_params(co);
 	print_in_out("OUT FT_GET_POSITION EN 3\n");
 	return (1);
@@ -88,8 +87,6 @@ int	ft_get_position(char **params, t_scene *scene)
 int	ft_get_light_ratio(char **params, t_scene *scene)
 {
 	print_in_out("IN FT_GET_LIGHT_RATIO\n");
-	// ratio is a float in the range 0-1
-	
 	if (ft_is_float(params[2]) == 1 && ft_atof(params[2]) >= 0
 		&& ft_atof(params[2]) <= 1)
 	{
@@ -100,3 +97,4 @@ int	ft_get_light_ratio(char **params, t_scene *scene)
 	print_in_out("OUT FT_GET_LIGHT_RATIO WITHOUT RATIO\n");
 	return (1);
 }
+	// ratio is a float in the range 0-1
