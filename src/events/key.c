@@ -9,15 +9,16 @@
 /*   Updated: 2022/09/20 15:41:05 by ageiser          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-# include "../include/minirt.h"
 
-int handle_no_event(t_scene *scene)
+#include "../include/minirt.h"
+
+int	handle_no_event(t_scene *scene)
 {
 	(void)scene;
 	return (0);
 }
 
-int handle_input(int keycode, t_scene *scene)
+int	handle_input(int keycode, t_scene *scene)
 {
 	if (keycode == ESC_KEY)
 	{
@@ -44,12 +45,12 @@ int handle_input(int keycode, t_scene *scene)
 	return (0);
 }
 
-int close_window(t_scene *scene) 
+int	close_window(t_scene *scene)
 {
-    mlx_destroy_window(scene->mlx_ptr, scene->window_ptr);
+	mlx_destroy_window(scene->mlx_ptr, scene->window_ptr);
 	ft_free_scene(scene);
-    exit(0);
-    return (0);
+	exit(0);
+	return (0);
 }
 
 void	hook_init(t_scene *scene)
