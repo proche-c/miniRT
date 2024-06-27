@@ -164,32 +164,3 @@ t_vector ft_mult_vector_float_1(t_vector v, float f)
 	printf("result.z %f\n", result.z);
 	return (result);
 }
-
-t_vector ft_div_vector_float(t_vector v, float f)
-{
-	t_vector	result;
-	int			temp;
-
-	result.x = v.x / f;
-	result.y = v.y / f;
-	result.z = v.z / f;
-	result.length_squared = v.length_squared; // Ne pas modifier length_squared
-    result.length = v.length; // Ne pas modifier length
-
-	if (fabs(result.x) < E || fabs(v.x) < E)
-	{
-		temp = 0;
-		result.x = (float)temp;
-	}
-	if (fabs(result.y) < E || fabs(v.x) < E)
-	{
-		temp = 0;
-		result.y = (float)temp;
-	}
-	if (fabs(result.z) < E || fabs(v.x) < E)
-	{
-		temp = 0;
-		result.z = (float)temp;
-	}
-	return (result);
-}
