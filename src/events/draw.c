@@ -99,6 +99,13 @@ void write_pixel_object(t_scene *scene, t_intersection *intersection, int j, int
     t_vector view_dir;
     t_color color_calc;
     int color_int2;
+    normal = (t_vector) {
+        .x = 0,
+        .y = 0,
+        .z = 0
+        //.length_squared = 0,
+        //.length = 0
+    };
 
 
     // Determine the normal based on the type of the intersected element

@@ -83,8 +83,8 @@ typedef struct s_ray
 	struct s_vector		origin;
 	struct s_vector		direction;
 	struct s_vector		pixel_center;
-	int 				t_min;
-	int 				t_max;
+	float 				t_min;
+	float 				t_max;
 }	t_ray;
 
 typedef struct s_element
