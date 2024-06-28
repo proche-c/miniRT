@@ -53,14 +53,12 @@ void	ft_print_light(t_scene *scene)
 
 void	ft_print_params(char **params)
 {
-	 int	i;
+	int	i;
 
-	 i = 0;
-	 while (params[i])
-	 {
+	i = 0;
+	while (params[i])
+	{
 		printf("params[%d]: %s\n", i, params[i]);
 		i++;
-	 }
+	}
 }
-
-
