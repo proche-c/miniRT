@@ -113,6 +113,6 @@ t_vector	calculate_normal(t_intersection *intersection)
 		normal = calculate_plane_normal(intersection->element, normal);
 	else if (ft_strncmp(intersection->element->identifier, "cy", 3) == 0)
 		normal = calculate_cylinder_normal(intersection->element, \
-		intersection, normal);
+		intersection);
 	return (normal);
 }

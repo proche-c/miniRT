@@ -58,6 +58,7 @@ void	display_image(t_scene *scene)
 	start_y = (WIN_HEIGHT - scene->image_side) / 2;
 	mlx_put_image_to_window(scene->mlx_ptr, scene->window_ptr,
 		scene->img.img_ptr, start_x, start_y);
+	printf("minirt: Image to Window.\n");
 	mlx_loop(scene->mlx_ptr);
 }
 

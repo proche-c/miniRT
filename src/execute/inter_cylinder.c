@@ -49,11 +49,19 @@ t_element *c_element, t_intersection *tmp_inter)
 
 void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 {
-	t_element		*plane;
-	t_intersection	*tmp_inter;
+	t_element		*plane = NULL;
+	t_intersection	*tmp_inter = NULL;
 
 	plane = malloc(sizeof(t_element));
-	tmp_inter = malloc(sizeof(t_intersection));
+    if (!plane)
+        return; // Allocation failed, return to avoid using null pointer
+
+    tmp_inter = malloc(sizeof(t_intersection));
+    if (!tmp_inter)
+    {
+        free(plane);
+        return; // Allocation failed, free plane and return
+    }
 	ft_init_tmp_inter(tmp_inter, inter);
 	handle_plane_intersections(inter, c_element, tmp_inter, plane);
 	handle_infinite_cylinder_intersection(inter, c_element, tmp_inter);
@@ -136,3 +144,26 @@ void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point)
 					0.5 * c_element->height), c_element->position);
 	}
 }
+
+//chatgpt
+/*
+void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point)
+{
+	plane->n_vector.x = c_element->n_vector.x;
+	plane->n_vector.y = c_element->n_vector.y;
+	plane->n_vector.z = c_element->n_vector.z;
+	if (point == 1)
+	{
+		plane->position = ft_add_vectors(ft_mult_vector_float \
+		(c_element->n_vector, 
+		-0.5 * c_element->height), c_element->position);
+		// Inverser la normale pour le plan inférieur
+		plane->n_vector = ft_mult_vector_float(plane->n_vector, -1);
+	}
+	else if (point == 2)
+	{
+		plane->position = ft_add_vectors(ft_mult_vector_float \
+		(c_element->n_vector, 
+		* c_element->height), c_element->position);
+	}
+}*/
