@@ -46,7 +46,25 @@ t_vector	calculate_plane_normal(t_element *element, t_vector normal)
 	return (normal);
 }
 
-// Transforms a point to the local coordinate system of the cylinder
+// Fonction auxiliaire pour calculer les vecteurs up et right
+void	calculate_up_right(t_vector n_vector, t_vector *up, t_vector *right)
+{
+	up->x = 0;
+	up->y = 1;
+	up->z = 0;
+	if (fabs(n_vector.y) > 0.99)
+	{
+		up->x = 1;
+		up->y = 0;
+		up->z = 0;
+	}
+	*right = ft_cross(*up, n_vector);
+	*right = normalize(*right);
+	*up = ft_cross(n_vector, *right);
+	*up = normalize(*up);
+}
+
+// Fonction principale pour transformer le point
 t_vector	transform_point_to_local(t_vector inter_position, \
 t_vector cylinder_position, t_vector n_vector)
 {
@@ -55,53 +73,15 @@ t_vector cylinder_position, t_vector n_vector)
 	t_vector	right;
 	t_vector	relative_point;
 
-	up.x = 0;
-	up.y = 1;
-	up.z = 0;
-	up.length_squared = 0;
-	up.length = 0;
-	if (fabs(n_vector.y) > 0.99)
-	{
-		up.x = 1;
-		up.y = 0;
-		up.z = 0;
-		up.length_squared = 0;
-		up.length = 0;
-	}
-	right = ft_cross(up, n_vector);
-	right = normalize(right);
-	up = ft_cross(n_vector, right);
-	up = normalize(up);
+	calculate_up_right(n_vector, &up, &right);
 	relative_point.x = inter_position.x - cylinder_position.x;
 	relative_point.y = inter_position.y - cylinder_position.y;
 	relative_point.z = inter_position.z - cylinder_position.z;
-	relative_point.length_squared = 0;
-	relative_point.length = 0;
-	local_point.x = relative_point.x * right.x + relative_point.y * \
-	right.y + relative_point.z * right.z;
-	local_point.y = relative_point.x * up.x + relative_point.y * \
-	up.y + relative_point.z * up.z;
-	local_point.z = relative_point.x * n_vector.x + relative_point.y \
-	* n_vector.y + relative_point.z * n_vector.z;
-	local_point.length_squared = 0;
-	local_point.length = 0;
+	local_point.x = relative_point.x * right.x + relative_point.y * right.y + \
+	relative_point.z * right.z;
+	local_point.y = relative_point.x * up.x + relative_point.y * up.y + \
+	relative_point.z * up.z;
+	local_point.z = relative_point.x * n_vector.x + relative_point.y * \
+	n_vector.y + relative_point.z * n_vector.z;
 	return (local_point);
-}
-
-t_vector	calculate_cylinder_normal(t_element *element, \
-t_intersection *inter, t_vector normal)
-{
-	t_vector	local_point;
-	t_vector	local_normal;
-
-	local_point = transform_point_to_local(inter->position, \
-	element->position, element->n_vector);
-	normal.x = local_point.x;
-	normal.y = 0;
-	normal.z = local_point.z;
-	normal.length_squared = 0;
-	normal.length = 0;
-	local_normal = normalize(local_normal);
-	normal = transform_point_to_world(local_normal, element->n_vector);
-	return (normal);
 }

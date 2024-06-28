@@ -49,20 +49,16 @@ int	ft_is_normalized(char **co)
 	while (i < 3)
 	{
 		if (vec[i] > 1 || vec[i] < -1)
-		{
-			print_in_out("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
 			return (0);
-		}
 		length = length + vec[i] * vec[i];
 		i++;
 	}
 	if (length != 1)
-	{
-		print_in_out("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
 		return (0);
-	}
-	print_in_out("OUT FT_IS_NORMALIZED, THEY ARE NORMALIZED\n");
 	return (1);
 }
-		// each parameter must be 1 or 0
-		// check if co is normalized
+// each parameter must be 1 or 0
+// check if co is normalized
+//print_in_out("OUT FT_IS_NORMALIZED, THEY ARE NORMALIZED\n");
+//	print_in_out("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
+//		print_in_out("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");

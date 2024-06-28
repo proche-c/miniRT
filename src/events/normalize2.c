@@ -21,15 +21,11 @@ t_vector	transform_point_to_world(t_vector local_normal, t_vector n_vector)
 	up.x = 0;
 	up.y = 1;
 	up.z = 0;
-	up.length_squared = 0;
-	up.length = 0;
 	if (fabs(n_vector.y) > 0.99)
 	{
 		up.x = 1;
 		up.y = 0;
 		up.z = 0;
-		up.length_squared = 0;
-		up.length = 0;
 	}
 	right = ft_cross(up, n_vector);
 	right = normalize(right);
@@ -41,7 +37,21 @@ t_vector	transform_point_to_world(t_vector local_normal, t_vector n_vector)
 	up.y + local_normal.z * n_vector.y;
 	world_normal.z = local_normal.x * right.z + local_normal.y * \
 	up.z + local_normal.z * n_vector.z;
-	world_normal.length_squared = 0;
-	world_normal.length = 0;
 	return (world_normal);
+}
+
+t_vector	calculate_cylinder_normal(t_element *element, \
+t_intersection *inter, t_vector normal)
+{
+	t_vector	local_point;
+	t_vector	local_normal;
+
+	local_point = transform_point_to_local(inter->position, \
+	element->position, element->n_vector);
+	normal.x = local_point.x;
+	normal.y = 0;
+	normal.z = local_point.z;
+	local_normal = normalize(local_normal);
+	normal = transform_point_to_world(local_normal, element->n_vector);
+	return (normal);
 }
