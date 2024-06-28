@@ -58,14 +58,13 @@ int	ft_check_file(int fd, t_scene *scene)
 	else
 	{
 		buff[file_size] = '\0';
-		printf("len buff: %lu\n", ft_strlen(buff));
 		scene->str_scene = ft_strdup(buff);
-		printf("file_size: %lu\n", file_size);
-		printf("len scene: %lu\n", ft_strlen(scene->str_scene));
 		result = 0;
 	}
 	close(fd);
 	return (result);
 }
-
+//printf("len buff: %lu\n", ft_strlen(buff));
+//printf("file_size: %lu\n", file_size);
+//printf("len scene: %lu\n", ft_strlen(scene->str_scene));
 //free(buff);
