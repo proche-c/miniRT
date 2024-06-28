@@ -87,37 +87,18 @@ int	ft_is_positive(char *str)
 	return (1);
 }
 
-float	ft_atof(char *str)
+float	convert_decimal_part(const char *decimal_str)
 {
-	float	result;
-	float	num1;
 	float	num2;
-	char	**parts;
 
-	if (ft_strchr(str, '.') == NULL)
+	num2 = 0;
+	if (decimal_str != NULL)
 	{
-		result = (float)atoi(str);
-		return (result);
+		num2 = (float)ft_atoi(decimal_str);
+		while (num2 >= 1)
+		{
+			num2 /= 10;
+		}
 	}
-	parts = ft_split(str, '.');
-	num1 = ft_atoi(parts[0]);
-	if (parts[1] != NULL)
-	{
-		num2 = ft_atoi(parts[1]);
-		while (num2 > 1)
-			num2 = num2 / 10;
-	}
-	else
-		num2 = 0;
-	if (num1 >= 0)
-		result = num1 + num2;
-	else
-		result = num1 - num2;
-	ft_free_params(parts);
-	return (result);
+	return (num2);
 }
-	// printf("char: %s\n", str);
-	// printf("********************SALGO DE FT_ATOF 
-	//con result: %f\n\n", result);
-	// printf("\n***************ENTRO EN FT_ATOF 
-	//con str: %s*******************\n", str);
