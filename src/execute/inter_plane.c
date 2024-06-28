@@ -12,7 +12,6 @@
 
 #include "minirt.h"
 
-
 void	ft_inter_pl(t_intersection *inter, t_element *c_element)
 {
 	float		inter_exists;
@@ -21,19 +20,19 @@ void	ft_inter_pl(t_intersection *inter, t_element *c_element)
 	inter_exists = ft_dot(inter->ray.direction, c_element->n_vector);
 	if (inter_exists != 0)
 	{
-		t = ft_dot(ft_sub_vectors(c_element->position, inter->ray.origin), 
-			c_element->n_vector) / inter_exists;
+		t = ft_dot(ft_sub_vectors(c_element->position, inter->ray.origin),
+				c_element->n_vector) / inter_exists;
 		if (t > 0)
 		{
 			ft_get_inter_pl(inter, c_element, t);
-			// inter->position = ft_add_vectors(inter->ray.origin,
-			// 	ft_mult_vector_float(inter->ray.direction, inter->t));
-			// inter->color = c_element->color;
-			// inter->state = 1;
 		}
-	} 	
+	}
 	return ;
 }
+	// inter->position = ft_add_vectors(inter->ray.origin,
+	// 	ft_mult_vector_float(inter->ray.direction, inter->t));
+	// inter->color = c_element->color;
+	// inter->state = 1;
 
 void	ft_get_inter_pl(t_intersection *inter, t_element *c_element, float t)
 {
