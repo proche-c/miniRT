@@ -12,38 +12,36 @@
 
 #include "minirt.h"
 
-
 void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 {
-	t_element	*plane;
-	t_intersection *tmp_inter;
+	t_element		*plane;
+	t_intersection	*tmp_inter;
 
 	tmp_inter = malloc(sizeof(t_intersection));
 	plane = malloc(sizeof(t_element));
 	ft_init_tmp_inter(tmp_inter, inter);
 	ft_init_tmp_plane(plane, c_element, 1);
-	//printf("plane n_vector: %f %f %f\n", plane->n_vector.x, plane->n_vector.y, plane->n_vector.z);
 	ft_inter_pl(tmp_inter, plane);
-	if (tmp_inter->state == 1 &&
+	if (tmp_inter->state == 1 && \
 		ft_get_vector_length(ft_sub_vectors(tmp_inter->position,
-			plane->position)) <=c_element->diameter * 0.5)
+				plane->position)) <= c_element->diameter * 0.5)
 	{
-		//printf("cy_base");
-			ft_get_inter_data_1(inter, tmp_inter, c_element);			
+		ft_get_inter_data_1(inter, tmp_inter, c_element);
 	}
 	tmp_inter->state = 0;
 	ft_init_tmp_plane(plane, c_element, 2);
 	ft_inter_pl(tmp_inter, plane);
-	if (tmp_inter->state == 1 &&
+	if (tmp_inter->state == 1 && \
 		ft_get_vector_length(ft_sub_vectors(tmp_inter->position,
-			plane->position)) <=c_element->diameter * 0.5)
+				plane->position)) <= c_element->diameter * 0.5)
 	{
-		//printf("cy_base");
-			ft_get_inter_data_1(inter, tmp_inter, c_element);			
+		ft_get_inter_data_1(inter, tmp_inter, c_element);
 	}
 	tmp_inter->state = 0;
 	ft_inter_inf_cy(tmp_inter, c_element);
-	if (tmp_inter->state == 1 && pow(ft_distance(c_element->position, tmp_inter->position), 2) <= (pow(c_element->height * 0.5, 2) + c_element->diameter * c_element->diameter * 0.25))
+	if (tmp_inter->state == 1 && pow(ft_distance(c_element->position,
+				tmp_inter->position), 2) <= (pow(c_element->height * 0.5, 2) + \
+			c_element->diameter * c_element->diameter * 0.25))
 	{
 		ft_get_inter_data_2(inter, tmp_inter, c_element);
 	}
@@ -51,6 +49,10 @@ void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 	free(tmp_inter);
 	return ;
 }
+	//printf("plane n_vector: %f %f %f\n", plane->n_vector.x, 
+	//plane->n_vector.y, plane->n_vector.z);
+	//printf("cy_base");
+	//printf("cy_base");
 
 void	ft_init_tmp_inter(t_intersection *tmp_inter, t_intersection *inter)
 {
@@ -73,13 +75,15 @@ void	ft_init_tmp_plane(t_element *plane, t_element *c_element, int point)
 	plane->n_vector.z = c_element->n_vector.z;
 	if (point == 1)
 	{
-		plane->position = ft_add_vectors(ft_mult_vector_float(c_element->n_vector,
-			-0.5 * c_element->height), c_element->position);
+		plane->position = \
+		ft_add_vectors(ft_mult_vector_float(c_element->n_vector,
+					-0.5 * c_element->height), c_element->position);
 	}
 	else if (point == 2)
 	{
-		plane->position = ft_add_vectors(ft_mult_vector_float(c_element->n_vector,
-			0.5 * c_element->height), c_element->position);
+		plane->position = \
+		ft_add_vectors(ft_mult_vector_float(c_element->n_vector,
+					0.5 * c_element->height), c_element->position);
 	}
 }
 
@@ -115,5 +119,3 @@ void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	else
 		ft_get_closest_point(inter, tmp_inter->position, c_element);
 }
-	
-	
