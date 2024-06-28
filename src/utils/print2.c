@@ -163,7 +163,14 @@ void	ft_print_element(t_element *element)
 	else if (ft_strncmp(element->identifier, "pl", 3) == 0)
 	{
 		printf("\n***PLANE***\n");
-		printf("pointer: %p\n", element);
+	}
+	else if (ft_strncmp(element->identifier, "cy", 3) == 0)
+	{
+		printf("\n***CYLINDER***\n");
+	}
+}
+/*else if (ft_strncmp(element->identifier, "pl", 3) == 0)
+printf("pointer: %p\n", element);
 		printf("element->identifier: %s\n", element->identifier);
 		printf("element->position.x: %f\n", element->position.x);
 		printf("element->position.y: %f\n", element->position.y);
@@ -174,10 +181,10 @@ void	ft_print_element(t_element *element)
 		printf("element->color.r: %d\n", element->color.r);
 		printf("element->color.g: %d\n", element->color.g);
 		printf("element->color.b: %d\n", element->color.b);
-	}
-	else if (ft_strncmp(element->identifier, "cy", 3) == 0)
-	{
-		printf("\n***CYLINDER***\n");
+
+
+else if (ft_strncmp(element->identifier, "cy", 3) == 0)
+printf("\n***CYLINDER***\n");
 		printf("pointer: %p\n", element);
 		printf("element->identifier: %s\n", element->identifier);
 		printf("element->position.x: %f\n", element->position.x);
@@ -191,5 +198,4 @@ void	ft_print_element(t_element *element)
 		printf("element->color.r: %d\n", element->color.r);
 		printf("element->color.g: %d\n", element->color.g);
 		printf("element->color.b: %d\n", element->color.b);
-	}
-}
+*/

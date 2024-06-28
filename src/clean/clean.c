@@ -21,6 +21,7 @@ void	ft_free_scene(t_scene *scene)
 }
 	//printf("**ENTRO EN FT_FREE_SCENE**\n");
 	//printf("**SALGO DE FT_FREE_SCENE**\n");
+
 void	ft_free_all_elements(t_scene *scene)
 {
 	t_element	*element;
