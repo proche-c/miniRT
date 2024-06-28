@@ -18,14 +18,13 @@ MAIN = ./src/minirt.c \
 
 OBJS = $(SRCS:.c=.o)
 
-NAME = minirt
+NAME = miniRT
 
 HEADER = ./include/minirt.h
 
 CC = gcc #-fsanitize=address -g
 
 CFLAGS = -Wall -Wextra -Werror -g $(INC)
-
 
 ifeq ($(shell uname), Linux)
 	MDIR   = ./minilibx/linux
