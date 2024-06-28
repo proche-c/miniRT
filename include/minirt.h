@@ -331,6 +331,7 @@ t_vector	calculate_normal(t_intersection *intersection);
 t_vector	calculate_view_dir(t_scene *scene, t_intersection *intersection);
 void		write_pixel_no_object(t_scene *scene);
 float		convert_decimal_part(const char *decimal_str);
-
+void		ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter, t_element *c_element);
+void		ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter, t_element *c_element);
 
 #endif
