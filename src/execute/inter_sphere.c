@@ -12,24 +12,37 @@
 
 #include "minirt.h"
 
+float	calculate_discriminant(t_ray ray, t_vector oc, float radius_squared, \
+float *h)
+{
+	float	a;
+	float	c;
+
+	*h = ft_dot(ray.direction, oc);
+	a = ft_get_length_squared(ray.direction);
+	c = ft_get_length_squared(oc) - radius_squared;
+	return ((*h * *h) - (a * c));
+}
+
+float	calculate_t(float h, float disc, float a)
+{
+	return ((h - sqrtf(disc)) / a);
+}
+
 void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 {
 	t_vector	oc;
-	float		a;
 	float		h;
-	float		c;
-	float		disc;
 	float		t;
+	float		radius_squared;
+	float		disc;
 
 	oc = ft_sub_vectors(c_element->position, inter->ray.origin);
-	a = ft_get_length_squared(inter->ray.direction);
-	h = ft_dot(inter->ray.direction, oc);
-	c = ft_get_length_squared(oc) - ((c_element->diameter / \
-	2.0) * (c_element->diameter / 2.0));
-	disc = h * h - a * c;
+	radius_squared = (c_element->diameter / 2.0) * (c_element->diameter / 2.0);
+	disc = calculate_discriminant(inter->ray, oc, radius_squared, &h);
 	if (disc >= 0)
 	{
-		t = (h - sqrtf(disc)) / a;
+		t = calculate_t(h, disc, ft_get_length_squared(inter->ray.direction));
 		if (t > 0.001)
 		{
 			ft_get_inter_sp(inter, c_element, t);
