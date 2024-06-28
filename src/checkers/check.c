@@ -39,7 +39,7 @@ int	ft_check_extension(char *file_name)
 	len = ft_strlen(file_name);
 	if (file_name[len - 1] == 't' && file_name[len - 2] == 'r'
 		&& file_name[len - 3] == '.')
-			return (0);
+		return (0);
 	return (1);
 }
 
@@ -63,8 +63,9 @@ int	ft_check_file(int fd, t_scene *scene)
 		printf("file_size: %lu\n", file_size);
 		printf("len scene: %lu\n", ft_strlen(scene->str_scene));
 		result = 0;
-		//free(buff);
 	}
 	close(fd);
 	return (result);
 }
+
+//free(buff);
