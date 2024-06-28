@@ -85,8 +85,8 @@ void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element *c_element)
 	// printf("q.t2: %f\n", q.t2);
 	// printf("q.disc: %f\n", q.disc);
 
-	void	ft_get_inter_data_1(t_intersection *inter, t_intersection *tmp_inter,
-	t_element *c_element)
+void	ft_get_inter_data_1(t_intersection *inter,
+	t_intersection *tmp_inter, t_element *c_element)
 {
 	if (inter->state == 0 || tmp_inter->distance < inter->distance)
 	{
@@ -117,4 +117,3 @@ void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	else
 		ft_get_closest_point(inter, tmp_inter->position, c_element);
 }
-
