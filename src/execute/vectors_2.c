@@ -82,15 +82,12 @@ t_vector	ft_cross(t_vector v1, t_vector v2)
 		result.z = (float)temp;
 	}
 	return (result);
-
 }
 
 t_vector	ft_unit_vector(t_vector v)
 {
-	// float	length;
-	
-	// length = ft_get_vector_length(v);
 	return (ft_div_vector_float(v, ft_get_vector_length(v)));
 }
 
-
+	// float	length;	
+	// length = ft_get_vector_length(v);

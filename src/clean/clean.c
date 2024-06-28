@@ -38,8 +38,6 @@ void	ft_free_all_elements(t_scene *scene)
 	}
 }
 
-
-
 void	ft_free_params(char **params)
 {
 	int	i;
