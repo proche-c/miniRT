@@ -40,6 +40,8 @@ t_vector	transform_point_to_world(t_vector local_normal, t_vector n_vector)
 	return (world_normal);
 }
 
+// The transform_point_to_world function transforms a given normal vector local_normal from local coordinates (relative to a cylinder's surface) into global/world coordinates.
+
 t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter)
 {
     t_vector local_point;

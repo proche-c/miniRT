@@ -28,6 +28,10 @@ t_vector	reflect_vector(t_vector incident, t_vector normal)
 	return (normalize(reflected));
 }
 
+// The dot product measures the magnitude of the projection of the incident vector in the direction of the normal vector.
+// reflected.x = incident.x - 2 * dot_product * normal.x; This calculates each component of the reflected vector using the formula:
+// R=I−2(I⋅N)N
+
 t_color	calculate_shadow(t_scene *scene, t_intersection *inter, t_light *light, \
 t_ambient *ambient)
 {
@@ -68,6 +72,9 @@ t_vector light_dir, t_light_ambient *light_ambient)
 	return (ambient_diffuse_color);
 }
 
+// function computes the final color of a surface point based on ambient and diffuse lighting components.
+// diff: The computed diffuse reflection factor (determined by the dot product between normal and light_dir).
+
 t_color	calculate_lighting(t_scene *scene, t_intersection *inter, \
 t_vector normal, t_vector view_dir)
 {
@@ -96,6 +103,9 @@ t_vector normal, t_vector view_dir)
 	light_ambient.ambient->ratio);
 	return (inter_color);
 }
+
+// ft_sub_vectors: Computes the vector difference between the position of the light source and the intersection point.
+// ft_unit_vector: Normalizes the resulting vector light_dir to have unit length, ensuring it represents a direction.
 
 /*
     // Specular lighting (Phong reflection model)
