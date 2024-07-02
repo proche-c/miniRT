@@ -7,13 +7,6 @@ UTILS =	$(wildcard ./src/utils/*.c)
 CLEAN = $(wildcard ./src/clean/*.c)
 EVENT = $(wildcard ./src/events/*.c)
 
-# LISTS = ./src/lists/parse.c \
-# 	./src/lists/envp.c \
-# 	./src/lists/redir.c \
-# 	./src/lists/files.c \
-# 	./src/lists/args.c \
-
-
 MAIN = ./src/minirt.c \
 
 OBJS = $(SRCS:.c=.o)
@@ -24,7 +17,7 @@ HEADER = ./include/minirt.h
 
 CC = gcc -fsanitize=address -g
 
-CFLAGS = -Wall -Wextra -Werror -g $(INC)
+CFLAGS = -Wall -Wextra -Werror -g $(INCS)
 
 ifeq ($(shell uname), Linux)
 	MDIR   = ./minilibx/linux
@@ -79,3 +72,5 @@ test: clean re
 leaks: all
 	@clear
 	@leaks  -atExit -- ./minirt scenes/test.rt
+
+.PHONY: all clean fclean re norme test leaks library
