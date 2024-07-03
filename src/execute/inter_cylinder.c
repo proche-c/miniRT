@@ -49,19 +49,20 @@ t_element *c_element, t_intersection *tmp_inter)
 
 void	ft_inter_cy(t_intersection *inter, t_element *c_element)
 {
-	t_element		*plane = NULL;
-	t_intersection	*tmp_inter = NULL;
+	t_element		*plane ;
+	t_intersection	*tmp_inter;
 
+	plane = NULL;
+	tmp_inter = NULL;
 	plane = malloc(sizeof(t_element));
-    if (!plane)
-        return; // Allocation failed, return to avoid using null pointer
-
-    tmp_inter = malloc(sizeof(t_intersection));
-    if (!tmp_inter)
-    {
-        free(plane);
-        return; // Allocation failed, free plane and return
-    }
+	if (!plane)
+		return ;
+	tmp_inter = malloc(sizeof(t_intersection));
+	if (!tmp_inter)
+	{
+		free(plane);
+		return ;
+	}
 	ft_init_tmp_inter(tmp_inter, inter);
 	handle_plane_intersections(inter, c_element, tmp_inter, plane);
 	handle_infinite_cylinder_intersection(inter, c_element, tmp_inter);

@@ -37,8 +37,6 @@ void	ft_pixel_put(t_pixel_info *pixel_info, int image_side)
 	if (pixel_info->x < 0 || pixel_info->x >= image_side || \
 	pixel_info->y < 0 || pixel_info->y >= image_side)
 	{
-		printf("Error: Invalid coordinates (%d, %d)\n", \
-		pixel_info->x, pixel_info->y);
 		return ;
 	}
 	offset = (pixel_info->img->size_line * pixel_info->y) + \
@@ -53,15 +51,21 @@ void	ft_pixel_put(t_pixel_info *pixel_info, int image_side)
 	*((unsigned int *)(pixel_info->img->img_pixel_str + offset)) \
 	= pixel_info->color;
 }
-
+/*printf("Error: Invalid coordinates (%d, %d)\n", \
+pixel_info->x, pixel_info->y);*/
 // pixel_info->img->size_line is the number of bytes in a row of the image.
 // pixel_info->img->bpp is the bits per pixel.
 // (pixel_info->img->bpp / 8) converts bits per pixel to bytes per pixel.
-// The offset is calculated by multiplying the row number (y) by the size of a row in bytes (size_line), and adding the column offset (x * bytes per pixel).
-// pixel_info->img->img_pixel_str is the starting address of the image pixel data.
-// The offset is added to this starting address to get the address of the specific pixel.
+// The offset is calculated by multiplying the row number (y) by 
+// the size of a row in bytes (size_line), and adding the column offset 
+// (x * bytes per pixel).
+// pixel_info->img->img_pixel_str is the starting address 
+// of the image pixel data.
+// The offset is added to this starting address to get the 
+// address of the specific pixel.
 // The color value (pixel_info->color) is assigned to this address.
-// The cast to unsigned int* ensures that the correct number of bytes are written for the pixel color.
+// The cast to unsigned int* ensures that the correct number of bytes 
+// are written for the pixel color.
 
 void	color_screen(t_scene *scene, int color)
 {
@@ -111,12 +115,16 @@ int	pixel_print(t_scene *scene)
 	return (0);
 }
 
-// mlx_get_data_addr is a function from the MLX library that retrieves the address of the image pixel data.
+// mlx_get_data_addr is a function from the MLX library 
+// that retrieves the address of the image pixel data.
 // scene->img.img_ptr: The pointer to the image created earlier.
 // &scene->img.bpp: A pointer to an integer to store bits per pixel.
-// &scene->img.size_line: A pointer to an integer to store the size of a line in bytes.
-// &scene->img.endian: A pointer to an integer to store the endianess of the image.
-// The function returns a pointer to the pixel data, which is stored in scene->img.img_pixel_str.
+// &scene->img.size_line: A pointer to an integer to store 
+// the size of a line in bytes.
+// &scene->img.endian: A pointer to an integer to store the endianess 
+// of the image.
+// The function returns a pointer to the pixel data, which 
+// is stored in scene->img.img_pixel_str.
 
 t_vector	calculate_normal(t_intersection *intersection)
 {

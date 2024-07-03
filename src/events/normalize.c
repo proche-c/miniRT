@@ -27,8 +27,10 @@ t_vector	normalize(t_vector v)
 	length_squared, length});
 }
 
- // sqrt(v.x * v.x + v.y * v.y + v.z * v.z): Calculates the Euclidean norm (magnitude) of the vector v.
-// Normalization: Ensures the vector v is transformed into a unit vector pointing in the same direction but with a magnitude of 1.
+// sqrt(v.x * v.x + v.y * v.y + v.z * v.z): Calculates the 
+// Euclidean norm (magnitude) of the vector v.
+// Normalization: Ensures the vector v is transformed into a 
+// unit vector pointing in the same direction but with a magnitude of 1.
 
 t_vector	calculate_sphere_normal(t_element *element, t_intersection *inter)
 {
@@ -40,7 +42,8 @@ t_vector	calculate_sphere_normal(t_element *element, t_intersection *inter)
 	normal = normalize(normal);
 	return (normal);
 }
-// normal.x = inter->position.x - element->position.x; normal between the center of the sphere and the intersection position
+// normal.x = inter->position.x - element->position.x; normal 
+// between the center of the sphere and the intersection position
 
 t_vector	calculate_plane_normal(t_element *element, t_vector normal)
 {
@@ -66,8 +69,10 @@ void	calculate_up_right(t_vector n_vector, t_vector *up, t_vector *right)
 	*up = ft_cross(n_vector, *right);
 	*up = normalize(*up);
 }
-// Initialization: Sets an initial up vector assuming typical orientation ({0, 1, 0}).
-// Cross Product Calculations: Computes orthogonal vectors right and up using cross products to ensure orthogonality.
+// Initialization: Sets an initial up vector assuming typical 
+// orientation ({0, 1, 0}).
+// Cross Product Calculations: Computes orthogonal vectors 
+// right and up using cross products to ensure orthogonality.
 
 t_vector	transform_point_to_local(t_vector inter_position, \
 t_vector cylinder_position, t_vector n_vector)
@@ -90,5 +95,9 @@ t_vector cylinder_position, t_vector n_vector)
 	return (local_point);
 }
 
-// The transform_point_to_local function transforms a given intersection point inter_position from global coordinates into local coordinates relative to a cylinder's surface, specified by its position (cylinder_position) and orientation (n_vector).
-// Calculates relative_point, which represents the vector from cylinder_position to inter_position in global coordinates.
+// The transform_point_to_local function transforms a given intersection 
+// point inter_position from global coordinates into local coordinates 
+// relative to a cylinder's surface, specified by its 
+// position (cylinder_position) and orientation (n_vector).
+// Calculates relative_point, which represents the vector 
+// from cylinder_position to inter_position in global coordinates.

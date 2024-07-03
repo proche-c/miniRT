@@ -40,19 +40,25 @@ t_vector	transform_point_to_world(t_vector local_normal, t_vector n_vector)
 	return (world_normal);
 }
 
-// The transform_point_to_world function transforms a given normal vector local_normal from local coordinates (relative to a cylinder's surface) into global/world coordinates.
+// The transform_point_to_world function transforms a given normal 
+// vector local_normal from local coordinates (relative to a cylinder's 
+// surface) into global/world coordinates.
 
-t_vector calculate_cylinder_normal(t_element *element, t_intersection *inter)
+t_vector	calculate_cylinder_normal(t_element *element, t_intersection *inter)
 {
-    t_vector local_point;
-    t_vector local_normal;
-    t_vector normal;
+	t_vector	local_point;
+	t_vector	local_normal;
+	t_vector	normal;
 
-    local_point = transform_point_to_local(inter->position, element->position, element->n_vector);
-    local_normal.x = local_point.x;
-    local_normal.y = 0; // Assurez-vous que la composante y est nulle pour un cylindre
-    local_normal.z = local_point.z;
-    local_normal = normalize(local_normal);
-    normal = transform_point_to_world(local_normal, element->n_vector);
-    return normalize(normal);
+	local_point = transform_point_to_local(inter->position, element->position, \
+	element->n_vector);
+	local_normal.x = local_point.x;
+	local_normal.y = 0;
+	local_normal.z = local_point.z;
+	local_normal = normalize(local_normal);
+	normal = transform_point_to_world(local_normal, element->n_vector);
+	return (normalize(normal));
 }
+
+// local_normal.y = 0; // Assurez-vous que la composante y 
+// est nulle pour un cylindre

@@ -25,7 +25,10 @@ t_ray	create_shadow_ray(t_vector origin, t_vector light_position)
 	return (shadow_ray);
 }
 // calculate the shadow ray from the intersection point to the light source
-// shadow_ray.t_max = ft_get_vector_length(ft_sub_vectors(light_position, origin)); The maximum distance the shadow ray can travel is the distance between the intersection point and the light source
+// shadow_ray.t_max = ft_get_vector_length(ft_sub_vectors(light_position, 
+// origin)); 
+//The maximum distance the shadow ray can travel is the distance between the 
+//intersection point and the light source
 
 int	is_in_shadow(t_scene *scene, t_ray shadow_ray, \
 t_light *light, t_intersection *inter)
@@ -49,8 +52,13 @@ t_light *light, t_intersection *inter)
 	return (0);
 }
 
-// function determines if a point on a surface (inter) in a scene is in shadow relative to a light source (light) using a shadow ray (shadow_ray). It does so by checking if the shadow ray intersects with any objects in the scene before reaching the light source.
-//     Calculates max_distance, which is the length of the vector from shadow_ray.origin (point on the surface) to light->position (position of the light source).
-//    ft_sub_vectors computes the vector difference between two points (light->position and shadow_ray.origin).
-//    ft_get_vector_length computes the magnitude (length) of the resulting vector.
-
+// function determines if a point on a surface (inter) in a scene is in 
+// shadow relative to a light source (light) using a shadow ray (shadow_ray). 
+// It does so by checking if the shadow ray intersects with any objects in the 
+// scene before reaching the light source.
+// Calculates max_distance, which is the length of the vector from 
+// shadow_ray.origin (point on the surface) to 
+// light->position (position of the light source).
+// ft_sub_vectors computes the vector difference between two 
+// points (light->position and shadow_ray.origin).
+// ft_get_vector_length computes the magnitude (length) of the resulting vector.

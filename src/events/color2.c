@@ -37,10 +37,14 @@ t_color	add_light(t_color color, t_color light, float ratio)
 	return (c);
 }
 
-// color.r * (1 - ratio): This part calculates the contribution of the original color's red component.
-//     As ratio increases from 0 to 1, the weight of color.r decreases from 1 to 0.
-// light.r * ratio: This part calculates the contribution of the light's red component.
-//     As ratio increases from 0 to 1, the weight of light.r increases from 0 to 1.
+// color.r * (1 - ratio): This part calculates the contribution 
+// of the original color's red component.
+//     As ratio increases from 0 to 1, the weight of color.r 
+// decreases from 1 to 0.
+// light.r * ratio: This part calculates the contribution 
+// of the light's red component.
+//     As ratio increases from 0 to 1, the weight of light.r 
+//increases from 0 to 1.
 
 //mix two colors (c1 = first color, p1 = ratio of fc...)
 t_color	mix_color(t_color c1, float p1, t_color c2, float p2)
