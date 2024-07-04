@@ -17,7 +17,6 @@ int	ft_parse(t_scene *scene)
 	char	**lines;
 	int		i;
 
-	print_in_out("IN FT_PARSE\n");
 	lines = ft_split(scene->str_scene, '\n');
 	i = 0;
 	while (lines[i])
@@ -40,14 +39,6 @@ int	ft_parse(t_scene *scene)
 	}
 	return (0);
 }
-	// ft_print_camera(scene);
-	// ft_print_ambient(scene);
-	// ft_print_light(scene);
-	//ft_print_elements(scene);
-	// get the lines in scene->str
-	//print_in_out("OUT FT_PARSE IN 3\n");
-	//printf("OUT FT_PARSE IN 2\n");
-	//print_in_out("OUT FT_PARSE IN 1\n");
 
 int	ft_get_parameter(char *line, t_scene *scene)
 {
@@ -75,10 +66,7 @@ int	ft_get_parameter(char *line, t_scene *scene)
 	ft_free_params(params);
 	return (0);
 }
-// get rid of spaces and get clean params
-// evaluate identifier
 
-// evaluates type of identifier and call function to get the data
 int	ft_get_data(char **params, t_scene *scene)
 {
 	int	result;
@@ -103,13 +91,6 @@ int	ft_get_data(char **params, t_scene *scene)
 		result = ft_get_element(params, scene);
 	}
 	return (result);
-}
-
-// I'm not using this for the moment
-int	ft_init_elements(t_scene *scene)
-{
-	(void)scene;
-	return (0);
 }
 
 t_vector	ft_normalize_params(t_vector vector)

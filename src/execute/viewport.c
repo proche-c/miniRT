@@ -50,7 +50,6 @@ void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 	t_vector	upper_left;
 	float		temp;
 
-	printf("w: %f %f %f\n", w.x, w.y, w.z);
 	if(w.x == -1 && w.y == 0 && w.z == 0)
 	{
 		scene->u.x = 0;

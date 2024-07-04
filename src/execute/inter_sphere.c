@@ -24,17 +24,24 @@ float *h)
 	return ((*h * *h) - (a * c));
 }
 
-float calculate_t(float h, float disc, float a)
+float	calculate_t(float h, float disc, float a)
 {
-    float t1 = (h - sqrtf(disc)) / a;
-    float t2 = (h + sqrtf(disc)) / a;
+	float	t1;
+	float	t2;
 
-    if (t1 > 0.001 && t2 > 0.001)
-        return (t1 < t2) ? t1 : t2;
-    else if (t1 > 0.001)
-        return t1;
-    else
-        return t2;
+	t1 = (h - sqrtf(disc)) / a;
+	t2 = (h + sqrtf(disc)) / a;
+	if (t1 > 0.001 && t2 > 0.001)
+	{
+		if (t1 < t2)
+			return (t1);
+		else
+			return (t2);
+	}
+	else if (t1 > 0.001)
+		return (t1);
+	else
+		return (t2);
 }
 
 void	ft_inter_sp(t_intersection *inter, t_element *c_element)
@@ -57,26 +64,6 @@ void	ft_inter_sp(t_intersection *inter, t_element *c_element)
 		}
 	}
 }
-
-//t_matrix translation_matrix = create_translation_matrix
-//(-c_element->position.x, -c_element->position.y, -c_element->position.z);
-	//t_vector transformed_origin = 
-	//apply_matrix(translation_matrix, inter->ray.origin);
-	//t_vector transformed_direction = inter->ray.direction;
-	//transformed_direction = normalize(transformed_direction);
-	//(void)transformed_origin;
-	//(void)transformed_direction;
-	//printf("OC: (%f, %f, %f, %f, %f)\n", oc.x, oc.y, 
-	//oc.z, oc.length_squared, oc.length);
-
-	// printf("entro en inter_sp.....\n");
-	//oc = ft_sub_vectors( (t_vector){0, 0, 0, 0, 0}, transformed_origin );
-	// Centre de la sphère est maintenant à l'origine
-	//a = ft_get_length_squared(transformed_direction);
-	//h = ft_dot(transformed_direction, oc);
-	// printf("h: %f\n", h);
-	// printf("c: %f\n", c);
-	//printf("disc: %f\n", disc);
 
 void	ft_get_closest_point(t_intersection *inter, \
 t_vector inter_point, t_element *c_element)
@@ -117,4 +104,3 @@ void	ft_get_inter_sp(t_intersection *inter, t_element *c_element, float t)
 		ft_get_closest_point(inter, inter_point, c_element);
 	}
 }
-

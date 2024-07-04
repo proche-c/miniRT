@@ -37,7 +37,7 @@ t_light *light, t_intersection *inter)
 	double			max_distance;
 
 	shadow_inter = malloc(sizeof(t_intersection));
-	shadow_inter->distance = FLT_MAX;
+	shadow_inter->distance = 3.402823466e+38F;
 	shadow_inter->state = 0;
 	shadow_inter->ray = shadow_ray;
 	ft_hit_something_2(scene, shadow_inter, inter->element);

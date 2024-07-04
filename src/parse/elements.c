@@ -14,13 +14,11 @@
 
 int	ft_get_element(char **params, t_scene *scene)
 {
-	print_in_out("IN FT_GET_ELEMENT\n");
 	if (scene->flag == 0)
 	{
 		scene->flag = 1;
 		if (ft_data_first_element(params, scene) == 1)
 		{
-			print_in_out("OUT FT_GET_ELEMENT, DATA FIRST ELEMENT FAILED\n");
 			return (1);
 		}
 	}
@@ -28,20 +26,16 @@ int	ft_get_element(char **params, t_scene *scene)
 	{
 		if (ft_data_add_element(params, scene) == 1)
 		{
-			print_in_out("OUT FT_GET_ELEMENT, DATA ADD ELEMENT FAILED\n");
 			return (1);
 		}
 	}
-	print_in_out("OUT FT_GET_ELEMENT, OK\n");
 	return (0);
 }
-	//ft_print_elements(scene);
 
 int	ft_data_first_element(char **params, t_scene *scene)
 {
 	t_element	*new_element;
 
-	print_in_out("IN FT_DATA_FIRST_ELEMENT\n");
 	new_element = malloc(sizeof(t_element));
 	if (!new_element)
 	{
@@ -50,7 +44,6 @@ int	ft_data_first_element(char **params, t_scene *scene)
 	}
 	if (ft_data_element(new_element, params) == 1)
 	{
-		print_in_out("OUT FT_DATA_FIRST_ELEMENT, DATA_ELEMENT FAILED\n");
 		return (1);
 	}
 	scene->elements = new_element;
@@ -61,7 +54,6 @@ int	ft_data_add_element(char **params, t_scene *scene)
 {
 	t_element	*new_element;
 
-	print_in_out("IN FT_DATA_ADD_ELEMENT\n");
 	new_element = malloc(sizeof(t_element));
 	if (!new_element)
 	{
@@ -70,7 +62,6 @@ int	ft_data_add_element(char **params, t_scene *scene)
 	}
 	if (ft_data_element(new_element, params) == 1)
 	{
-		print_in_out("OUT FT_DATA_ADD_ELEMENT, DATA_ELEMENT FAILED\n");
 		return (1);
 	}
 	ft_add_element(&(scene->elements), new_element);
@@ -95,20 +86,15 @@ int	ft_get_e_position(t_element *new_element, char *param)
 {
 	char	**co;
 
-	print_in_out("ENTRO EN FT_GET_E_POSITION\n");
 	co = ft_split(param, ',');
 	if (ft_is_vector(co) == 1)
 	{
 		new_element->position.x = ft_atof(co[0]);
 		new_element->position.y = ft_atof(co[1]);
 		new_element->position.z = ft_atof(co[2]);
-		print_in_out("OUT FT_GET_E_POSITION IN 1\n");
 		ft_free_params(co);
 		return (0);
 	}
 	ft_free_params(co);
-	print_in_out("OUT FT_GET_E_POSITION EN 2\n");
 	return (1);
 }
-	// position must be a vector
-	// if position is not a vector, error:

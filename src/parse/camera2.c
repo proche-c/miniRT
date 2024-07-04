@@ -16,23 +16,18 @@ int	ft_get_pov(char **params, t_scene *scene)
 {
 	char	**co;
 
-	print_in_out("ENTRO EN FT_GET_POV\n");
 	co = ft_split(params[1], ',');
 	if (ft_is_vector(co) == 1)
 	{
 		scene->camera.pov.x = ft_atof(co[0]);
 		scene->camera.pov.y = ft_atof(co[1]);
 		scene->camera.pov.z = ft_atof(co[2]);
-		print_in_out("OUT FT_GET_POV IN 1\n");
 		ft_free_params(co);
 		return (0);
 	}
 	ft_free_params(co);
-	print_in_out("OUT FT_GET_POV EN 2\n");
 	return (1);
 }
-	// pov must be a vector
-	// if pov is not a vector, error:
 
 int	ft_is_normalized(char **co)
 {
@@ -40,7 +35,6 @@ int	ft_is_normalized(char **co)
 	float	length;
 	float	vec[3];
 
-	print_in_out("IN FT_IS_NORMALIZED\n");
 	vec[0] = ft_atof(co[0]);
 	vec[1] = ft_atof(co[1]);
 	vec[2] = ft_atof(co[2]);
@@ -57,8 +51,3 @@ int	ft_is_normalized(char **co)
 		return (0);
 	return (1);
 }
-// each parameter must be 1 or 0
-// check if co is normalized
-//print_in_out("OUT FT_IS_NORMALIZED, THEY ARE NORMALIZED\n");
-//	print_in_out("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");
-//		print_in_out("OUT FT_IS_NORMALIZED, NO NORMALIZED\n");

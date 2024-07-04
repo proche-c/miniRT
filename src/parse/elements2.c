@@ -15,16 +15,13 @@ t_element	*ft_elelast(t_element *lst)
 {
 	t_element	*temp;
 
-	print_in_out("IN FT_ELELAST\n");
 	temp = lst;
 	if (lst)
 	{
 		while (temp->next)
 			temp = temp->next;
-		print_in_out("IN FT_ELELAST IN 1\n");
 		return (temp);
 	}
-	print_in_out("IN FT_ELELAST IN 2\n");
 	return (NULL);
 }
 
@@ -32,7 +29,6 @@ void	ft_add_element(t_element **lst, t_element *new)
 {
 	t_element	*last;
 
-	print_in_out("IN FT_ADD_ELEMENT\n");
 	if (lst && new)
 	{
 		if (*lst)
@@ -43,7 +39,6 @@ void	ft_add_element(t_element **lst, t_element *new)
 		else
 			*lst = new;
 	}
-	print_in_out("OUT FT_ADD_ELEMENT\n");
 }
 
 int	ft_get_e_color(t_element *new_element, char *param)
@@ -62,5 +57,3 @@ int	ft_get_e_color(t_element *new_element, char *param)
 	ft_free_params(col);
 	return (1);
 }
-
-	// col must be a color
