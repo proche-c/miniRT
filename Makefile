@@ -1,13 +1,10 @@
-SRCS = ${CHECKERS} ${EXECUTE} ${PARSE} ${UTILS} ${CLEAN} ${EVENT} ${MAIN}
-
-CHECKERS = $(wildcard ./src/checkers/*.c)
-EXECUTE = $(wildcard ./src/execute/*.c)
-PARSE = $(wildcard ./src/parse/*.c)
-UTILS = $(wildcard ./src/utils/*.c)
-CLEAN = $(wildcard ./src/clean/*.c)
-EVENT = $(wildcard ./src/events/*.c)
-
-MAIN = ./src/minirt.c
+SRCS = $(wildcard ./src/checkers/*.c) \
+       $(wildcard ./src/execute/*.c) \
+       $(wildcard ./src/parse/*.c) \
+       $(wildcard ./src/utils/*.c) \
+       $(wildcard ./src/clean/*.c) \
+       $(wildcard ./src/events/*.c) \
+       ./src/minirt.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -31,32 +28,35 @@ endif
 
 RM = rm -f
 
+LIBFT_DIR = libft
+LIBFT = $(LIBFT_DIR)/libft.a
+
 .PHONY: all clean fclean re norme test leaks library
 
 all: $(NAME)
 
-$(NAME): $(OBJS) libft/libft.a
+$(NAME): $(OBJS) $(LIBFT)
 	$(MAKE) -C $(MDIR)
-	$(CC) $(CFLAGS) $(OBJS) $(MFLAGS) -L$(MDIR) -L./libft -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJS) $(MFLAGS) -L$(MDIR) -L$(LIBFT_DIR) -lft -o $(NAME)
 	@echo "Executable $(NAME) generated"
 
-%.o: %.c $(HEADER)
+$(OBJS): %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -I $(MINC) -c $< -o $@
 	@echo "Compiled $< to $@"
 
-libft/libft.a:
-	@$(MAKE) -s -C libft
-	@cp libft/libft.a .
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_DIR)
+	@echo "Library $(LIBFT) built"
 
 clean:
 	@$(RM) $(OBJS)
-	@$(MAKE) -s -C libft clean
+	@$(MAKE) -s -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(MDIR) clean
 	@echo "Object files removed"
 
 fclean: clean
-	@$(RM) $(NAME) libft.a
-	@$(MAKE) -s -C libft fclean
+	@$(RM) $(NAME) $(LIBFT)
+	@$(MAKE) -s -C $(LIBFT_DIR) fclean
 	@echo "Executable and libraries removed"
 
 re: fclean all
