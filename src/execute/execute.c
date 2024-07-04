@@ -16,6 +16,7 @@
 void	initialize_scene(t_scene *scene)
 {
 	ft_get_viewport(scene);
+	ft_print_viewport(scene);
 	mlx_initiator(scene);
 	hook_init(scene);
 	pixel_print(scene);
