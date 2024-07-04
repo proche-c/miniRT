@@ -50,14 +50,7 @@ void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 	t_vector	upper_left;
 	float		temp;
 
-	if(w.x == -1 && w.y == 0 && w.z == 0)
-	{
-		scene->u.x = 0;
-		scene->u.y = 0;
-		scene->u.z = 1;
-	}
-	else
-		scene->u = ft_unit_vector(ft_cross(vup, w));
+	ft_get_scene_u(scene, w);
 	scene->v = ft_cross(w, scene->u);
 	scene->view_u = ft_mult_vector_float(scene->u, scene->viewport_side);
 	temp = scene->viewport_side * -1;
@@ -79,16 +72,14 @@ void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 	(scene->delta_u.z + scene->delta_v.z);
 }
 
-	// printf("scene->image_side: %d\n", scene->image_side);
-	// printf("temp: %f\n", temp);
-
-	// printf("scene->delta_u.x: %f\n", scene->delta_u.x);
-	// printf("scene->delta_u.y: %f\n", scene->delta_u.y);
-	// printf("scene->delta_u.z: %f\n", scene->delta_u.z);
-	// printf("scene->delta_v.x: %f\n", scene->delta_v.x);
-	// printf("scene->delta_v.y: %f\n", scene->delta_v.y);
-	// printf("scene->delta_v.z: %f\n", scene->delta_v.z);
-
-	// printf("upper_left.x: %f\n", upper_left.x);
-	// printf("upper_left.y: %f\n", upper_left.y);
-	// printf("upper_left.z: %f\n", upper_left.z);
+void	ft_get_scene_u(t_scene *scene, t_vector w)
+{
+	if (w.x == -1 && w.y == 0 && w.z == 0)
+	{
+		scene->u.x = 0;
+		scene->u.y = 0;
+		scene->u.z = 1;
+	}
+	else
+		scene->u = ft_unit_vector(ft_cross(vup, w));
+}
