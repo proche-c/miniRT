@@ -88,7 +88,7 @@ void	ft_inter_inf_cy(t_intersection *tmp_inter, t_element *c_element)
 void	ft_get_inter_data_1(t_intersection *inter,
 	t_intersection *tmp_inter, t_element *c_element)
 {
-	if (inter->state == 0 || tmp_inter->distance < inter->distance)
+	if (inter->state == 0)
 	{
 		inter->position.x = tmp_inter->position.x;
 		inter->position.y = tmp_inter->position.y;
@@ -105,7 +105,7 @@ void	ft_get_inter_data_1(t_intersection *inter,
 void	ft_get_inter_data_2(t_intersection *inter, t_intersection *tmp_inter,
 	t_element *c_element)
 {
-	if (inter->state == 0 || tmp_inter->distance < inter->distance)
+	if (inter->state == 0)
 	{
 		inter->position.x = tmp_inter->position.x;
 		inter->position.y = tmp_inter->position.y;
