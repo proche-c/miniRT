@@ -32,6 +32,7 @@ void	process_pixels(t_scene *scene, t_intersection *inter)
 		while (i < scene->image_side)
 		{
 			inter->state = 0;
+			inter->is_shadow = 1;
 			ft_get_ray(scene, inter, j, i);
 			ft_hit_something(scene, inter);
 			if (inter->state == 1)

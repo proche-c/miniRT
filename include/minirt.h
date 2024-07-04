@@ -106,6 +106,7 @@ typedef struct s_intersection
 	struct s_ray		ray;
 	struct s_element	*element;
 	float				distance;
+	int					is_shadow;
 }	t_intersection;
 
 typedef struct s_scene
@@ -334,5 +335,10 @@ void		ft_get_inter_data_1(t_intersection *inter,
 				t_intersection *tmp_inter, t_element *c_element);
 void		ft_get_inter_data_2(t_intersection *inter,
 				t_intersection *tmp_inter, t_element *c_element);
-
+void		ft_get_inter_data_shadow_0(t_intersection *inter,
+				t_intersection *tmp_inter, t_element *c_element);
+void		ft_get_inter_data_shadow_not_0_v1(t_intersection *inter,
+				t_intersection *tmp_inter, t_element *c_element);
+void		ft_get_inter_data_shadow_not_0(t_intersection *inter,
+				t_intersection *tmp_inter, t_element *c_element);
 #endif

@@ -14,7 +14,7 @@ HEADER = ./include/minirt.h ./include/pixel.h
 
 CC = gcc
 
-CFLAGS = -fsanitize=leak -Wall -Wextra -Werror -I./include
+CFLAGS = -Wall -Wextra -Werror -I./include #-fsanitize=leak
 
 ifeq ($(shell uname), Linux)
     MDIR = ./minilibx/linux
