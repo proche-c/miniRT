@@ -22,14 +22,17 @@ int	ft_get_plane(t_element *new_element, char **params)
 	new_element->identifier = ft_strdup(params[0]);
 	if (ft_get_e_position(new_element, params[1]) == 1)
 	{
+		free(new_element->identifier);
 		return (1);
 	}
 	if (ft_get_e_color(new_element, params[3]) == 1)
 	{
+		free(new_element->identifier);
 		return (1);
 	}
 	if (ft_get_e_n_vector(new_element, params[2]) == 1)
 	{
+		free(new_element->identifier);
 		return (1);
 	}
 	return (0);

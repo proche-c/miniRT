@@ -22,6 +22,7 @@ int	ft_get_cylinder(t_element *new_element, char **params)
 	new_element->identifier = ft_strdup(params[0]);
 	if (ft_assign_cylinder_params(new_element, params) == 1)
 	{
+		free(new_element->identifier);
 		return (1);
 	}
 	return (0);

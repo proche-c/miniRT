@@ -79,6 +79,11 @@ int	ft_data_element(t_element *new_element, char **params)
 		result = ft_get_plane(new_element, params);
 	else if (ft_strncmp(params[0], "cy", 3) == 0)
 		result = ft_get_cylinder(new_element, params);
+	if (result == 1)
+	{
+		free(new_element);
+		return (1);
+	}
 	return (result);
 }
 

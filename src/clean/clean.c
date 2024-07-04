@@ -27,15 +27,19 @@ void	ft_free_all_elements(t_scene *scene)
 	t_element	*element;
 	t_element	*to_delete;
 
-	element = scene->elements;
+	to_delete = scene->elements;
+	element = scene->elements->next;
 	while (element != NULL)
 	{
-		to_delete = element;
-		element = element->next;
 		if (to_delete->identifier != NULL)
 			free(to_delete->identifier);
 		free(to_delete);
+		to_delete = element;
+		element = element->next;
 	}
+	if (to_delete->identifier != NULL)
+		free(to_delete->identifier);
+	free(to_delete);
 }
 
 void	ft_free_params(char **params)

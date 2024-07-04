@@ -27,12 +27,12 @@ int	main(int argc, char **argv)
 	ft_initialize_scene(scene);
 	if (ft_check(argv[1], scene) != 0)
 	{
-		free(scene);
+		ft_free_scene(scene);
 		return (1);
 	}
 	if (ft_parse(scene) != 0)
 	{
-		free(scene);
+		ft_free_scene(scene);
 		return (1);
 	}
 	ft_execute(scene);
