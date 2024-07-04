@@ -50,7 +50,7 @@ void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 	t_vector	upper_left;
 	float		temp;
 
-	ft_get_scene_u(scene, w);
+	ft_get_scene_u(scene, w, vup);
 	scene->v = ft_cross(w, scene->u);
 	scene->view_u = ft_mult_vector_float(scene->u, scene->viewport_side);
 	temp = scene->viewport_side * -1;
@@ -72,7 +72,7 @@ void	ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w)
 	(scene->delta_u.z + scene->delta_v.z);
 }
 
-void	ft_get_scene_u(t_scene *scene, t_vector w)
+void	ft_get_scene_u(t_scene *scene, t_vector w, t_vector vup)
 {
 	if (w.x == -1 && w.y == 0 && w.z == 0)
 	{

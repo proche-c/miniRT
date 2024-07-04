@@ -70,4 +70,4 @@ test: clean re
 
 leaks: all
 	@clear
-	@leaks -atExit -- ./minirt scenes/test.rt
+	@leaks -atExit -- ./minirt scenes/camx.rt

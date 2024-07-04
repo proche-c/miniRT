@@ -241,6 +241,7 @@ float		ft_distance(t_vector v1, t_vector v2);
 void		ft_get_viewport(t_scene *scene);
 t_vector	ft_get_vup(t_vector w);
 void		ft_get_pixel00(t_scene *scene, t_vector vup, t_vector w);
+void		ft_get_scene_u(t_scene *scene, t_vector w, t_vector vup);
 
 	/*intersections*/
 void		ft_get_ray(t_scene *scene, t_intersection *inter, int j, int i);
